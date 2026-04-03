@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, ChevronDown, ChevronUp,
-  Play, FileText, Key, EyeOff, Eye, Bot, X
+  Play, FileText, Key, EyeOff, Eye, Bot, X, Sparkles
 } from "lucide-react";
 import problemData from "../data.json";
 import ApiKeyModal from "../components/ApiKeyModal";
@@ -40,6 +40,7 @@ const CodeBlock = ({ code, language }) => {
 function ProblemCard({ problem, index, onOpenAI, onOpenEditor }) {
   const [expanded, setExpanded] = useState(index === 0);
   const [showSolution, setShowSolution] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="rounded-xl border border-border overflow-hidden" style={{ background: "#0d1117" }}>
@@ -142,6 +143,13 @@ function ProblemCard({ problem, index, onOpenAI, onOpenEditor }) {
                 {a.label}
               </button>
             ))}
+            <button
+              onClick={() => navigate(`/visualizer/${problem.lcNumber}`)}
+              className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs text-muted-foreground transition-all hover:border-primary/50 hover:text-foreground"
+            >
+              <Sparkles className="h-3 w-3" />
+              Visualize
+            </button>
             <button
               onClick={() => onOpenEditor(problem)}
               className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-all hover:opacity-90 ml-auto"
