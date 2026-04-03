@@ -1,17 +1,20 @@
 import React from "react";
-import ProblemList from "./components/ProblemList.js";
-import Problem from "./components/Problem.js";
+import HomePage from "./pages/HomePage.js";
+import ProblemList from "./components/library/ProblemList.js";
+import ProblemPage from "./pages/ProblemPage.js";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
     <Router>
-      <div className="App">
-        <div className="App-body">
+      <div className="min-h-screen bg-background text-foreground">
+        <div className="min-h-screen">
           <Routes>
-            <Route path="/dsawebsite/" element={<ProblemList />} />
-            <Route path="/dsawebsite/problem/:id" element={<Problem />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/library" element={<ProblemList />} />
+            <Route path="/problem/:id" element={<ProblemPage />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
         </div>
       </div>
