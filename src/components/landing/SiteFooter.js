@@ -1,26 +1,18 @@
-import { Code2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const SiteFooter = () => {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="py-8">
-      <div className="container flex flex-col items-center justify-between gap-4 border-t pt-6 text-sm text-muted-foreground md:flex-row">
-        <div className="flex items-center gap-2 text-foreground">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground">
-            <Code2 className="h-4 w-4" />
-          </span>
-          <span className="font-medium">DSA Academy</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <Link to="/library" className="hover:text-primary">
-            Library
-          </Link>
-          <a href="https://leetcode.com" target="_blank" rel="noreferrer" className="hover:text-primary">
-            LeetCode
-          </a>
-          <span>(c) {year}</span>
+    <footer className="border-t border-border py-8">
+      <div className="container flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
+        <Link to="/" className="flex items-center gap-1.5 font-mono font-bold text-foreground hover:text-primary transition-colors">
+          <span className="text-primary">&gt;_</span>
+          <span>Hashmap</span>
+        </Link>
+        <div className="flex items-center gap-5">
+          <Link to="/library" className="hover:text-foreground transition-colors">Library</Link>
+          <a href="https://leetcode.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">LeetCode</a>
+          <a href="https://www.youtube.com" target="_blank" rel="noreferrer" className="hover:text-foreground transition-colors">YouTube</a>
+          <span className="text-muted-foreground/60">© {new Date().getFullYear()}</span>
         </div>
       </div>
     </footer>
