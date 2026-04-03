@@ -25,7 +25,65 @@
         "timeComplexity": "O(m + n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution {\n    public void merge(int[] nums1, int m, int[] nums2, int n) {\n        int p1 = m-1, p2 = n-1, p3 = m+n-1;\n        while (p1 >= 0 && p2 >= 0) {\n            if (nums1[p1] > nums2[p2]) nums1[p3--] = nums1[p1--];\n            else nums1[p3--] = nums2[p2--];\n        }\n        while (p2 >= 0) nums1[p3--] = nums2[p2--];\n    }\n}",
-        "idea": "Three-pointer merge from the end. Uses p1 at end of nums1, p2 at end of nums2, and p3 at very end. Merging from the end avoids overwriting unprocessed elements."
+        "idea": "Three-pointer merge from the end. Uses p1 at end of nums1, p2 at end of nums2, and p3 at very end. Merging from the end avoids overwriting unprocessed elements.",
+        "description": "You are given two sorted arrays nums1 (length m+n) and nums2 (length n). Merge nums2 into nums1 in-place in sorted order.",
+        "examples": [
+          {
+            "input": "nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3",
+            "output": "[1,2,2,3,5,6]"
+          },
+          {
+            "input": "nums1 = [1], m = 1, nums2 = [], n = 0",
+            "output": "[1]"
+          },
+          {
+            "input": "nums1 = [0], m = 0, nums2 = [1], n = 1",
+            "output": "[1]"
+          }
+        ],
+        "constraints": [
+          "nums1.length == m + n",
+          "0 <= m, n <= 200",
+          "-10^9 <= nums1[i], nums2[j] <= 10^9"
+        ],
+        "hints": [
+          "Merge from the end to avoid overwriting elements. Three pointers: p1=m-1, p2=n-1, p3=m+n-1."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,0,0,0]\n3\n[2,5,6]\n3",
+            "expected": "[1,2,2,3,5,6]"
+          },
+          {
+            "id": 2,
+            "input": "[1]\n1\n[]\n0",
+            "expected": "[1]"
+          },
+          {
+            "id": 3,
+            "input": "[0]\n0\n[1]\n1",
+            "expected": "[1]"
+          },
+          {
+            "id": 4,
+            "input": "[4,5,6,0,0,0]\n3\n[1,2,3]\n3",
+            "expected": "[1,2,3,4,5,6]"
+          },
+          {
+            "id": 5,
+            "input": "[-1,0,0,3,3,3,0,0,0]\n6\n[1,2,2]\n3",
+            "expected": "[-1,0,0,1,2,2,3,3,3]"
+          }
+        ],
+        "methodName": "merge",
+        "paramTypes": [
+          "intarray",
+          "int",
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def merge(self, nums1: list, m: int, nums2: list, n: int) -> None:\n        pass\n"
       },
       {
         "lcNumber": 15,
@@ -42,7 +100,53 @@
         "timeComplexity": "O(n²)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def threeSum(self, nums):\n        nums.sort(); result = []\n        for i in range(len(nums) - 2):\n            if i >= 1 and nums[i] == nums[i-1]: continue\n            j, k = i+1, len(nums)-1\n            target = -nums[i]\n            while j < k:\n                if nums[j]+nums[k] == target:\n                    result.append([nums[i],nums[j],nums[k]])\n                    while j<k and nums[j]==nums[j+1]: j+=1\n                    while j<k and nums[k]==nums[k-1]: k-=1\n                    j+=1; k-=1\n                elif nums[j]+nums[k] < target: j+=1\n                else: k-=1\n        return result",
-        "idea": "Sort + two pointers. Fix i, use j and k to find pairs summing to -nums[i]. Skip duplicates at each pointer."
+        "idea": "Sort + two pointers. Fix i, use j and k to find pairs summing to -nums[i]. Skip duplicates at each pointer.",
+        "description": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j != k and nums[i] + nums[j] + nums[k] == 0. The solution set must not contain duplicate triplets.",
+        "examples": [
+          {
+            "input": "nums = [-1,0,1,2,-1,-4]",
+            "output": "[[-1,-1,2],[-1,0,1]]"
+          },
+          {
+            "input": "nums = [0,1,1]",
+            "output": "[]"
+          },
+          {
+            "input": "nums = [0,0,0]",
+            "output": "[[0,0,0]]"
+          }
+        ],
+        "constraints": [
+          "3 <= nums.length <= 3000",
+          "-10^5 <= nums[i] <= 10^5"
+        ],
+        "hints": [
+          "Fix one number, reduce to 2Sum on the rest.",
+          "Sort first to skip duplicates easily.",
+          "Use two pointers for the inner 2Sum loop."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[-1,0,1,2,-1,-4]",
+            "expected": "[[-1,-1,2],[-1,0,1]]"
+          },
+          {
+            "id": 2,
+            "input": "[0,1,1]",
+            "expected": "[]"
+          },
+          {
+            "id": 3,
+            "input": "[0,0,0]",
+            "expected": "[[0,0,0]]"
+          }
+        ],
+        "methodName": "threeSum",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def threeSum(self, nums: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Sort_colors_and_merge_sorted_array.pdf"
@@ -73,7 +177,49 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def isValidBST(self, root):\n        self.prev = float('-inf')\n        self.flag = True\n        self.dfs(root)\n        return self.flag\n\n    def dfs(self, root):\n        if not root: return\n        self.dfs(root.left)\n        if root.val <= self.prev: self.flag = False\n        self.prev = root.val\n        self.dfs(root.right)",
-        "idea": "In-order traversal must produce strictly increasing sequence. Track prev value with class variable. Any violation sets flag to False."
+        "idea": "In-order traversal must produce strictly increasing sequence. Track prev value with class variable. Any violation sets flag to False.",
+        "description": "Given the root of a binary tree, determine if it is a valid binary search tree (BST). A valid BST: left subtree has only keys < node's key; right subtree has only keys > node's key; both subtrees are also BSTs.",
+        "examples": [
+          {
+            "input": "root = [2,1,3]",
+            "output": "true"
+          },
+          {
+            "input": "root = [5,1,4,null,null,3,6]",
+            "output": "false",
+            "explanation": "Root is 5 but right child is 4."
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 10^4",
+          "-2^31 <= Node.val <= 2^31 - 1"
+        ],
+        "hints": [
+          "In-order traversal should produce strictly increasing values.",
+          "Pass min/max bounds recursively: left must be < node, right must be > node."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[2,1,3]",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "[5,1,4,null,null,3,6]",
+            "expected": "false"
+          },
+          {
+            "id": 3,
+            "input": "[0]",
+            "expected": "true"
+          }
+        ],
+        "methodName": "isValidBST",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def isValidBST(self, root) -> bool:\n        pass\n"
       }
     ],
     "notesUrl": "Binary_search_tree.pdf"
@@ -102,7 +248,33 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution {\n    public int minCost(int[][] costs) {\n        for (int i = costs.length-2; i >= 0; i--) {\n            costs[i][0] += Math.min(costs[i+1][1], costs[i+1][2]);\n            costs[i][1] += Math.min(costs[i+1][0], costs[i+1][2]);\n            costs[i][2] += Math.min(costs[i+1][0], costs[i+1][1]);\n        }\n        return Math.min(costs[0][0], Math.min(costs[0][1], costs[0][2]));\n    }\n}",
-        "idea": "Bottom-up DP in-place. For each house i, update costs[i][color] by adding the min of the OTHER two colors from house i+1."
+        "idea": "Bottom-up DP in-place. For each house i, update costs[i][color] by adding the min of the OTHER two colors from house i+1.",
+        "description": "There are n houses in a row, each can be painted red, blue, or green. Adjacent houses cannot have the same color. Given costs[i][j] (cost to paint house i with color j), return the minimum cost to paint all houses.",
+        "examples": [
+          {
+            "input": "costs = [[17,2,17],[16,16,5],[14,3,19]]",
+            "output": "10"
+          }
+        ],
+        "constraints": [
+          "costs.length >= 1",
+          "costs[i].length == 3"
+        ],
+        "hints": [
+          "DP: costs[i][0] += min(costs[i-1][1], costs[i-1][2]). Accumulate in-place from left to right."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[17,2,17],[16,16,5],[14,3,19]]",
+            "expected": "10"
+          }
+        ],
+        "methodName": "minCost",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def minCost(self, costs: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "coin_change_paint_house.pdf"
@@ -131,7 +303,52 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution {\n    public int rob(int[] nums) {\n        int n = nums.length;\n        int[] dp = new int[n];\n        dp[0] = nums[0];\n        if (n > 1) dp[1] = Math.max(nums[0], nums[1]);\n        for (int i = 2; i < n; i++)\n            dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]);\n        return dp[n-1];\n    }\n}",
-        "idea": "Classic 1D DP. dp[i] = max money from houses 0..i. Recurrence: dp[i] = max(dp[i-1], dp[i-2] + nums[i])."
+        "idea": "Classic 1D DP. dp[i] = max money from houses 0..i. Recurrence: dp[i] = max(dp[i-1], dp[i-2] + nums[i]).",
+        "description": "You are a robber. Each house has money. You can't rob adjacent houses (triggers alarm). Return the maximum money you can rob.",
+        "examples": [
+          {
+            "input": "nums = [1,2,3,1]",
+            "output": "4"
+          },
+          {
+            "input": "nums = [2,7,9,3,1]",
+            "output": "12"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 100",
+          "0 <= nums[i] <= 400"
+        ],
+        "hints": [
+          "DP: rob[i] = max(rob[i-1], rob[i-2] + nums[i]). Only need previous two values."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,1]",
+            "expected": "4"
+          },
+          {
+            "id": 2,
+            "input": "[2,7,9,3,1]",
+            "expected": "12"
+          },
+          {
+            "id": 3,
+            "input": "[0]",
+            "expected": "0"
+          },
+          {
+            "id": 4,
+            "input": "[1,2]",
+            "expected": "2"
+          }
+        ],
+        "methodName": "rob",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def rob(self, nums: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "DP_robbery_and_subarray_equals_K.pdf"
@@ -162,7 +379,47 @@
         "timeComplexity": "O(n · 2ⁿ)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def partition(self, s):\n        self.result = []\n        self.backtrack(s, 0, [])\n        return self.result\n\n    def backtrack(self, s, pivot, path):\n        if pivot == len(s): self.result.append(path[:]); return\n        for i in range(pivot, len(s)):\n            sub = s[pivot:i+1]\n            if sub == sub[::-1]:\n                path.append(sub)\n                self.backtrack(s, i+1, path)\n                path.pop()",
-        "idea": "Backtrack from pivot index. Try every substring — if palindrome, add to path and recurse from i+1. Pop on backtrack."
+        "idea": "Backtrack from pivot index. Try every substring — if palindrome, add to path and recurse from i+1. Pop on backtrack.",
+        "description": "Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitionings.",
+        "examples": [
+          {
+            "input": "s = \"aab\"",
+            "output": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"
+          },
+          {
+            "input": "s = \"a\"",
+            "output": "[[\"a\"]]"
+          }
+        ],
+        "constraints": [
+          "1 <= s.length <= 16",
+          "s contains only lowercase English letters."
+        ],
+        "hints": [
+          "Backtrack: from current index, try every possible palindromic prefix and recurse on the suffix."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"aab\"",
+            "expected": "[[\"a\",\"a\",\"b\"],[\"aa\",\"b\"]]"
+          },
+          {
+            "id": 2,
+            "input": "\"a\"",
+            "expected": "[[\"a\"]]"
+          },
+          {
+            "id": 3,
+            "input": "\"bb\"",
+            "expected": "[[\"b\",\"b\"],[\"bb\"]]"
+          }
+        ],
+        "methodName": "partition",
+        "paramTypes": [
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def partition(self, s: str) -> list:\n        pass\n"
       },
       {
         "lcNumber": 79,
@@ -180,7 +437,52 @@
         "timeComplexity": "O(m·n·3^L)",
         "spaceComplexity": "O(L)",
         "code": "class Solution:\n    def exist(self, board, word):\n        m, n = len(board), len(board[0])\n        def dfs(i, j, k):\n            if k == len(word): return True\n            if i<0 or i>=m or j<0 or j>=n or board[i][j] != word[k]: return False\n            tmp, board[i][j] = board[i][j], '#'\n            found = any(dfs(i+dx,j+dy,k+1) for dx,dy in [(0,1),(1,0),(0,-1),(-1,0)])\n            board[i][j] = tmp\n            return found\n        return any(dfs(i,j,0) for i in range(m) for j in range(n))",
-        "idea": "DFS backtracking. Mark visited cells as '#', recurse into 4 directions, restore on backtrack."
+        "idea": "DFS backtracking. Mark visited cells as '#', recurse into 4 directions, restore on backtrack.",
+        "description": "Given an m×n grid of characters and a string word, return true if word exists in the grid. The word can be constructed from sequentially adjacent cells (horizontal/vertical). Each cell may not be used more than once.",
+        "examples": [
+          {
+            "input": "board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"",
+            "output": "true"
+          },
+          {
+            "input": "word = \"SEE\"",
+            "output": "true"
+          },
+          {
+            "input": "word = \"ABCB\"",
+            "output": "false"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 6",
+          "1 <= word.length <= 15"
+        ],
+        "hints": [
+          "DFS from each cell. Mark visited cells temporarily. Backtrack if a path fails."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\n\"ABCCED\"",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\n\"SEE\"",
+            "expected": "true"
+          },
+          {
+            "id": 3,
+            "input": "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\n\"ABCB\"",
+            "expected": "false"
+          }
+        ],
+        "methodName": "exist",
+        "paramTypes": [
+          "charmatrix",
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def exist(self, board: list, word: str) -> bool:\n        pass\n"
       }
     ],
     "notesUrl": "Combination_sum_cont_palindrome_partitioning_subsets.pdf"
@@ -210,7 +512,52 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def reverseList(self, head):\n        prev, curr = None, head\n        while curr:\n            nxt = curr.next\n            curr.next = prev\n            prev, curr = curr, nxt\n        return prev",
-        "idea": "Iterative pointer reversal: save next, point current to prev, advance both."
+        "idea": "Iterative pointer reversal: save next, point current to prev, advance both.",
+        "description": "Given the head of a singly linked list, reverse the list and return the reversed list.",
+        "examples": [
+          {
+            "input": "head = [1,2,3,4,5]",
+            "output": "[5,4,3,2,1]"
+          },
+          {
+            "input": "head = [1,2]",
+            "output": "[2,1]"
+          },
+          {
+            "input": "head = []",
+            "output": "[]"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 5000",
+          "-5000 <= Node.val <= 5000"
+        ],
+        "hints": [
+          "Iterative: prev=null, curr=head. Each step: next=curr.next, curr.next=prev, prev=curr, curr=next.",
+          "Recursive: reverse(head.next), then head.next.next=head, head.next=null."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,4,5]",
+            "expected": "[5,4,3,2,1]"
+          },
+          {
+            "id": 2,
+            "input": "[1,2]",
+            "expected": "[2,1]"
+          },
+          {
+            "id": 3,
+            "input": "[]",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "reverseList",
+        "paramTypes": [
+          "linkedlist"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def reverseList(self, head):\n        pass\n"
       },
       {
         "lcNumber": 142,
@@ -227,7 +574,51 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def detectCycle(self, head):\n        slow = fast = head\n        while fast and fast.next:\n            slow, fast = slow.next, fast.next.next\n            if slow == fast:\n                slow = head\n                while slow != fast: slow, fast = slow.next, fast.next\n                return slow\n        return None",
-        "idea": "Floyd's algorithm. Phase 1: slow/fast meet inside cycle. Phase 2: reset slow to head — they meet at cycle entry."
+        "idea": "Floyd's algorithm. Phase 1: slow/fast meet inside cycle. Phase 2: reset slow to head — they meet at cycle entry.",
+        "description": "Given the head of a linked list, return the node where a cycle begins, or null if there is no cycle.",
+        "examples": [
+          {
+            "input": "head = [3,2,0,-4], pos = 1",
+            "output": "tail connects to node index 1"
+          },
+          {
+            "input": "head = [1,2], pos = 0",
+            "output": "tail connects to node index 0"
+          },
+          {
+            "input": "head = [1], pos = -1",
+            "output": "no cycle"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 10^4",
+          "pos is -1 or valid index"
+        ],
+        "hints": [
+          "Floyd's: fast+slow meet inside cycle. Reset slow to head, advance both one step at a time — they meet at the cycle start."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,2,0,-4]\n1",
+            "expected": "tail connects to node index 1"
+          },
+          {
+            "id": 2,
+            "input": "[1,2]\n0",
+            "expected": "tail connects to node index 0"
+          },
+          {
+            "id": 3,
+            "input": "[1]\n-1",
+            "expected": "no cycle"
+          }
+        ],
+        "methodName": "detectCycle",
+        "paramTypes": [
+          "linkedlist_cycle"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def detectCycle(self, head):\n        pass\n"
       },
       {
         "lcNumber": 124,
@@ -244,7 +635,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def maxPathSum(self, root):\n        self.maxSum = root.val\n        def dfs(node):\n            if not node: return 0\n            l = max(dfs(node.left), 0)\n            r = max(dfs(node.right), 0)\n            self.maxSum = max(self.maxSum, l+r+node.val)\n            return max(l, r) + node.val\n        dfs(root)\n        return self.maxSum",
-        "idea": "Post-order DFS. Clamp child sums to 0, check arch sum vs global max, return max single branch + val."
+        "idea": "Post-order DFS. Clamp child sums to 0, check arch sum vs global max, return max single branch + val.",
+        "description": "A path in a binary tree is a sequence of nodes where each adjacent pair is connected. Return the maximum path sum of any non-empty path (path doesn't need to go through root).",
+        "examples": [
+          {
+            "input": "root = [1,2,3]",
+            "output": "6"
+          },
+          {
+            "input": "root = [-10,9,20,null,null,15,7]",
+            "output": "42"
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 3 * 10^4",
+          "-1000 <= Node.val <= 1000"
+        ],
+        "hints": [
+          "Post-order DFS. At each node, max contribution upward = node.val + max(0, left, right). Max path through node = node.val + max(0,left) + max(0,right). Update global max."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3]",
+            "expected": "6"
+          },
+          {
+            "id": 2,
+            "input": "[-10,9,20,null,null,15,7]",
+            "expected": "42"
+          }
+        ],
+        "methodName": "maxPathSum",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def maxPathSum(self, root) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Maximum_path_sum.pdf"
@@ -276,7 +702,38 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def gameOfLife(self, board):\n        m, n = len(board), len(board[0])\n        dirs = [(0,1),(1,0),(-1,0),(0,-1),(-1,-1),(-1,1),(1,-1),(1,1)]\n        for i in range(m):\n            for j in range(n):\n                live = sum(1 for r,c in dirs if 0<=i+r<m and 0<=j+c<n and abs(board[i+r][j+c])==1)\n                if board[i][j]==1 and (live<2 or live>3): board[i][j]=-1\n                elif board[i][j]==0 and live==3: board[i][j]=2\n        for i in range(m):\n            for j in range(n):\n                if board[i][j]==-1: board[i][j]=0\n                elif board[i][j]==2: board[i][j]=1",
-        "idea": "Two-pass in-place with encoding: -1 = alive→dead, 2 = dead→alive. Both 1 and -1 count as alive when checking neighbors."
+        "idea": "Two-pass in-place with encoding: -1 = alive→dead, 2 = dead→alive. Both 1 and -1 count as alive when checking neighbors.",
+        "description": "The Game of Life: given an m×n board of live (1) and dead (0) cells, apply all four rules simultaneously. Update the board to its next state in-place.",
+        "examples": [
+          {
+            "input": "board = [[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+            "output": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 25",
+          "board[i][j] is 0 or 1"
+        ],
+        "hints": [
+          "Use extra states (2 = was alive, dies; 3 = was dead, becomes alive) to encode both old and new state simultaneously."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[0,1,0],[0,0,1],[1,1,1],[0,0,0]]",
+            "expected": "[[0,0,0],[1,0,1],[0,1,1],[0,1,0]]"
+          },
+          {
+            "id": 2,
+            "input": "[[1,1],[1,0]]",
+            "expected": "[[1,1],[1,1]]"
+          }
+        ],
+        "methodName": "gameOfLife",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def gameOfLife(self, board: list) -> None:\n        pass\n"
       },
       {
         "lcNumber": 11,
@@ -293,7 +750,50 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def maxArea(self, height):\n        l, r, best = 0, len(height)-1, 0\n        while l < r:\n            best = max(best, min(height[l], height[r]) * (r-l))\n            if height[l] < height[r]: l += 1\n            else: r -= 1\n        return best",
-        "idea": "Two-pointer greedy. Always move the pointer with the shorter height — it is the bottleneck."
+        "idea": "Two-pointer greedy. Always move the pointer with the shorter height — it is the bottleneck.",
+        "description": "Given an integer array `height` of length `n`, find two lines that form a container holding the most water. Return the maximum amount of water.",
+        "examples": [
+          {
+            "input": "height = [1,8,6,2,5,4,8,3,7]",
+            "output": "49"
+          },
+          {
+            "input": "height = [1,1]",
+            "output": "1"
+          }
+        ],
+        "constraints": [
+          "n == height.length",
+          "2 <= n <= 10^5",
+          "0 <= height[i] <= 10^4"
+        ],
+        "hints": [
+          "O(n²) brute force works but is too slow.",
+          "Use two pointers at both ends. Move the pointer with the smaller height inward.",
+          "Area = min(height[l], height[r]) * (r - l)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,8,6,2,5,4,8,3,7]",
+            "expected": "49"
+          },
+          {
+            "id": 2,
+            "input": "[1,1]",
+            "expected": "1"
+          },
+          {
+            "id": 3,
+            "input": "[4,3,2,1,4]",
+            "expected": "16"
+          }
+        ],
+        "methodName": "maxArea",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def maxArea(self, height: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Find_Disappeared_element_in_array_game_of_life.pdf"
@@ -323,7 +823,52 @@
         "timeComplexity": "O(log n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def findMin(self, nums):\n        l, r = 0, len(nums)-1\n        while l < r:\n            mid = (l+r)//2\n            if nums[mid] > nums[r]: l = mid+1\n            else: r = mid\n        return nums[l]",
-        "idea": "Compare mid with right. If nums[mid] > nums[right], min is in right half. Otherwise narrow to left."
+        "idea": "Compare mid with right. If nums[mid] > nums[right], min is in right half. Otherwise narrow to left.",
+        "description": "Given a sorted array rotated between 1 and n times, return the minimum element. Must run in O(log n).",
+        "examples": [
+          {
+            "input": "nums = [3,4,5,1,2]",
+            "output": "1"
+          },
+          {
+            "input": "nums = [4,5,6,7,0,1,2]",
+            "output": "0"
+          },
+          {
+            "input": "nums = [11,13,15,17]",
+            "output": "11"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 5000",
+          "All integers unique",
+          "O(log n) required"
+        ],
+        "hints": [
+          "Binary search. If nums[mid] > nums[right], minimum is in right half. Otherwise in left half (including mid)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,4,5,1,2]",
+            "expected": "1"
+          },
+          {
+            "id": 2,
+            "input": "[4,5,6,7,0,1,2]",
+            "expected": "0"
+          },
+          {
+            "id": 3,
+            "input": "[11,13,15,17]",
+            "expected": "11"
+          }
+        ],
+        "methodName": "findMin",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def findMin(self, nums: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 268,
@@ -340,7 +885,53 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def missingNumber(self, nums):\n        n = len(nums)\n        return n*(n+1)//2 - sum(nums)",
-        "idea": "Gauss formula: expected sum n*(n+1)/2 minus actual sum = missing number."
+        "idea": "Gauss formula: expected sum n*(n+1)/2 minus actual sum = missing number.",
+        "description": "Given an array nums containing n distinct numbers in range [0, n], return the only number in range missing from the array.",
+        "examples": [
+          {
+            "input": "nums = [3,0,1]",
+            "output": "2"
+          },
+          {
+            "input": "nums = [0,1]",
+            "output": "2"
+          },
+          {
+            "input": "nums = [9,6,4,2,3,5,7,0,1]",
+            "output": "8"
+          }
+        ],
+        "constraints": [
+          "n == nums.length",
+          "0 <= nums[i] <= n",
+          "All numbers unique"
+        ],
+        "hints": [
+          "Math: expected sum = n*(n+1)/2, subtract actual sum.",
+          "XOR: XOR all indices and all values — duplicates cancel, missing number remains."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,0,1]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[0,1]",
+            "expected": "2"
+          },
+          {
+            "id": 3,
+            "input": "[9,6,4,2,3,5,7,0,1]",
+            "expected": "8"
+          }
+        ],
+        "methodName": "missingNumber",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def missingNumber(self, nums: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 34,
@@ -356,7 +947,53 @@
         "timeComplexity": "O(log n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def searchRange(self, nums, target):\n        def bs(left_bias):\n            lo, hi, idx = 0, len(nums)-1, -1\n            while lo <= hi:\n                mid = (lo+hi)//2\n                if nums[mid] == target:\n                    idx = mid\n                    if left_bias: hi = mid-1\n                    else: lo = mid+1\n                elif nums[mid] < target: lo = mid+1\n                else: hi = mid-1\n            return idx\n        return [bs(True), bs(False)]",
-        "idea": "Two binary searches — one for leftmost (continue left on match), one for rightmost (continue right on match)."
+        "idea": "Two binary searches — one for leftmost (continue left on match), one for rightmost (continue right on match).",
+        "description": "Given a sorted array nums and a target, find the starting and ending position of target. If not found return [-1, -1]. Must be O(log n).",
+        "examples": [
+          {
+            "input": "nums = [5,7,7,8,8,10], target = 8",
+            "output": "[3,4]"
+          },
+          {
+            "input": "nums = [5,7,7,8,8,10], target = 6",
+            "output": "[-1,-1]"
+          },
+          {
+            "input": "nums = [], target = 0",
+            "output": "[-1,-1]"
+          }
+        ],
+        "constraints": [
+          "0 <= nums.length <= 10^5",
+          "nums is non-decreasing",
+          "O(log n) required"
+        ],
+        "hints": [
+          "Run two binary searches: one for leftmost occurrence, one for rightmost."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[5,7,7,8,8,10]\n8",
+            "expected": "[3,4]"
+          },
+          {
+            "id": 2,
+            "input": "[5,7,7,8,8,10]\n6",
+            "expected": "[-1,-1]"
+          },
+          {
+            "id": 3,
+            "input": "[]\n0",
+            "expected": "[-1,-1]"
+          }
+        ],
+        "methodName": "searchRange",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def searchRange(self, nums: list, target: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "BinarySearch_SearchInA2DMatrix.pdf"
@@ -387,7 +1024,47 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(m·n)",
         "code": "from collections import deque\nclass Solution:\n    def orangesRotting(self, grid):\n        m, n = len(grid), len(grid[0])\n        q, fresh = deque(), 0\n        for i in range(m):\n            for j in range(n):\n                if grid[i][j]==2: q.append((i,j))\n                elif grid[i][j]==1: fresh+=1\n        time = 0\n        while q and fresh:\n            time += 1\n            for _ in range(len(q)):\n                i,j = q.popleft()\n                for di,dj in [(0,1),(1,0),(0,-1),(-1,0)]:\n                    ni,nj = i+di,j+dj\n                    if 0<=ni<m and 0<=nj<n and grid[ni][nj]==1:\n                        grid[ni][nj]=2; fresh-=1; q.append((ni,nj))\n        return time if fresh==0 else -1",
-        "idea": "Multi-source BFS. Enqueue all initially rotten oranges. Each BFS level = 1 minute. Return -1 if fresh remain."
+        "idea": "Multi-source BFS. Enqueue all initially rotten oranges. Each BFS level = 1 minute. Return -1 if fresh remain.",
+        "description": "Given an m×n grid where 0=empty, 1=fresh orange, 2=rotten orange, every minute fresh oranges 4-directionally adjacent to rotten ones become rotten. Return minimum minutes until no fresh orange remains, or -1 if impossible.",
+        "examples": [
+          {
+            "input": "grid = [[2,1,1],[1,1,0],[0,1,1]]",
+            "output": "4"
+          },
+          {
+            "input": "grid = [[2,1,1],[0,1,1],[1,0,1]]",
+            "output": "-1"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 10",
+          "grid[i][j] is 0, 1, or 2"
+        ],
+        "hints": [
+          "Multi-source BFS from all rotten oranges simultaneously. Count fresh oranges. If any remain after BFS, return -1."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[2,1,1],[1,1,0],[0,1,1]]",
+            "expected": "4"
+          },
+          {
+            "id": 2,
+            "input": "[[2,1,1],[0,1,1],[1,0,1]]",
+            "expected": "-1"
+          },
+          {
+            "id": 3,
+            "input": "[[0,2]]",
+            "expected": "0"
+          }
+        ],
+        "methodName": "orangesRotting",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def orangesRotting(self, grid: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 690,
@@ -404,7 +1081,39 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "from collections import deque\nclass Solution:\n    def getImportance(self, employees, id):\n        adj = {e.id: (e.importance, e.subordinates) for e in employees}\n        total, q = 0, deque([id])\n        while q:\n            eid = q.popleft()\n            imp, subs = adj[eid]\n            total += imp; q.extend(subs)\n        return total",
-        "idea": "BFS with adjacency map id→[importance, subordinates]. Sum importance of all reachable employees."
+        "idea": "BFS with adjacency map id→[importance, subordinates]. Sum importance of all reachable employees.",
+        "description": "Each employee has an id, importance value, and list of direct subordinate IDs. Given an id, return the total importance of that employee plus all direct and indirect subordinates.",
+        "examples": [
+          {
+            "input": "employees = [[1,5,[2,3]],[2,3,[]],[3,3,[]]], id = 1",
+            "output": "11"
+          }
+        ],
+        "constraints": [
+          "1 <= employees.length <= 2000",
+          "-100 <= importance <= 100"
+        ],
+        "hints": [
+          "BFS/DFS from the given employee. Accumulate importance values as you traverse the subordinate tree."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,5,[2,3]],[2,3,[]],[3,3,[]]]\n1",
+            "expected": "11"
+          },
+          {
+            "id": 2,
+            "input": "[[1,2,[5]],[5,-3,[]]]\n5",
+            "expected": "-3"
+          }
+        ],
+        "methodName": "getImportance",
+        "paramTypes": [
+          "employeearray",
+          "int"
+        ],
+        "pythonStarter": "# Employee: id, importance, subordinates\nclass Solution:\n    def getImportance(self, employees: list, id: int) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "employee_subordinates_and_rotten_oranges.pdf"
@@ -433,7 +1142,51 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(m·n)",
         "code": "class Solution:\n    def longestCommonSubsequence(self, text1, text2):\n        m, n = len(text1), len(text2)\n        dp = [[0]*(n+1) for _ in range(m+1)]\n        for i in range(m-1,-1,-1):\n            for j in range(n-1,-1,-1):\n                if text1[i]==text2[j]: dp[i][j]=dp[i+1][j+1]+1\n                else: dp[i][j]=max(dp[i+1][j], dp[i][j+1])\n        return dp[0][0]",
-        "idea": "Bottom-up 2D DP from bottom-right to top-left. If chars match: dp[i][j]=dp[i+1][j+1]+1, else max of skipping either."
+        "idea": "Bottom-up 2D DP from bottom-right to top-left. If chars match: dp[i][j]=dp[i+1][j+1]+1, else max of skipping either.",
+        "description": "Given two strings text1 and text2, return the length of their longest common subsequence. If none exists, return 0.",
+        "examples": [
+          {
+            "input": "text1 = \"abcde\", text2 = \"ace\"",
+            "output": "3"
+          },
+          {
+            "input": "text1 = \"abc\", text2 = \"abc\"",
+            "output": "3"
+          },
+          {
+            "input": "text1 = \"abc\", text2 = \"def\"",
+            "output": "0"
+          }
+        ],
+        "constraints": [
+          "1 <= text1.length, text2.length <= 1000"
+        ],
+        "hints": [
+          "DP: dp[i][j] = LCS of text1[0..i-1] and text2[0..j-1]. If chars match, dp[i][j] = dp[i-1][j-1]+1. Otherwise max(dp[i-1][j], dp[i][j-1])."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"abcde\"\n\"ace\"",
+            "expected": "3"
+          },
+          {
+            "id": 2,
+            "input": "\"abc\"\n\"abc\"",
+            "expected": "3"
+          },
+          {
+            "id": 3,
+            "input": "\"abc\"\n\"def\"",
+            "expected": "0"
+          }
+        ],
+        "methodName": "longestCommonSubsequence",
+        "paramTypes": [
+          "str",
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def longestCommonSubsequence(self, text1: str, text2: str) -> int:\n        pass\n"
       },
       {
         "lcNumber": 45,
@@ -450,7 +1203,48 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def jump(self, nums):\n        start = end = jumps = 0\n        while end < len(nums)-1:\n            farthest = max(i+nums[i] for i in range(start, end+1))\n            jumps+=1; start=end+1; end=farthest\n        return jumps",
-        "idea": "Greedy BFS-like. Maintain window [start, end]. Scan window for farthest reach, jump++, advance window."
+        "idea": "Greedy BFS-like. Maintain window [start, end]. Scan window for farthest reach, jump++, advance window.",
+        "description": "Given a 0-indexed array nums where each element is the max jump length from that index, return the minimum number of jumps to reach the last index.",
+        "examples": [
+          {
+            "input": "nums = [2,3,1,1,4]",
+            "output": "2"
+          },
+          {
+            "input": "nums = [2,3,0,1,4]",
+            "output": "2"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^4",
+          "0 <= nums[i] <= 1000",
+          "It's guaranteed you can reach the last index."
+        ],
+        "hints": [
+          "Greedy: track the farthest reachable index. Each time you exhaust the current jump range, increment jumps."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[2,3,1,1,4]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[2,3,0,1,4]",
+            "expected": "2"
+          },
+          {
+            "id": 3,
+            "input": "[0]",
+            "expected": "0"
+          }
+        ],
+        "methodName": "jump",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def jump(self, nums: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Intro1.pdf"
@@ -481,7 +1275,47 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def findMaxLength(self, nums):\n        seen = {0: -1}\n        rsum = maxlen = 0\n        for i, n in enumerate(nums):\n            rsum += 1 if n==1 else -1\n            if rsum in seen: maxlen = max(maxlen, i-seen[rsum])\n            else: seen[rsum] = i\n        return maxlen",
-        "idea": "Treat 0→-1, running sum. Same rSum at two indices means equal 0s and 1s between them. Init {0:-1}."
+        "idea": "Treat 0→-1, running sum. Same rSum at two indices means equal 0s and 1s between them. Init {0:-1}.",
+        "description": "Given a binary array nums, return the maximum length of a contiguous subarray with equal number of 0s and 1s.",
+        "examples": [
+          {
+            "input": "nums = [0,1]",
+            "output": "2"
+          },
+          {
+            "input": "nums = [0,1,0]",
+            "output": "2"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "nums[i] is 0 or 1"
+        ],
+        "hints": [
+          "Replace 0s with -1, compute prefix sums. If the same prefix sum appears at index i and j, subarray [i+1..j] has equal 0s and 1s. Use a hash map to store first occurrence."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[0,1]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[0,1,0]",
+            "expected": "2"
+          },
+          {
+            "id": 3,
+            "input": "[0,1,1,1,1,1,0,0,0]",
+            "expected": "6"
+          }
+        ],
+        "methodName": "findMaxLength",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def findMaxLength(self, nums: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 409,
@@ -498,7 +1332,47 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(k)",
         "code": "class Solution:\n    def longestPalindrome(self, s):\n        seen, count = set(), 0\n        for c in s:\n            if c in seen: seen.remove(c); count+=2\n            else: seen.add(c)\n        return count + (1 if seen else 0)",
-        "idea": "HashSet toggle: pair up chars (count+=2), add 1 for center if any unpaired char remains."
+        "idea": "HashSet toggle: pair up chars (count+=2), add 1 for center if any unpaired char remains.",
+        "description": "Given a string s of lowercase and uppercase letters, return the length of the longest palindrome that can be built with those letters.",
+        "examples": [
+          {
+            "input": "s = \"abccccdd\"",
+            "output": "7",
+            "explanation": "\"dccaccd\""
+          },
+          {
+            "input": "s = \"a\"",
+            "output": "1"
+          }
+        ],
+        "constraints": [
+          "1 <= s.length <= 2000"
+        ],
+        "hints": [
+          "Count character frequencies. All even-count chars can be used fully. One odd-count char can go in the middle. Sum = sum of all floors + 1 if any odd count exists."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"abccccdd\"",
+            "expected": "7"
+          },
+          {
+            "id": 2,
+            "input": "\"a\"",
+            "expected": "1"
+          },
+          {
+            "id": 3,
+            "input": "\"bb\"",
+            "expected": "2"
+          }
+        ],
+        "methodName": "longestPalindrome",
+        "paramTypes": [
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def longestPalindrome(self, s: str) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "longest_palindrome_contiguous_subarray.pdf"
@@ -529,7 +1403,47 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def dailyTemperatures(self, temperatures):\n        stack, res = [], [0]*len(temperatures)\n        for i, t in enumerate(temperatures):\n            while stack and temperatures[stack[-1]] < t:\n                j = stack.pop(); res[j] = i-j\n            stack.append(i)\n        return res",
-        "idea": "Monotonic decreasing stack of indices. For each temp, pop all smaller and set result[idx] = i - idx."
+        "idea": "Monotonic decreasing stack of indices. For each temp, pop all smaller and set result[idx] = i - idx.",
+        "description": "Given array temperatures, return an array where answer[i] is the number of days until a warmer temperature. If no warmer future day, answer[i] = 0.",
+        "examples": [
+          {
+            "input": "temperatures = [73,74,75,71,69,72,76,73]",
+            "output": "[1,1,4,2,1,1,0,0]"
+          },
+          {
+            "input": "temperatures = [30,40,50,60]",
+            "output": "[1,1,1,0]"
+          }
+        ],
+        "constraints": [
+          "1 <= temperatures.length <= 10^5",
+          "30 <= temperatures[i] <= 100"
+        ],
+        "hints": [
+          "Monotonic stack of indices. For each temperature, pop all smaller temperatures from stack and compute their wait days."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[73,74,75,71,69,72,76,73]",
+            "expected": "[1,1,4,2,1,1,0,0]"
+          },
+          {
+            "id": 2,
+            "input": "[30,40,50,60]",
+            "expected": "[1,1,1,0]"
+          },
+          {
+            "id": 3,
+            "input": "[30,60,90]",
+            "expected": "[1,1,0]"
+          }
+        ],
+        "methodName": "dailyTemperatures",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def dailyTemperatures(self, temperatures: list) -> list:\n        pass\n"
       },
       {
         "lcNumber": 503,
@@ -546,7 +1460,41 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def nextGreaterElements(self, nums):\n        n = len(nums); res, stack = [-1]*n, []\n        for i in range(2*n):\n            while stack and nums[stack[-1]] < nums[i%n]:\n                res[stack.pop()] = nums[i%n]\n            if i < n: stack.append(i)\n        return res",
-        "idea": "Iterate 2n times with i%n to simulate circular. Only push indices during first n."
+        "idea": "Iterate 2n times with i%n to simulate circular. Only push indices during first n.",
+        "description": "Given a circular integer array nums, return the next greater number for every element. If none exists, return -1.",
+        "examples": [
+          {
+            "input": "nums = [1,2,1]",
+            "output": "[2,-1,2]"
+          },
+          {
+            "input": "nums = [1,2,3,4,3]",
+            "output": "[2,3,4,-1,4]"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^4"
+        ],
+        "hints": [
+          "Monotonic stack. Iterate 2*n times (using mod). Push indices, pop when a larger element is found."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,1]",
+            "expected": "[2,-1,2]"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,3,4,3]",
+            "expected": "[2,3,4,-1,4]"
+          }
+        ],
+        "methodName": "nextGreaterElements",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def nextGreaterElements(self, nums: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Intro2.pdf"
@@ -576,7 +1524,51 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "from collections import deque\nclass Solution:\n    def levelOrder(self, root):\n        if not root: return []\n        q, res = deque([root]), []\n        while q:\n            level = []\n            for _ in range(len(q)):\n                node = q.popleft(); level.append(node.val)\n                if node.left: q.append(node.left)\n                if node.right: q.append(node.right)\n            res.append(level)\n        return res",
-        "idea": "BFS with level tracking. Record queue size at start of each level, pop exactly that many nodes, enqueue children."
+        "idea": "BFS with level tracking. Record queue size at start of each level, pop exactly that many nodes, enqueue children.",
+        "description": "Given the root of a binary tree, return the level order traversal of its nodes' values (left to right, level by level).",
+        "examples": [
+          {
+            "input": "root = [3,9,20,null,null,15,7]",
+            "output": "[[3],[9,20],[15,7]]"
+          },
+          {
+            "input": "root = [1]",
+            "output": "[[1]]"
+          },
+          {
+            "input": "root = []",
+            "output": "[]"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 2000",
+          "-1000 <= Node.val <= 1000"
+        ],
+        "hints": [
+          "BFS with a queue. At each level, process all nodes in the current queue batch before adding their children."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,9,20,null,null,15,7]",
+            "expected": "[[3],[9,20],[15,7]]"
+          },
+          {
+            "id": 2,
+            "input": "[1]",
+            "expected": "[[1]]"
+          },
+          {
+            "id": 3,
+            "input": "[]",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "levelOrder",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def levelOrder(self, root) -> list:\n        pass\n"
       },
       {
         "lcNumber": 199,
@@ -593,7 +1585,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def rightSideView(self, root):\n        res = []\n        def dfs(node, d):\n            if not node: return\n            if d==len(res): res.append(node.val)\n            else: res[d] = node.val\n            dfs(node.left, d+1); dfs(node.right, d+1)\n        dfs(root, 0)\n        return res",
-        "idea": "DFS left then right, tracking depth. Each depth value is overwritten until rightmost node sets it last."
+        "idea": "DFS left then right, tracking depth. Each depth value is overwritten until rightmost node sets it last.",
+        "description": "Given the root of a binary tree, imagine standing on the right side. Return values of nodes visible from the right side, top to bottom.",
+        "examples": [
+          {
+            "input": "root = [1,2,3,null,5,null,4]",
+            "output": "[1,3,4]"
+          },
+          {
+            "input": "root = [1,null,3]",
+            "output": "[1,3]"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 100",
+          "-100 <= Node.val <= 100"
+        ],
+        "hints": [
+          "BFS level order. Take the last node of each level. Or DFS right-first, record first node seen at each depth."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,null,5,null,4]",
+            "expected": "[1,3,4]"
+          },
+          {
+            "id": 2,
+            "input": "[1,null,3]",
+            "expected": "[1,3]"
+          }
+        ],
+        "methodName": "rightSideView",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def rightSideView(self, root) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "right_side_view_symmetric_tree.pdf"
@@ -624,7 +1651,33 @@
         "timeComplexity": "O(1) per op",
         "spaceComplexity": "O(n)",
         "code": "class MinStack:\n    def __init__(self):\n        self.stack = []; self.minStack = []\n    def push(self, val):\n        self.stack.append(val)\n        if not self.minStack or val <= self.minStack[-1]:\n            self.minStack.append(val)\n    def pop(self):\n        if self.stack[-1] == self.minStack[-1]: self.minStack.pop()\n        self.stack.pop()\n    def top(self): return self.stack[-1]\n    def getMin(self): return self.minStack[-1]",
-        "idea": "Two stacks: main and min-stack. Push to min-stack only when val ≤ current min. Pop both when tops match."
+        "idea": "Two stacks: main and min-stack. Push to min-stack only when val ≤ current min. Pop both when tops match.",
+        "description": "Design a stack supporting push, pop, top, and getMin in O(1) time.",
+        "examples": [
+          {
+            "input": "[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"] with values [[-2],[0],[-3],[],[],[],[]]",
+            "output": "[null,null,null,null,-3,null,0,-2]"
+          }
+        ],
+        "constraints": [
+          "-2^31 <= val <= 2^31-1",
+          "At most 3 * 10^4 calls"
+        ],
+        "hints": [
+          "Maintain a second stack that tracks the minimum at each level. Push min onto it when push is called, pop it when pop is called."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"MinStack\",\"push\",\"push\",\"push\",\"getMin\",\"pop\",\"top\",\"getMin\"]\n[[],[-2],[0],[-3],[],[],[],[]]",
+            "expected": "[null,null,null,null,-3,null,0,-2]"
+          }
+        ],
+        "methodName": "minstack",
+        "paramTypes": [
+          "design"
+        ],
+        "pythonStarter": "class MinStack:\n    def __init__(self):\n        pass\n\n    def push(self, val: int) -> None:\n        pass\n\n    def pop(self) -> None:\n        pass\n\n    def top(self) -> int:\n        pass\n\n    def getMin(self) -> int:\n        pass\n"
       },
       {
         "lcNumber": 706,
@@ -642,7 +1695,33 @@
         "timeComplexity": "O(n/k) avg",
         "spaceComplexity": "O(k + n)",
         "code": "class MyHashMap:\n    class Node:\n        def __init__(self,k=-1,v=-1): self.key=k; self.val=v; self.next=None\n    def __init__(self): self.b=[None]*100\n    def _i(self,k): return k%100\n    def _p(self,h,k):\n        c=h\n        while c.next and c.next.key!=k: c=c.next\n        return c\n    def put(self,k,v):\n        i=self._i(k)\n        if not self.b[i]: self.b[i]=self.Node()\n        p=self._p(self.b[i],k)\n        if p.next: p.next.val=v\n        else: p.next=self.Node(k,v)\n    def get(self,k):\n        i=self._i(k)\n        if not self.b[i]: return -1\n        p=self._p(self.b[i],k)\n        return p.next.val if p.next else -1\n    def remove(self,k):\n        i=self._i(k)\n        if not self.b[i]: return\n        p=self._p(self.b[i],k)\n        if p.next: p.next=p.next.next",
-        "idea": "Separate chaining with 100 buckets and dummy head nodes. findPrev helper returns predecessor for O(1) insert/delete."
+        "idea": "Separate chaining with 100 buckets and dummy head nodes. findPrev helper returns predecessor for O(1) insert/delete.",
+        "description": "Design a HashMap without built-in hash table libraries. Support put(key,value), get(key), and remove(key).",
+        "examples": [
+          {
+            "input": "put(1,1), put(2,2), get(1), get(3), put(2,1), get(2), remove(2), get(2)",
+            "output": "[1, -1, 1, -1]"
+          }
+        ],
+        "constraints": [
+          "0 <= key, value <= 10^6",
+          "At most 10^4 calls"
+        ],
+        "hints": [
+          "Array of linked lists (chaining) with (key, value) pairs. Same bucket approach as HashSet."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"MyHashMap\",\"put\",\"put\",\"get\",\"get\",\"put\",\"get\",\"remove\",\"get\"]\n[[],[1,1],[2,2],[1],[3],[2,1],[2],[2],[2]]",
+            "expected": "[null,null,null,1,-1,null,1,null,-1]"
+          }
+        ],
+        "methodName": "myhashmap",
+        "paramTypes": [
+          "design"
+        ],
+        "pythonStarter": "class MyHashMap:\n    def __init__(self):\n        pass\n\n    def put(self, key: int, value: int) -> None:\n        pass\n\n    def get(self, key: int) -> int:\n        pass\n\n    def remove(self, key: int) -> None:\n        pass\n"
       }
     ],
     "notesUrl": "HashmapImplementation_MinStack.pdf"
@@ -673,7 +1752,45 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "from collections import deque\nclass Solution:\n    def isCousins(self, root, x, y):\n        q = deque([root])\n        while q:\n            level, sibling = set(), False\n            for _ in range(len(q)):\n                node = q.popleft()\n                level.add(node.val)\n                if node.left and node.right:\n                    vals={node.left.val,node.right.val}\n                    if x in vals and y in vals: sibling=True\n                if node.left: q.append(node.left)\n                if node.right: q.append(node.right)\n            if x in level and y in level: return not sibling\n        return False",
-        "idea": "BFS level-by-level. Check same level AND different parents (not children of same node)."
+        "idea": "BFS level-by-level. Check same level AND different parents (not children of same node).",
+        "description": "Two nodes are cousins if they have the same depth but different parents. Given the binary tree root and two node values x and y, return true if x and y are cousins.",
+        "examples": [
+          {
+            "input": "root = [1,2,3,4], x = 4, y = 3",
+            "output": "false"
+          },
+          {
+            "input": "root = [1,2,3,null,4,null,5], x = 5, y = 4",
+            "output": "true"
+          }
+        ],
+        "constraints": [
+          "2 <= nodes <= 100",
+          "x != y",
+          "x and y both exist in tree"
+        ],
+        "hints": [
+          "BFS level order. Check that x and y are at the same level but have different parents."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,4]\n4\n3",
+            "expected": "false"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,3,null,4,null,5]\n5\n4",
+            "expected": "true"
+          }
+        ],
+        "methodName": "isCousins",
+        "paramTypes": [
+          "tree",
+          "int",
+          "int"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def isCousins(self, root, x: int, y: int) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 101,
@@ -690,7 +1807,43 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def isSymmetric(self, root):\n        def check(l, r):\n            if not l and not r: return True\n            if not l or not r or l.val!=r.val: return False\n            return check(l.left,r.right) and check(l.right,r.left)\n        return check(root.left, root.right)",
-        "idea": "Recursive mirror check: left.val==right.val, left.left mirrors right.right, left.right mirrors right.left."
+        "idea": "Recursive mirror check: left.val==right.val, left.left mirrors right.right, left.right mirrors right.left.",
+        "description": "Given the root of a binary tree, check whether it is a mirror of itself (symmetric around its center).",
+        "examples": [
+          {
+            "input": "root = [1,2,2,3,4,4,3]",
+            "output": "true"
+          },
+          {
+            "input": "root = [1,2,2,null,3,null,3]",
+            "output": "false"
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 1000",
+          "-100 <= Node.val <= 100"
+        ],
+        "hints": [
+          "Recursive: left.left mirrors right.right, left.right mirrors right.left.",
+          "Iterative: use a queue with pairs of nodes to compare."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,2,3,4,4,3]",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,2,null,3,null,3]",
+            "expected": "false"
+          }
+        ],
+        "methodName": "isSymmetric",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def isSymmetric(self, root) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 429,
@@ -706,7 +1859,33 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "from collections import deque\nclass Solution:\n    def levelOrder(self, root):\n        if not root: return []\n        q, res = deque([root]), []\n        while q:\n            level = []\n            for _ in range(len(q)):\n                node=q.popleft(); level.append(node.val); q.extend(node.children)\n            res.append(level)\n        return res",
-        "idea": "Standard BFS — same as binary tree but enqueue all node.children."
+        "idea": "Standard BFS — same as binary tree but enqueue all node.children.",
+        "description": "Given an n-ary tree, return the level order traversal of its nodes' values.",
+        "examples": [
+          {
+            "input": "root = [1,null,3,2,4,null,5,6]",
+            "output": "[[1],[3,2,4],[5,6]]"
+          }
+        ],
+        "constraints": [
+          "Height <= 1000",
+          "0 <= nodes <= 10^4"
+        ],
+        "hints": [
+          "BFS with a queue. Process all nodes at each level, enqueue their children."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,null,3,2,4,null,5,6]",
+            "expected": "[[1],[3,2,4],[5,6]]"
+          }
+        ],
+        "methodName": "levelOrder",
+        "paramTypes": [
+          "nary_tree"
+        ],
+        "pythonStarter": "# Node is already defined for you\nclass Solution:\n    def levelOrder(self, root) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Cousins_in_BT_Course_schedule.pdf"
@@ -738,7 +1917,33 @@
         "timeComplexity": "O(L) per op",
         "spaceComplexity": "O(total chars × 26)",
         "code": "class TrieNode:\n    def __init__(self): self.children=[None]*26; self.isEnd=False\n\nclass Trie:\n    def __init__(self): self.root=TrieNode()\n    def insert(self, word):\n        node=self.root\n        for c in word:\n            i=ord(c)-ord('a')\n            if not node.children[i]: node.children[i]=TrieNode()\n            node=node.children[i]\n        node.isEnd=True\n    def search(self, word):\n        node=self.root\n        for c in word:\n            i=ord(c)-ord('a')\n            if not node.children[i]: return False\n            node=node.children[i]\n        return node.isEnd\n    def startsWith(self, prefix):\n        node=self.root\n        for c in prefix:\n            i=ord(c)-ord('a')\n            if not node.children[i]: return False\n            node=node.children[i]\n        return True",
-        "idea": "Array-based trie. Each node has children[26] and isEnd flag. Insert creates missing nodes. Search checks isEnd at path end."
+        "idea": "Array-based trie. Each node has children[26] and isEnd flag. Insert creates missing nodes. Search checks isEnd at path end.",
+        "description": "Implement a Trie (prefix tree) with insert, search, and startsWith operations.",
+        "examples": [
+          {
+            "input": "insert(\"apple\"), search(\"apple\"), search(\"app\"), startsWith(\"app\"), insert(\"app\"), search(\"app\")",
+            "output": "[true, false, true, true]"
+          }
+        ],
+        "constraints": [
+          "1 <= word.length, prefix.length <= 2000",
+          "At most 3 * 10^4 calls total"
+        ],
+        "hints": [
+          "Each node has a dict of children and a is_end flag. insert walks/creates nodes. search walks and checks is_end. startsWith just walks."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"Trie\",\"insert\",\"search\",\"search\",\"startsWith\",\"insert\",\"search\"]\n[[],[\"apple\"],[\"apple\"],[\"app\"],[\"app\"],[\"app\"],[\"app\"]]",
+            "expected": "[null,null,true,false,true,null,true]"
+          }
+        ],
+        "methodName": "trie",
+        "paramTypes": [
+          "design"
+        ],
+        "pythonStarter": "class Trie:\n    def __init__(self):\n        pass\n\n    def insert(self, word: str) -> None:\n        pass\n\n    def search(self, word: str) -> bool:\n        pass\n\n    def startsWith(self, prefix: str) -> bool:\n        pass\n"
       }
     ],
     "notesUrl": "Tries.pdf"
@@ -771,7 +1976,48 @@
         "timeComplexity": "O(V + E)",
         "spaceComplexity": "O(V + E)",
         "code": "from collections import deque\nclass Solution:\n    def canFinish(self, numCourses, prerequisites):\n        adj = [[] for _ in range(numCourses)]\n        ind = [0]*numCourses\n        for a,b in prerequisites: adj[b].append(a); ind[a]+=1\n        q = deque(i for i in range(numCourses) if ind[i]==0)\n        done=0\n        while q:\n            c=q.popleft(); done+=1\n            for nb in adj[c]:\n                ind[nb]-=1\n                if ind[nb]==0: q.append(nb)\n        return done==numCourses",
-        "idea": "Kahn's algorithm. Start with all indegree-0 nodes. Decrement neighbors. If all processed, no cycle."
+        "idea": "Kahn's algorithm. Start with all indegree-0 nodes. Decrement neighbors. If all processed, no cycle.",
+        "description": "There are numCourses courses (0 to numCourses-1) and prerequisites [a,b] meaning you must take b before a. Return true if you can finish all courses.",
+        "examples": [
+          {
+            "input": "numCourses = 2, prerequisites = [[1,0]]",
+            "output": "true"
+          },
+          {
+            "input": "numCourses = 2, prerequisites = [[1,0],[0,1]]",
+            "output": "false"
+          }
+        ],
+        "constraints": [
+          "1 <= numCourses <= 2000",
+          "0 <= prerequisites.length <= 5000"
+        ],
+        "hints": [
+          "Equivalent to cycle detection in a directed graph. Use DFS with states: unvisited/visiting/visited. Cycle = impossible."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "2\n[[1,0]]",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "2\n[[1,0],[0,1]]",
+            "expected": "false"
+          },
+          {
+            "id": 3,
+            "input": "1\n[]",
+            "expected": "true"
+          }
+        ],
+        "methodName": "canFinish",
+        "paramTypes": [
+          "int",
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def canFinish(self, numCourses: int, prerequisites: list) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 863,
@@ -789,7 +2035,41 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "from collections import defaultdict\nclass Solution:\n    def distanceK(self, root, target, k):\n        adj=defaultdict(list)\n        stack=[(root,None)]\n        while stack:\n            node,par=stack.pop()\n            if par: adj[node.val].append(par.val); adj[par.val].append(node.val)\n            if node.left: stack.append((node.left,node))\n            if node.right: stack.append((node.right,node))\n        res,seen=[],{target.val}\n        def dfs(v,d):\n            if d==k: res.append(v); return\n            for nb in adj[v]:\n                if nb not in seen: seen.add(nb); dfs(nb,d+1)\n        dfs(target.val,0)\n        return res",
-        "idea": "Convert tree to undirected graph via BFS. Then DFS from target tracking depth — collect nodes at depth k."
+        "idea": "Convert tree to undirected graph via BFS. Then DFS from target tracking depth — collect nodes at depth k.",
+        "description": "Given a binary tree, a target node value, and integer k, return all node values that are exactly k distance from the target node.",
+        "examples": [
+          {
+            "input": "root = [3,5,1,6,2,0,8,null,null,7,4], target = 5, k = 2",
+            "output": "[7,4,1]"
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 500",
+          "All Node.val are unique",
+          "0 <= k <= 1000"
+        ],
+        "hints": [
+          "Build a parent map (to traverse upward). Then BFS from target node in all 3 directions (left child, right child, parent) for k steps."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,5,1,6,2,0,8,null,null,7,4]\n5\n2",
+            "expected": "[7,4,1]"
+          },
+          {
+            "id": 2,
+            "input": "[1]\n1\n3",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "distanceK",
+        "paramTypes": [
+          "tree",
+          "int",
+          "int"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def distanceK(self, root, target: int, k: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "BFS_and_DFS.pdf"
@@ -821,7 +2101,58 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(min(n,m))",
         "code": "class Solution:\n    def lengthOfLongestSubstring(self, s):\n        seen, start, best = set(), 0, 0\n        for end, c in enumerate(s):\n            while c in seen: seen.remove(s[start]); start+=1\n            seen.add(c); best=max(best, end-start+1)\n        return best",
-        "idea": "Sliding window with hash set. Shrink from left when duplicate found. Each char added/removed at most once."
+        "idea": "Sliding window with hash set. Shrink from left when duplicate found. Each char added/removed at most once.",
+        "description": "Given a string `s`, find the length of the longest substring without duplicate characters.",
+        "examples": [
+          {
+            "input": "s = \"abcabcbb\"",
+            "output": "3",
+            "explanation": "The answer is \"abc\", length 3."
+          },
+          {
+            "input": "s = \"bbbbb\"",
+            "output": "1"
+          },
+          {
+            "input": "s = \"pwwkew\"",
+            "output": "3"
+          }
+        ],
+        "constraints": [
+          "0 <= s.length <= 5 * 10^4",
+          "s consists of English letters, digits, symbols and spaces."
+        ],
+        "hints": [
+          "Use a sliding window. Expand right pointer, shrink left when a duplicate is found.",
+          "Track characters in a set or hash map for O(1) lookup."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"abcabcbb\"",
+            "expected": "3"
+          },
+          {
+            "id": 2,
+            "input": "\"bbbbb\"",
+            "expected": "1"
+          },
+          {
+            "id": 3,
+            "input": "\"pwwkew\"",
+            "expected": "3"
+          },
+          {
+            "id": 4,
+            "input": "\"\"",
+            "expected": "0"
+          }
+        ],
+        "methodName": "lengthOfLongestSubstring",
+        "paramTypes": [
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        pass\n"
       },
       {
         "lcNumber": 438,
@@ -838,7 +2169,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "from collections import Counter\nclass Solution:\n    def findAnagrams(self, s, p):\n        if len(p)>len(s): return []\n        pc, sc = Counter(p), Counter(s[:len(p)])\n        res = [0] if pc==sc else []\n        for i in range(len(p), len(s)):\n            sc[s[i]]+=1\n            sc[s[i-len(p)]]-=1\n            if sc[s[i-len(p)]]==0: del sc[s[i-len(p)]]\n            if sc==pc: res.append(i-len(p)+1)\n        return res",
-        "idea": "Fixed-size sliding window with Counter comparison. Slide by adding right char and removing left char."
+        "idea": "Fixed-size sliding window with Counter comparison. Slide by adding right char and removing left char.",
+        "description": "Given strings s and p, return all start indices of p's anagrams in s.",
+        "examples": [
+          {
+            "input": "s = \"cbaebabacd\", p = \"abc\"",
+            "output": "[0,6]"
+          },
+          {
+            "input": "s = \"abab\", p = \"ab\"",
+            "output": "[0,1,2]"
+          }
+        ],
+        "constraints": [
+          "1 <= s.length, p.length <= 3 * 10^4"
+        ],
+        "hints": [
+          "Sliding window of size len(p). Compare character frequency arrays. Slide and update counts."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"cbaebabacd\"\n\"abc\"",
+            "expected": "[0,6]"
+          },
+          {
+            "id": 2,
+            "input": "\"abab\"\n\"ab\"",
+            "expected": "[0,1,2]"
+          }
+        ],
+        "methodName": "findAnagrams",
+        "paramTypes": [
+          "str",
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def findAnagrams(self, s: str, p: str) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "anagrams_in_string_longest_substring_without_repeating_char.pdf"
@@ -869,7 +2235,43 @@
         "timeComplexity": "O(n · 2ⁿ)",
         "spaceComplexity": "O(n · 2ⁿ)",
         "code": "class Solution:\n    def subsets(self, nums):\n        res = [[]]\n        for n in nums: res += [s+[n] for s in res]\n        return res",
-        "idea": "Iterative cascading: start with [[]], for each num copy all existing subsets, append num, add to result."
+        "idea": "Iterative cascading: start with [[]], for each num copy all existing subsets, append num, add to result.",
+        "description": "Given an integer array nums of unique elements, return all possible subsets (the power set). The solution must not contain duplicate subsets.",
+        "examples": [
+          {
+            "input": "nums = [1,2,3]",
+            "output": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]"
+          },
+          {
+            "input": "nums = [0]",
+            "output": "[[],[0]]"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10",
+          "-10 <= nums[i] <= 10",
+          "All numbers unique."
+        ],
+        "hints": [
+          "Backtrack: at each index decide to include or exclude. Or iteratively add each number to all existing subsets."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3]",
+            "expected": "[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]"
+          },
+          {
+            "id": 2,
+            "input": "[0]",
+            "expected": "[[],[0]]"
+          }
+        ],
+        "methodName": "subsets",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def subsets(self, nums: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Combination_sum_cont_palindrome_partitioning_subsets.pdf"
@@ -901,7 +2303,44 @@
         "timeComplexity": "O(M²·N)",
         "spaceComplexity": "O(M²·N)",
         "code": "from collections import defaultdict, deque\nclass Solution:\n    def ladderLength(self, beginWord, endWord, wordList):\n        if endWord not in wordList: return 0\n        adj=defaultdict(list)\n        for w in wordList+[beginWord]:\n            for i in range(len(w)): adj[w[:i]+'_'+w[i+1:]].append(w)\n        q,vis=deque([(beginWord,1)]),{beginWord}\n        while q:\n            word,dist=q.popleft()\n            for i in range(len(word)):\n                for nw in adj[word[:i]+'_'+word[i+1:]]:\n                    if nw==endWord: return dist+1\n                    if nw not in vis: vis.add(nw); q.append((nw,dist+1))\n        return 0",
-        "idea": "BFS + wildcard adjacency list. Pre-build pattern→words map. BFS through patterns to find shortest transformation."
+        "idea": "BFS + wildcard adjacency list. Pre-build pattern→words map. BFS through patterns to find shortest transformation.",
+        "description": "Given beginWord, endWord and wordList, return the number of words in the shortest transformation sequence from beginWord to endWord where each step changes exactly one letter and every intermediate word is in wordList. Return 0 if no sequence exists.",
+        "examples": [
+          {
+            "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+            "output": "5"
+          },
+          {
+            "input": "beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+            "output": "0"
+          }
+        ],
+        "constraints": [
+          "1 <= beginWord.length <= 10",
+          "1 <= wordList.length <= 5000"
+        ],
+        "hints": [
+          "BFS from beginWord. For each word, try changing every character (a-z). If the new word is in wordList, add to queue and remove from set."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"hit\"\n\"cog\"\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]",
+            "expected": "5"
+          },
+          {
+            "id": 2,
+            "input": "\"hit\"\n\"cog\"\n[\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]",
+            "expected": "0"
+          }
+        ],
+        "methodName": "ladderLength",
+        "paramTypes": [
+          "str",
+          "str",
+          "strarray"
+        ],
+        "pythonStarter": "class Solution:\n    def ladderLength(self, beginWord: str, endWord: str, wordList: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 542,
@@ -919,7 +2358,42 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(m·n)",
         "code": "from collections import deque\nclass Solution:\n    def updateMatrix(self, mat):\n        m,n=len(mat),len(mat[0]); q=deque()\n        for i in range(m):\n            for j in range(n):\n                if mat[i][j]==0: q.append((i,j))\n                else: mat[i][j]=-1\n        dist=0\n        while q:\n            dist+=1\n            for _ in range(len(q)):\n                i,j=q.popleft()\n                for di,dj in [(0,1),(1,0),(0,-1),(-1,0)]:\n                    ni,nj=i+di,j+dj\n                    if 0<=ni<m and 0<=nj<n and mat[ni][nj]==-1:\n                        mat[ni][nj]=dist; q.append((ni,nj))\n        return mat",
-        "idea": "Multi-source BFS from all 0s. Mark 1-cells as -1, process level by level assigning increasing distance."
+        "idea": "Multi-source BFS from all 0s. Mark 1-cells as -1, process level by level assigning increasing distance.",
+        "description": "Given an m×n binary matrix mat, return the distance of the nearest 0 for each cell.",
+        "examples": [
+          {
+            "input": "mat = [[0,0,0],[0,1,0],[0,0,0]]",
+            "output": "[[0,0,0],[0,1,0],[0,0,0]]"
+          },
+          {
+            "input": "mat = [[0,0,0],[0,1,0],[1,1,1]]",
+            "output": "[[0,0,0],[0,1,0],[1,2,1]]"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 10^4",
+          "At least one 0 in mat"
+        ],
+        "hints": [
+          "Multi-source BFS: start from all 0s simultaneously. Distance to each cell is its BFS level."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[0,0,0],[0,1,0],[0,0,0]]",
+            "expected": "[[0,0,0],[0,1,0],[0,0,0]]"
+          },
+          {
+            "id": 2,
+            "input": "[[0,0,0],[0,1,0],[1,1,1]]",
+            "expected": "[[0,0,0],[0,1,0],[1,2,1]]"
+          }
+        ],
+        "methodName": "updateMatrix",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def updateMatrix(self, mat: list) -> list:\n        pass\n"
       },
       {
         "lcNumber": 733,
@@ -937,7 +2411,41 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(m·n)",
         "code": "class Solution:\n    def floodFill(self, image, sr, sc, color):\n        orig=image[sr][sc]\n        if orig==color: return image\n        m,n=len(image),len(image[0])\n        def dfs(i,j):\n            if i<0 or i>=m or j<0 or j>=n or image[i][j]!=orig: return\n            image[i][j]=color\n            for di,dj in [(0,1),(1,0),(0,-1),(-1,0)]: dfs(i+di,j+dj)\n        dfs(sr,sc); return image",
-        "idea": "Recursive DFS. Color change acts as visited marker. Guard: return early if new color = original."
+        "idea": "Recursive DFS. Color change acts as visited marker. Guard: return early if new color = original.",
+        "description": "Given an image (m×n grid), perform a flood fill starting from pixel (sr,sc): change its color to `color` and recursively change all 4-directionally adjacent pixels of the same original color.",
+        "examples": [
+          {
+            "input": "image = [[1,1,1],[1,1,0],[1,0,1]], sr=1, sc=1, color=2",
+            "output": "[[2,2,2],[2,2,0],[2,0,1]]"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 50",
+          "0 <= image[i][j], color < 2^16"
+        ],
+        "hints": [
+          "DFS/BFS from (sr,sc). Only change cells matching the original color. Handle the edge case where starting color equals new color."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,1,1],[1,1,0],[1,0,1]]\n1\n1\n2",
+            "expected": "[[2,2,2],[2,2,0],[2,0,1]]"
+          },
+          {
+            "id": 2,
+            "input": "[[0,0,0],[0,0,0]]\n0\n0\n0",
+            "expected": "[[0,0,0],[0,0,0]]"
+          }
+        ],
+        "methodName": "floodFill",
+        "paramTypes": [
+          "int2darray",
+          "int",
+          "int",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def floodFill(self, image: list, sr: int, sc: int, color: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Floodfill_01Matrix_Trajan_algo.pdf"
@@ -968,7 +2476,44 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def sumNumbers(self, root):\n        def dfs(node, curr):\n            if not node: return 0\n            curr=curr*10+node.val\n            if not node.left and not node.right: return curr\n            return dfs(node.left,curr)+dfs(node.right,curr)\n        return dfs(root,0)",
-        "idea": "DFS accumulating number: currSum = currSum*10 + val. At leaf nodes add to total."
+        "idea": "DFS accumulating number: currSum = currSum*10 + val. At leaf nodes add to total.",
+        "description": "Given the root of a binary tree with digits 0-9, where each root-to-leaf path represents a number, return the total sum of all root-to-leaf numbers.",
+        "examples": [
+          {
+            "input": "root = [1,2,3]",
+            "output": "25",
+            "explanation": "12 + 13 = 25"
+          },
+          {
+            "input": "root = [4,9,0,5,1]",
+            "output": "1026"
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 1000",
+          "0 <= Node.val <= 9",
+          "depth <= 10"
+        ],
+        "hints": [
+          "DFS passing current accumulated number. At leaf, add to total. current = current * 10 + node.val."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3]",
+            "expected": "25"
+          },
+          {
+            "id": 2,
+            "input": "[4,9,0,5,1]",
+            "expected": "1026"
+          }
+        ],
+        "methodName": "sumNumbers",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def sumNumbers(self, root) -> int:\n        pass\n"
       },
       {
         "lcNumber": 113,
@@ -985,7 +2530,43 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def pathSum(self, root, targetSum):\n        res, path = [], []\n        def dfs(node, rem):\n            if not node: return\n            path.append(node.val)\n            if not node.left and not node.right and rem==node.val: res.append(path[:])\n            dfs(node.left, rem-node.val); dfs(node.right, rem-node.val)\n            path.pop()\n        dfs(root, targetSum); return res",
-        "idea": "DFS backtracking with path list. Append on enter, pop on exit. At leaf if sum matches, copy path."
+        "idea": "DFS backtracking with path list. Append on enter, pop on exit. At leaf if sum matches, copy path.",
+        "description": "Given the root of a binary tree and targetSum, return all root-to-leaf paths where the sum of node values equals targetSum.",
+        "examples": [
+          {
+            "input": "root = [5,4,8,11,null,13,4,7,2,null,null,5,1], targetSum = 22",
+            "output": "[[5,4,11,2],[5,8,4,5]]"
+          },
+          {
+            "input": "root = [1,2,3], targetSum = 5",
+            "output": "[]"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 5000",
+          "-1000 <= Node.val, targetSum <= 1000"
+        ],
+        "hints": [
+          "DFS + backtracking. Add node to path, subtract from remaining sum. At leaf, check if remaining == 0."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[5,4,8,11,null,13,4,7,2,null,null,5,1]\n22",
+            "expected": "[[5,4,11,2],[5,8,4,5]]"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,3]\n5",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "pathSum",
+        "paramTypes": [
+          "tree",
+          "int"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def pathSum(self, root, targetSum: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Path_sum_2_and_sum_from_root_to_leaf.pdf"
@@ -1017,7 +2598,48 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def topKFrequent(self, nums, k):\n        freq={}\n        for n in nums: freq[n]=freq.get(n,0)+1\n        buckets=[[] for _ in range(len(nums)+1)]\n        for n,f in freq.items(): buckets[f].append(n)\n        res=[]\n        for i in range(len(buckets)-1,0,-1):\n            res.extend(buckets[i])\n            if len(res)>=k: return res[:k]\n        return res",
-        "idea": "Bucket sort: bucket[freq] = elements. Iterate from highest freq down collecting k elements. O(n) vs O(n log k) heap."
+        "idea": "Bucket sort: bucket[freq] = elements. Iterate from highest freq down collecting k elements. O(n) vs O(n log k) heap.",
+        "description": "Given integer array nums and integer k, return the k most frequent elements. Answer is guaranteed to be unique.",
+        "examples": [
+          {
+            "input": "nums = [1,1,1,2,2,3], k = 2",
+            "output": "[1,2]"
+          },
+          {
+            "input": "nums = [1], k = 1",
+            "output": "[1]"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "k is in range [1, unique element count]"
+        ],
+        "hints": [
+          "Count frequencies, then use a min-heap of size k. Or bucket sort by frequency (O(n))."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,1,1,2,2,3]\n2",
+            "expected": "[1,2]"
+          },
+          {
+            "id": 2,
+            "input": "[1]\n1",
+            "expected": "[1]"
+          },
+          {
+            "id": 3,
+            "input": "[-1,-1]\n1",
+            "expected": "[-1]"
+          }
+        ],
+        "methodName": "topKFrequent",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def topKFrequent(self, nums: list, k: int) -> list:\n        pass\n"
       },
       {
         "lcNumber": 62,
@@ -1033,7 +2655,42 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def uniquePaths(self, m, n):\n        dp=[1]*n\n        for _ in range(m-1):\n            for i in range(n-2,-1,-1): dp[i]+=dp[i+1]\n        return dp[0]",
-        "idea": "Space-optimized 1D DP. Right-to-left each row: dp[i] += dp[i+1]. Repeat m-1 times."
+        "idea": "Space-optimized 1D DP. Right-to-left each row: dp[i] += dp[i+1]. Repeat m-1 times.",
+        "description": "A robot on an m×n grid starts at top-left and moves only right or down. Return the number of unique paths to reach bottom-right.",
+        "examples": [
+          {
+            "input": "m = 3, n = 7",
+            "output": "28"
+          },
+          {
+            "input": "m = 3, n = 2",
+            "output": "3"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 100"
+        ],
+        "hints": [
+          "DP: dp[i][j] = dp[i-1][j] + dp[i][j-1]. First row and column are all 1s."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "3\n7",
+            "expected": "28"
+          },
+          {
+            "id": 2,
+            "input": "3\n2",
+            "expected": "3"
+          }
+        ],
+        "methodName": "uniquePaths",
+        "paramTypes": [
+          "int",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def uniquePaths(self, m: int, n: int) -> int:\n        pass\n"
       },
       {
         "lcNumber": 64,
@@ -1050,7 +2707,42 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def minPathSum(self, grid):\n        m,n=len(grid),len(grid[0])\n        for r in range(m-2,-1,-1): grid[r][n-1]+=grid[r+1][n-1]\n        for c in range(n-2,-1,-1): grid[m-1][c]+=grid[m-1][c+1]\n        for r in range(m-2,-1,-1):\n            for c in range(n-2,-1,-1): grid[r][c]+=min(grid[r+1][c],grid[r][c+1])\n        return grid[0][0]",
-        "idea": "Bottom-up DP in-place. Fill last col then row, then inner: grid[r][c] += min(right, down)."
+        "idea": "Bottom-up DP in-place. Fill last col then row, then inner: grid[r][c] += min(right, down).",
+        "description": "Given an m×n grid of non-negative numbers, find a path from top-left to bottom-right (only right or down) that minimizes the sum of all numbers along the path.",
+        "examples": [
+          {
+            "input": "grid = [[1,3,1],[1,5,1],[4,2,1]]",
+            "output": "7"
+          },
+          {
+            "input": "grid = [[1,2,3],[4,5,6]]",
+            "output": "12"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 200",
+          "0 <= grid[i][j] <= 200"
+        ],
+        "hints": [
+          "DP in-place: grid[i][j] += min(grid[i-1][j], grid[i][j-1])."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,3,1],[1,5,1],[4,2,1]]",
+            "expected": "7"
+          },
+          {
+            "id": 2,
+            "input": "[[1,2,3],[4,5,6]]",
+            "expected": "12"
+          }
+        ],
+        "methodName": "minPathSum",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def minPathSum(self, grid: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Meeting_rooms_and_TopK_frequent_elements.pdf"
@@ -1081,7 +2773,57 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def twoSum(self, nums, target):\n        seen={}\n        for i,n in enumerate(nums):\n            if target-n in seen: return [i, seen[target-n]]\n            seen[n]=i",
-        "idea": "Single-pass hashmap. For each element compute complement. If complement in map, return pair."
+        "idea": "Single-pass hashmap. For each element compute complement. If complement in map, return pair.",
+        "description": "Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
+        "examples": [
+          {
+            "input": "nums = [2,7,11,15], target = 9",
+            "output": "[0,1]",
+            "explanation": "nums[0] + nums[1] == 9, return [0, 1]."
+          },
+          {
+            "input": "nums = [3,2,4], target = 6",
+            "output": "[1,2]"
+          },
+          {
+            "input": "nums = [3,3], target = 6",
+            "output": "[0,1]"
+          }
+        ],
+        "constraints": [
+          "2 <= nums.length <= 10^4",
+          "-10^9 <= nums[i] <= 10^9",
+          "-10^9 <= target <= 10^9",
+          "Only one valid answer exists."
+        ],
+        "hints": [
+          "A brute force approach checks all pairs — O(n²). Can you do better?",
+          "Fix one number x, search for target-x. Can you make that search faster?",
+          "Use a hash map to store seen values and look up target-x in O(1)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[2,7,11,15]\n9",
+            "expected": "[0,1]"
+          },
+          {
+            "id": 2,
+            "input": "[3,2,4]\n6",
+            "expected": "[1,2]"
+          },
+          {
+            "id": 3,
+            "input": "[3,3]\n6",
+            "expected": "[0,1]"
+          }
+        ],
+        "methodName": "twoSum",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def twoSum(self, nums: list, target: int) -> list:\n        pass\n"
       },
       {
         "lcNumber": 75,
@@ -1098,7 +2840,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def sortColors(self, nums):\n        count=[0,0,0]\n        for n in nums: count[n]+=1\n        i=0\n        for color,c in enumerate(count):\n            for _ in range(c): nums[i]=color; i+=1",
-        "idea": "Count occurrences of 0, 1, 2. Overwrite array. Alternatively, Dutch National Flag for single pass."
+        "idea": "Count occurrences of 0, 1, 2. Overwrite array. Alternatively, Dutch National Flag for single pass.",
+        "description": "Given an array nums with n objects colored red (0), white (1), or blue (2), sort them in-place in that order without using the library sort function.",
+        "examples": [
+          {
+            "input": "nums = [2,0,2,1,1,0]",
+            "output": "[0,0,1,1,2,2]"
+          },
+          {
+            "input": "nums = [2,0,1]",
+            "output": "[0,1,2]"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 300",
+          "nums[i] is 0, 1, or 2"
+        ],
+        "hints": [
+          "Dutch National Flag algorithm: three pointers low, mid, high. Swap 0s to front, 2s to back."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[2,0,2,1,1,0]",
+            "expected": "[0,0,1,1,2,2]"
+          },
+          {
+            "id": 2,
+            "input": "[2,0,1]",
+            "expected": "[0,1,2]"
+          }
+        ],
+        "methodName": "sortColors",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def sortColors(self, nums: list) -> None:\n        pass\n"
       },
       {
         "lcNumber": 26,
@@ -1114,7 +2891,44 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def removeDuplicates(self, nums):\n        slow=0\n        for fast in range(1,len(nums)):\n            if nums[fast]!=nums[slow]: slow+=1; nums[slow]=nums[fast]\n        return slow+1",
-        "idea": "Slow pointer writes unique values. When fast finds new value, slow advances and copies."
+        "idea": "Slow pointer writes unique values. When fast finds new value, slow advances and copies.",
+        "description": "Given a sorted integer array nums in non-decreasing order, remove duplicates in-place so each unique element appears only once. Return the number of unique elements k.",
+        "examples": [
+          {
+            "input": "nums = [1,1,2]",
+            "output": "2, nums = [1,2,_]"
+          },
+          {
+            "input": "nums = [0,0,1,1,1,2,2,3,3,4]",
+            "output": "5, nums = [0,1,2,3,4,_,_,_,_,_]"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 3 * 10^4",
+          "-100 <= nums[i] <= 100",
+          "nums is sorted in non-decreasing order."
+        ],
+        "hints": [
+          "Two pointers: slow tracks last unique position, fast scans forward.",
+          "When nums[fast] != nums[slow], increment slow and copy."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,1,2]",
+            "expected": "2, nums = [1,2,_]"
+          },
+          {
+            "id": 2,
+            "input": "[0,0,1,1,1,2,2,3,3,4]",
+            "expected": "5, nums = [0,1,2,3,4,_,_,_,_,_]"
+          }
+        ],
+        "methodName": "removeDuplicates",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def removeDuplicates(self, nums: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "2sum_3sum_water_container.pdf"
@@ -1145,7 +2959,42 @@
         "timeComplexity": "O(m + n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def getIntersectionNode(self, headA, headB):\n        a, b = headA, headB\n        while a != b:\n            a = a.next if a else headB\n            b = b.next if b else headA\n        return a",
-        "idea": "Two pointers: when one hits null redirect to other's head. They meet at intersection after traversing a+b+c total."
+        "idea": "Two pointers: when one hits null redirect to other's head. They meet at intersection after traversing a+b+c total.",
+        "description": "Given heads of two singly linked lists, return the node where they intersect. Return null if no intersection. Lists must retain original structure after.",
+        "examples": [
+          {
+            "input": "intersectVal=8, listA=[4,1,8,4,5], listB=[5,6,1,8,4,5]",
+            "output": "Intersected at '8'"
+          },
+          {
+            "input": "intersectVal=0, listA=[2,6,4], listB=[1,5]",
+            "output": "No intersection"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 3 * 10^4",
+          "O(m+n) time, O(1) memory preferred"
+        ],
+        "hints": [
+          "Two pointers: when one reaches end, redirect to other list's head. They meet at intersection after at most m+n steps."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "8\n[4,1,8,4,5]\n[5,6,1,8,4,5]\n2\n3",
+            "expected": "Intersected at '8'"
+          },
+          {
+            "id": 2,
+            "input": "0\n[2,6,4]\n[1,5]\n3\n2",
+            "expected": "No intersection"
+          }
+        ],
+        "methodName": "getIntersectionNode",
+        "paramTypes": [
+          "intersect"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def getIntersectionNode(self, headA, headB):\n        pass\n"
       },
       {
         "lcNumber": 143,
@@ -1162,7 +3011,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def reorderList(self, head):\n        slow,fast=head,head\n        while fast.next and fast.next.next: slow,fast=slow.next,fast.next.next\n        prev,curr=None,slow.next; slow.next=None\n        while curr: nxt=curr.next; curr.next=prev; prev,curr=curr,nxt\n        f,s=head,prev\n        while s:\n            t1,t2=f.next,s.next; f.next=s; s.next=t1; f,s=t1,t2",
-        "idea": "Three steps: find middle, reverse second half, merge two halves alternating."
+        "idea": "Three steps: find middle, reverse second half, merge two halves alternating.",
+        "description": "Reorder a singly linked list L0→L1→…→Ln-1→Ln to L0→Ln→L1→Ln-1→L2→Ln-2→…. Do not modify node values.",
+        "examples": [
+          {
+            "input": "head = [1,2,3,4]",
+            "output": "[1,4,2,3]"
+          },
+          {
+            "input": "head = [1,2,3,4,5]",
+            "output": "[1,5,2,4,3]"
+          }
+        ],
+        "constraints": [
+          "1 <= nodes <= 5 * 10^4",
+          "1 <= Node.val <= 1000"
+        ],
+        "hints": [
+          "Find mid with slow/fast. Reverse the second half. Merge both halves alternately."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,4]",
+            "expected": "[1,4,2,3]"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,3,4,5]",
+            "expected": "[1,5,2,4,3]"
+          }
+        ],
+        "methodName": "reorderList",
+        "paramTypes": [
+          "linkedlist"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def reorderList(self, head) -> None:\n        pass\n"
       },
       {
         "lcNumber": 19,
@@ -1178,7 +3062,53 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def removeNthFromEnd(self, head, n):\n        dummy=ListNode(0,head); slow=fast=dummy\n        for _ in range(n+1): fast=fast.next\n        while fast: slow,fast=slow.next,fast.next\n        slow.next=slow.next.next\n        return dummy.next",
-        "idea": "Dummy node + gap of n+1. Move fast n+1 steps, then both until fast is null. Skip slow.next."
+        "idea": "Dummy node + gap of n+1. Move fast n+1 steps, then both until fast is null. Skip slow.next.",
+        "description": "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+        "examples": [
+          {
+            "input": "head = [1,2,3,4,5], n = 2",
+            "output": "[1,2,3,5]"
+          },
+          {
+            "input": "head = [1], n = 1",
+            "output": "[]"
+          },
+          {
+            "input": "head = [1,2], n = 1",
+            "output": "[1]"
+          }
+        ],
+        "constraints": [
+          "1 <= sz <= 30",
+          "0 <= Node.val <= 100",
+          "1 <= n <= sz"
+        ],
+        "hints": [
+          "Use two pointers. Advance the fast pointer n steps ahead, then move both until fast reaches the end."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,4,5]\n2",
+            "expected": "[1,2,3,5]"
+          },
+          {
+            "id": 2,
+            "input": "[1]\n1",
+            "expected": "[]"
+          },
+          {
+            "id": 3,
+            "input": "[1,2]\n1",
+            "expected": "[1]"
+          }
+        ],
+        "methodName": "removeNthFromEnd",
+        "paramTypes": [
+          "linkedlist",
+          "int"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def removeNthFromEnd(self, head, n: int):\n        pass\n"
       }
     ],
     "notesUrl": "word_search_merge_k_sortedlist_sliding_window.pdf"
@@ -1207,7 +3137,46 @@
         "timeComplexity": "O(n!)",
         "spaceComplexity": "O(n²)",
         "code": "class Solution:\n    def solveNQueens(self, n):\n        res,board=[],[['.']* n for _ in range(n)]\n        cols,d1,d2=set(),set(),set()\n        def bt(r):\n            if r==n: res.append([''.join(row) for row in board]); return\n            for c in range(n):\n                if c in cols or r-c in d1 or r+c in d2: continue\n                board[r][c]='Q'; cols.add(c); d1.add(r-c); d2.add(r+c)\n                bt(r+1)\n                board[r][c]='.'; cols.remove(c); d1.remove(r-c); d2.remove(r+c)\n        bt(0); return res",
-        "idea": "Row-by-row backtracking. Track columns, diagonals (r-c) and anti-diagonals (r+c) with sets for O(1) safety checks."
+        "idea": "Row-by-row backtracking. Track columns, diagonals (r-c) and anti-diagonals (r+c) with sets for O(1) safety checks.",
+        "description": "The n-queens puzzle: place n queens on an n×n chessboard so no two queens attack each other. Return all distinct solutions.",
+        "examples": [
+          {
+            "input": "n = 4",
+            "output": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"
+          },
+          {
+            "input": "n = 1",
+            "output": "[[\"Q\"]]"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 9"
+        ],
+        "hints": [
+          "Backtrack row by row. Track used columns and diagonals to prune invalid placements."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "4",
+            "expected": "[[\".Q..\",\"...Q\",\"Q...\",\"..Q.\"],[\"..Q.\",\"Q...\",\"...Q\",\".Q..\"]]"
+          },
+          {
+            "id": 2,
+            "input": "1",
+            "expected": "[[\"Q\"]]"
+          },
+          {
+            "id": 3,
+            "input": "2",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "solveNQueens",
+        "paramTypes": [
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def solveNQueens(self, n: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "word_search_nqueens.pdf"
@@ -1238,7 +3207,34 @@
         "timeComplexity": "O(1) amortized",
         "spaceComplexity": "O(n)",
         "code": "class MyQueue:\n    def __init__(self): self.inS,self.outS=[],[]\n    def push(self,x): self.inS.append(x)\n    def pop(self): self.peek(); return self.outS.pop()\n    def peek(self):\n        if not self.outS:\n            while self.inS: self.outS.append(self.inS.pop())\n        return self.outS[-1]\n    def empty(self): return not self.inS and not self.outS",
-        "idea": "Two stacks. Transfer inStack→outStack lazily when outStack empty. Amortized O(1) per op."
+        "idea": "Two stacks. Transfer inStack→outStack lazily when outStack empty. Amortized O(1) per op.",
+        "description": "Implement a FIFO queue using only two stacks. Support push, pop, peek, and empty operations.",
+        "examples": [
+          {
+            "input": "push(1), push(2), peek(), pop(), empty()",
+            "output": "[1, 1, false]"
+          }
+        ],
+        "constraints": [
+          "1 <= x <= 9",
+          "At most 100 calls",
+          "All calls to pop and peek are valid"
+        ],
+        "hints": [
+          "Two stacks: inbox and outbox. Push to inbox. For pop/peek, if outbox empty, pour inbox into outbox (reversing order). Amortized O(1)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"MyQueue\",\"push\",\"push\",\"peek\",\"pop\",\"empty\"]\n[[],[1],[2],[],[],[]]",
+            "expected": "[null,null,null,1,1,false]"
+          }
+        ],
+        "methodName": "myqueue",
+        "paramTypes": [
+          "design"
+        ],
+        "pythonStarter": "class MyQueue:\n    def __init__(self):\n        pass\n\n    def push(self, x: int) -> None:\n        pass\n\n    def pop(self) -> int:\n        pass\n\n    def peek(self) -> int:\n        pass\n\n    def empty(self) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 705,
@@ -1256,7 +3252,33 @@
         "timeComplexity": "O(1) per op",
         "spaceComplexity": "O(n)",
         "code": "class MyHashSet:\n    def __init__(self): self.d=[None]*1000\n    def _i(self,k): return k%1000,k//1000\n    def add(self,k):\n        i,j=self._i(k)\n        if self.d[i] is None: self.d[i]=[False]*(1001 if i==0 else 1000)\n        self.d[i][j]=True\n    def remove(self,k):\n        i,j=self._i(k)\n        if self.d[i]: self.d[i][j]=False\n    def contains(self,k):\n        i,j=self._i(k)\n        return bool(self.d[i]) and self.d[i][j]",
-        "idea": "Double hashing with 1000 buckets. primary[key%1000][key//1000] = bool. Lazily allocated per bucket."
+        "idea": "Double hashing with 1000 buckets. primary[key%1000][key//1000] = bool. Lazily allocated per bucket.",
+        "description": "Design a HashSet without using built-in hash table libraries. Support add(key), contains(key), and remove(key).",
+        "examples": [
+          {
+            "input": "add(1), add(2), contains(1), contains(3), remove(2), contains(2)",
+            "output": "[true, false, false]"
+          }
+        ],
+        "constraints": [
+          "0 <= key <= 10^6",
+          "At most 10^4 calls"
+        ],
+        "hints": [
+          "Array of linked lists (chaining). Hash = key % bucket_size. Handle collisions within each bucket."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"MyHashSet\",\"add\",\"add\",\"contains\",\"contains\",\"add\",\"contains\",\"remove\",\"contains\"]\n[[],[1],[2],[1],[3],[2],[2],[2],[2]]",
+            "expected": "[null,null,null,true,false,null,true,null,false]"
+          }
+        ],
+        "methodName": "myhashset",
+        "paramTypes": [
+          "design"
+        ],
+        "pythonStarter": "class MyHashSet:\n    def __init__(self):\n        pass\n\n    def add(self, key: int) -> None:\n        pass\n\n    def remove(self, key: int) -> None:\n        pass\n\n    def contains(self, key: int) -> bool:\n        pass\n"
       }
     ],
     "notesUrl": "HashsetImplementation.pdf"
@@ -1285,7 +3307,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def findDisappearedNumbers(self, nums):\n        for n in nums:\n            i=abs(n)-1\n            if nums[i]>0: nums[i]*=-1\n        return [i+1 for i,n in enumerate(nums) if n>0]",
-        "idea": "Negation marking. For each num negate nums[|num|-1]. Indices still positive = missing numbers."
+        "idea": "Negation marking. For each num negate nums[|num|-1]. Indices still positive = missing numbers.",
+        "description": "Given array nums of n integers where nums[i] is in [1,n], return all integers in [1,n] that do not appear in nums.",
+        "examples": [
+          {
+            "input": "nums = [4,3,2,7,8,2,3,1]",
+            "output": "[5,6]"
+          },
+          {
+            "input": "nums = [1,1]",
+            "output": "[2]"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 10^5",
+          "1 <= nums[i] <= n"
+        ],
+        "hints": [
+          "Mark visited: negate nums[nums[i]-1]. Then collect all indices with positive values (0-indexed, add 1)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[4,3,2,7,8,2,3,1]",
+            "expected": "[5,6]"
+          },
+          {
+            "id": 2,
+            "input": "[1,1]",
+            "expected": "[2]"
+          }
+        ],
+        "methodName": "findDisappearedNumbers",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def findDisappearedNumbers(self, nums: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Find_Disappeared_element_in_array_game_of_life.pdf"
@@ -1315,7 +3372,42 @@
         "timeComplexity": "O(n + max_val)",
         "spaceComplexity": "O(max_val)",
         "code": "class Solution:\n    def deleteAndEarn(self, nums):\n        freq=[0]*(max(nums)+1)\n        for n in nums: freq[n]+=n\n        prev2,prev1=0,0\n        for f in freq: prev2,prev1=prev1,max(prev1,prev2+f)\n        return prev1",
-        "idea": "Transform to House Robber. freq[x] = x * count(x). Choosing x deletes x±1, reducing to non-adjacent max sum."
+        "idea": "Transform to House Robber. freq[x] = x * count(x). Choosing x deletes x±1, reducing to non-adjacent max sum.",
+        "description": "Given integer array nums, each operation: pick nums[i], earn nums[i] points, delete all elements equal to nums[i]-1 and nums[i]+1. Maximize total points.",
+        "examples": [
+          {
+            "input": "nums = [3,4,2]",
+            "output": "6"
+          },
+          {
+            "input": "nums = [2,2,3,3,3,4]",
+            "output": "9"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 2 * 10^4",
+          "1 <= nums[i] <= 10^4"
+        ],
+        "hints": [
+          "Reduce to House Robber: bucket[v] = v * count(v). You can't take adjacent buckets. dp[i] = max(dp[i-1], dp[i-2] + bucket[i])."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,4,2]",
+            "expected": "6"
+          },
+          {
+            "id": 2,
+            "input": "[2,2,3,3,3,4]",
+            "expected": "9"
+          }
+        ],
+        "methodName": "deleteAndEarn",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def deleteAndEarn(self, nums: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "knapsack_delete_and_earn.pdf"
@@ -1346,7 +3438,38 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def findDiagonalOrder(self, mat):\n        m,n=len(mat),len(mat[0]); res,r,c,flag=[],0,0,1\n        for _ in range(m*n):\n            res.append(mat[r][c])\n            if flag==1:\n                if c==n-1: r+=1; flag=-1\n                elif r==0: c+=1; flag=-1\n                else: r-=1; c+=1\n            else:\n                if r==m-1: c+=1; flag=1\n                elif c==0: r+=1; flag=1\n                else: r+=1; c-=1\n        return res",
-        "idea": "Simulation with flag. 1=up-right, -1=down-left. Change direction at boundaries."
+        "idea": "Simulation with flag. 1=up-right, -1=down-left. Change direction at boundaries.",
+        "description": "Given an m×n matrix mat, return all elements in diagonal order (alternating up-right and down-left diagonals).",
+        "examples": [
+          {
+            "input": "mat = [[1,2,3],[4,5,6],[7,8,9]]",
+            "output": "[1,2,4,7,5,3,6,8,9]"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 10^4",
+          "1 <= m*n <= 10^4"
+        ],
+        "hints": [
+          "Track current direction. When going up-right, if hit top or right edge, switch to down-left. Adjust row/col boundaries accordingly."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+            "expected": "[1,2,4,7,5,3,6,8,9]"
+          },
+          {
+            "id": 2,
+            "input": "[[1,2],[3,4]]",
+            "expected": "[1,2,3,4]"
+          }
+        ],
+        "methodName": "findDiagonalOrder",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def findDiagonalOrder(self, mat: list) -> list:\n        pass\n"
       },
       {
         "lcNumber": 54,
@@ -1363,7 +3486,42 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def spiralOrder(self, matrix):\n        res=[]; top,bot,left,right=0,len(matrix)-1,0,len(matrix[0])-1\n        while top<=bot and left<=right:\n            res+=matrix[top][left:right+1]; top+=1\n            for r in range(top,bot+1): res.append(matrix[r][right]); right-=1\n            if top<=bot: res+=matrix[bot][left:right+1][::-1]; bot-=1\n            if left<=right:\n                for r in range(bot,top-1,-1): res.append(matrix[r][left]); left+=1\n        return res",
-        "idea": "Shrink 4 boundaries: take top row, right col, bottom row reversed, left col reversed. Repeat."
+        "idea": "Shrink 4 boundaries: take top row, right col, bottom row reversed, left col reversed. Repeat.",
+        "description": "Given an m×n matrix, return all elements in spiral order.",
+        "examples": [
+          {
+            "input": "matrix = [[1,2,3],[4,5,6],[7,8,9]]",
+            "output": "[1,2,3,6,9,8,7,4,5]"
+          },
+          {
+            "input": "matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]",
+            "output": "[1,2,3,4,8,12,11,10,9,5,6,7]"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 10",
+          "-100 <= matrix[i][j] <= 100"
+        ],
+        "hints": [
+          "Maintain four boundaries (top, bottom, left, right). Traverse each boundary, then shrink inward."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,2,3],[4,5,6],[7,8,9]]",
+            "expected": "[1,2,3,6,9,8,7,4,5]"
+          },
+          {
+            "id": 2,
+            "input": "[[1,2,3,4],[5,6,7,8],[9,10,11,12]]",
+            "expected": "[1,2,3,4,8,12,11,10,9,5,6,7]"
+          }
+        ],
+        "methodName": "spiralOrder",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def spiralOrder(self, matrix: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Remove_duplicates_and_Spiral_matrix.pdf"
@@ -1395,7 +3553,43 @@
         "timeComplexity": "O(log(m·n))",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def searchMatrix(self, matrix, target):\n        m,n=len(matrix),len(matrix[0]); lo,hi=0,m*n-1\n        while lo<=hi:\n            mid=(lo+hi)//2; val=matrix[mid//n][mid%n]\n            if val==target: return True\n            elif val<target: lo=mid+1\n            else: hi=mid-1\n        return False",
-        "idea": "Treat 2D matrix as flat sorted array. Map mid → matrix[mid//n][mid%n]."
+        "idea": "Treat 2D matrix as flat sorted array. Map mid → matrix[mid//n][mid%n].",
+        "description": "Given an m×n integer matrix where each row is sorted and the first integer of each row is greater than the last of the previous row, return true if target is in the matrix. Must be O(log(m*n)).",
+        "examples": [
+          {
+            "input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3",
+            "output": "true"
+          },
+          {
+            "input": "matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13",
+            "output": "false"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 100",
+          "O(log(m*n)) required"
+        ],
+        "hints": [
+          "Treat the matrix as a flattened sorted array. Binary search on indices 0..m*n-1, convert mid to row/col with divmod."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,3,5,7],[10,11,16,20],[23,30,34,60]]\n3",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "[[1,3,5,7],[10,11,16,20],[23,30,34,60]]\n13",
+            "expected": "false"
+          }
+        ],
+        "methodName": "searchMatrix",
+        "paramTypes": [
+          "int2darray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def searchMatrix(self, matrix: list, target: int) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 33,
@@ -1411,7 +3605,48 @@
         "timeComplexity": "O(log n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def search(self, nums, target):\n        lo,hi=0,len(nums)-1\n        while lo<=hi:\n            mid=(lo+hi)//2\n            if nums[mid]==target: return mid\n            if nums[lo]<=nums[mid]:\n                if nums[lo]<=target<nums[mid]: hi=mid-1\n                else: lo=mid+1\n            else:\n                if nums[mid]<target<=nums[hi]: lo=mid+1\n                else: hi=mid-1\n        return -1",
-        "idea": "Identify sorted half: if nums[lo]<=nums[mid] left is sorted. Check if target in that half; else go to other."
+        "idea": "Identify sorted half: if nums[lo]<=nums[mid] left is sorted. Check if target in that half; else go to other.",
+        "description": "There is an integer array nums sorted in ascending order (with distinct values), possibly rotated at unknown index k. Given nums after rotation and a target, return the index of target, or -1 if not found. Must be O(log n).",
+        "examples": [
+          {
+            "input": "nums = [4,5,6,7,0,1,2], target = 0",
+            "output": "4"
+          },
+          {
+            "input": "nums = [4,5,6,7,0,1,2], target = 3",
+            "output": "-1"
+          },
+          {
+            "input": "nums = [1], target = 0",
+            "output": "-1"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 5000",
+          "All values unique",
+          "O(log n) required"
+        ],
+        "hints": [
+          "One half is always sorted. Check which half and decide where target lies."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[4,5,6,7,0,1,2]\n0",
+            "expected": "4"
+          },
+          {
+            "id": 2,
+            "input": "[4,5,6,7,0,1,2]\n3",
+            "expected": "-1"
+          }
+        ],
+        "methodName": "search",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def search(self, nums: list, target: int) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "BinarySearch_SearchInA2DMatrix.pdf"
@@ -1443,7 +3678,47 @@
         "timeComplexity": "O(n·k log k)",
         "spaceComplexity": "O(n·k)",
         "code": "from collections import defaultdict\nclass Solution:\n    def groupAnagrams(self, strs):\n        groups=defaultdict(list)\n        for s in strs: groups[tuple(sorted(s))].append(s)\n        return list(groups.values())",
-        "idea": "Sort each string as canonical key. Group by sorted string in hashmap."
+        "idea": "Sort each string as canonical key. Group by sorted string in hashmap.",
+        "description": "Given an array of strings strs, group the anagrams together. Return the grouped anagrams in any order.",
+        "examples": [
+          {
+            "input": "strs = [\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+            "output": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+          },
+          {
+            "input": "strs = [\"\"]",
+            "output": "[[\"\"]]"
+          },
+          {
+            "input": "strs = [\"a\"]",
+            "output": "[[\"a\"]]"
+          }
+        ],
+        "constraints": [
+          "1 <= strs.length <= 10^4",
+          "0 <= strs[i].length <= 100",
+          "strs[i] consists of lowercase English letters."
+        ],
+        "hints": [
+          "Canonical form: sort each string's characters. Strings with the same sorted form are anagrams."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"]",
+            "expected": "[[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]"
+          },
+          {
+            "id": 2,
+            "input": "[\"\"]",
+            "expected": "[[\"\"]]"
+          }
+        ],
+        "methodName": "groupAnagrams",
+        "paramTypes": [
+          "strarray"
+        ],
+        "pythonStarter": "class Solution:\n    def groupAnagrams(self, strs: list) -> list:\n        pass\n"
       },
       {
         "lcNumber": 205,
@@ -1459,7 +3734,52 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(k)",
         "code": "class Solution:\n    def isIsomorphic(self, s, t):\n        st,ts={},{}\n        for a,b in zip(s,t):\n            if (a in st and st[a]!=b) or (b in ts and ts[b]!=a): return False\n            st[a],ts[b]=b,a\n        return True",
-        "idea": "Two hashmaps: s→t and t→s. Each char must map bidirectionally to exactly one char."
+        "idea": "Two hashmaps: s→t and t→s. Each char must map bidirectionally to exactly one char.",
+        "description": "Two strings s and t are isomorphic if characters in s can be replaced to get t. All occurrences must be replaced consistently; no two characters may map to the same character.",
+        "examples": [
+          {
+            "input": "s = \"egg\", t = \"add\"",
+            "output": "true"
+          },
+          {
+            "input": "s = \"foo\", t = \"bar\"",
+            "output": "false"
+          },
+          {
+            "input": "s = \"paper\", t = \"title\"",
+            "output": "true"
+          }
+        ],
+        "constraints": [
+          "1 <= s.length <= 5 * 10^4",
+          "s.length == t.length"
+        ],
+        "hints": [
+          "Maintain two maps: s→t and t→s. If a character is seen before with a different mapping, return false."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "\"egg\"\n\"add\"",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "\"foo\"\n\"bar\"",
+            "expected": "false"
+          },
+          {
+            "id": 3,
+            "input": "\"paper\"\n\"title\"",
+            "expected": "true"
+          }
+        ],
+        "methodName": "isIsomorphic",
+        "paramTypes": [
+          "str",
+          "str"
+        ],
+        "pythonStarter": "class Solution:\n    def isIsomorphic(self, s: str, t: str) -> bool:\n        pass\n"
       },
       {
         "lcNumber": 560,
@@ -1476,7 +3796,43 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution:\n    def subarraySum(self, nums, k):\n        seen,count,rsum={0:1},0,0\n        for n in nums:\n            rsum+=n; count+=seen.get(rsum-k,0)\n            seen[rsum]=seen.get(rsum,0)+1\n        return count",
-        "idea": "Prefix sum hashmap {sum: count}. count += map[rSum - k]. Init {0:1}."
+        "idea": "Prefix sum hashmap {sum: count}. count += map[rSum - k]. Init {0:1}.",
+        "description": "Given integer array nums and integer k, return the total number of subarrays whose sum equals k.",
+        "examples": [
+          {
+            "input": "nums = [1,1,1], k = 2",
+            "output": "2"
+          },
+          {
+            "input": "nums = [1,2,3], k = 3",
+            "output": "2"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 2 * 10^4",
+          "-1000 <= nums[i] <= 1000"
+        ],
+        "hints": [
+          "Prefix sum + hash map. If prefix[j] - prefix[i] = k, then subarray [i+1..j] sums to k. Store prefix sum counts."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,1,1]\n2",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,3]\n3",
+            "expected": "2"
+          }
+        ],
+        "methodName": "subarraySum",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def subarraySum(self, nums: list, k: int) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "hashmap_anagram_isomorphic.pdf"
@@ -1507,7 +3863,44 @@
         "timeComplexity": "O(n log k)",
         "spaceComplexity": "O(k)",
         "code": "import heapq\nclass Solution:\n    def findKthLargest(self, nums, k):\n        hp=[]\n        for n in nums:\n            heapq.heappush(hp,n)\n            if len(hp)>k: heapq.heappop(hp)\n        return hp[0]",
-        "idea": "Min-heap of size k. After all insertions, heap top is the kth largest element."
+        "idea": "Min-heap of size k. After all insertions, heap top is the kth largest element.",
+        "description": "Given an integer array nums and integer k, return the kth largest element in the array (not kth distinct).",
+        "examples": [
+          {
+            "input": "nums = [3,2,1,5,6,4], k = 2",
+            "output": "5"
+          },
+          {
+            "input": "nums = [3,2,3,1,2,4,5,5,6], k = 4",
+            "output": "4"
+          }
+        ],
+        "constraints": [
+          "1 <= k <= nums.length <= 10^5",
+          "-10^4 <= nums[i] <= 10^4"
+        ],
+        "hints": [
+          "Min-heap of size k: push elements, pop when size exceeds k. Top of heap is answer.",
+          "QuickSelect: partition and recurse on correct side. Average O(n)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,2,1,5,6,4]\n2",
+            "expected": "5"
+          },
+          {
+            "id": 2,
+            "input": "[3,2,3,1,2,4,5,5,6]\n4",
+            "expected": "4"
+          }
+        ],
+        "methodName": "findKthLargest",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def findKthLargest(self, nums: list, k: int) -> int:\n        pass\n"
       },
       {
         "lcNumber": 23,
@@ -1524,7 +3917,48 @@
         "timeComplexity": "O(N log k)",
         "spaceComplexity": "O(k)",
         "code": "import heapq\nclass Solution:\n    def mergeKLists(self, lists):\n        heap,dummy=[],ListNode(0); curr=dummy\n        for i,l in enumerate(lists):\n            if l: heapq.heappush(heap,(l.val,i)); lists[i]=l.next\n        while heap:\n            val,i=heapq.heappop(heap)\n            curr.next=ListNode(val); curr=curr.next\n            if lists[i]: heapq.heappush(heap,(lists[i].val,i)); lists[i]=lists[i].next\n        return dummy.next",
-        "idea": "Min-heap of (val, idx). Pop minimum, append to result, push next from that list."
+        "idea": "Min-heap of (val, idx). Pop minimum, append to result, push next from that list.",
+        "description": "You are given an array of k linked-lists, each sorted in ascending order. Merge all linked-lists into one sorted linked-list and return it.",
+        "examples": [
+          {
+            "input": "lists = [[1,4,5],[1,3,4],[2,6]]",
+            "output": "[1,1,2,3,4,4,5,6]"
+          },
+          {
+            "input": "lists = []",
+            "output": "[]"
+          },
+          {
+            "input": "lists = [[]]",
+            "output": "[]"
+          }
+        ],
+        "constraints": [
+          "k == lists.length",
+          "0 <= k <= 10^4",
+          "-10^4 <= lists[i][j] <= 10^4"
+        ],
+        "hints": [
+          "Use a min-heap (priority queue) of size k.",
+          "Or divide and conquer: merge pairs of lists repeatedly."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[1,4,5],[1,3,4],[2,6]]",
+            "expected": "[1,1,2,3,4,4,5,6]"
+          },
+          {
+            "id": 2,
+            "input": "[]",
+            "expected": "[]"
+          }
+        ],
+        "methodName": "mergeKLists",
+        "paramTypes": [
+          "linkedlistarray"
+        ],
+        "pythonStarter": "# ListNode is already defined for you\nclass Solution:\n    def mergeKLists(self, lists: list):\n        pass\n"
       },
       {
         "lcNumber": 253,
@@ -1542,7 +3976,41 @@
         "timeComplexity": "O(n log n)",
         "spaceComplexity": "O(n)",
         "code": "class Solution {\n    public int minMeetingRooms(int[][] intervals) {\n        Arrays.sort(intervals, (a,b)->a[0]-b[0]);\n        PriorityQueue<Integer> heap = new PriorityQueue<>();\n        heap.add(intervals[0][1]);\n        for (int i=1; i<intervals.length; i++) {\n            if (intervals[i][0]>=heap.peek()) heap.poll();\n            heap.add(intervals[i][1]);\n        }\n        return heap.size();\n    }\n}",
-        "idea": "Sort by start. Min-heap of end times. Reuse room if earliest end ≤ current start. Heap size = answer."
+        "idea": "Sort by start. Min-heap of end times. Reuse room if earliest end ≤ current start. Heap size = answer.",
+        "description": "Given an array of meeting time intervals [start, end], return the minimum number of conference rooms required.",
+        "examples": [
+          {
+            "input": "intervals = [[0,30],[5,10],[15,20]]",
+            "output": "2"
+          },
+          {
+            "input": "intervals = [[7,10],[2,4]]",
+            "output": "1"
+          }
+        ],
+        "constraints": [
+          "1 <= intervals.length <= 10^4"
+        ],
+        "hints": [
+          "Sort by start time. Use a min-heap of end times. If earliest ending room is free (end <= current start), reuse it; otherwise add a new room."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[0,30],[5,10],[15,20]]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[[7,10],[2,4]]",
+            "expected": "1"
+          }
+        ],
+        "methodName": "minMeetingRooms",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def minMeetingRooms(self, intervals: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Heaps_kth_largest_element.pdf"
@@ -1571,7 +4039,42 @@
         "timeComplexity": "O(log n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def findPeakElement(self, nums):\n        lo,hi=0,len(nums)-1\n        while lo<hi:\n            mid=(lo+hi)//2\n            if nums[mid]<nums[mid+1]: lo=mid+1\n            else: hi=mid\n        return lo",
-        "idea": "If nums[mid] < nums[mid+1], peak is in right half. Else peak is at mid or left. Converges to a peak."
+        "idea": "If nums[mid] < nums[mid+1], peak is in right half. Else peak is at mid or left. Converges to a peak.",
+        "description": "A peak element is strictly greater than its neighbors. Given nums, return the index of any peak element. Must be O(log n).",
+        "examples": [
+          {
+            "input": "nums = [1,2,3,1]",
+            "output": "2"
+          },
+          {
+            "input": "nums = [1,2,1,3,5,6,4]",
+            "output": "5"
+          }
+        ],
+        "constraints": [
+          "1 <= nums.length <= 1000",
+          "nums[i] != nums[i+1]"
+        ],
+        "hints": [
+          "Binary search: if nums[mid] < nums[mid+1], peak is on right. Otherwise on left (including mid)."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,1]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,1,3,5,6,4]",
+            "expected": "5"
+          }
+        ],
+        "methodName": "findPeakElement",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def findPeakElement(self, nums: list) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "Peak_element_and_MinRotated_sorted.pdf"
@@ -1600,7 +4103,48 @@
         "timeComplexity": "O(n^(T/M))",
         "spaceComplexity": "O(T/M)",
         "code": "class Solution:\n    def combinationSum(self, candidates, target):\n        res=[]\n        def bt(start,path,rem):\n            if rem==0: res.append(path[:]); return\n            for i in range(start,len(candidates)):\n                if candidates[i]>rem: break\n                path.append(candidates[i]); bt(i,path,rem-candidates[i]); path.pop()\n        candidates.sort(); bt(0,[],target); return res",
-        "idea": "Backtracking from current index (reuse allowed). Sort and prune when candidate > remaining."
+        "idea": "Backtracking from current index (reuse allowed). Sort and prune when candidate > remaining.",
+        "description": "Given an array of distinct integers candidates and a target integer, return all unique combinations where chosen numbers sum to target. The same number may be used unlimited times.",
+        "examples": [
+          {
+            "input": "candidates = [2,3,6,7], target = 7",
+            "output": "[[2,2,3],[7]]"
+          },
+          {
+            "input": "candidates = [2,3,5], target = 8",
+            "output": "[[2,2,2,2],[2,3,3],[3,5]]"
+          },
+          {
+            "input": "candidates = [2], target = 1",
+            "output": "[]"
+          }
+        ],
+        "constraints": [
+          "1 <= candidates.length <= 30",
+          "2 <= candidates[i] <= 40",
+          "1 <= target <= 40"
+        ],
+        "hints": [
+          "Backtrack: at each step pick a candidate (or skip it). Allow reuse by not incrementing start index."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[2,3,6,7]\n7",
+            "expected": "[[2,2,3],[7]]"
+          },
+          {
+            "id": 2,
+            "input": "[2,3,5]\n8",
+            "expected": "[[2,2,2,2],[2,3,3],[3,5]]"
+          }
+        ],
+        "methodName": "combinationSum",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def combinationSum(self, candidates: list, target: int) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Combination_sum.pdf"
@@ -1631,7 +4175,42 @@
         "timeComplexity": "O(n²)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def minFallingPathSum(self, matrix):\n        n=len(matrix)\n        for i in range(n-2,-1,-1):\n            for j in range(n):\n                best=matrix[i+1][j]\n                if j>0: best=min(best,matrix[i+1][j-1])\n                if j<n-1: best=min(best,matrix[i+1][j+1])\n                matrix[i][j]+=best\n        return min(matrix[0])",
-        "idea": "Bottom-up DP in-place. Each cell += min of 2-3 cells directly below. Answer = min of top row."
+        "idea": "Bottom-up DP in-place. Each cell += min of 2-3 cells directly below. Answer = min of top row.",
+        "description": "Given n×n matrix, return the minimum sum of any falling path through it. A falling path starts at any element in row 0 and at each step moves to the row below (directly below or one diagonal step left/right).",
+        "examples": [
+          {
+            "input": "matrix = [[2,1,3],[6,5,4],[7,8,9]]",
+            "output": "13"
+          },
+          {
+            "input": "matrix = [[-19,57],[-40,-5]]",
+            "output": "-59"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 100",
+          "-100 <= matrix[i][j] <= 100"
+        ],
+        "hints": [
+          "DP in-place. matrix[i][j] += min(matrix[i-1][j-1], matrix[i-1][j], matrix[i-1][j+1]) (clamping at edges). Answer is min of last row."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[2,1,3],[6,5,4],[7,8,9]]",
+            "expected": "13"
+          },
+          {
+            "id": 2,
+            "input": "[[-19,57],[-40,-5]]",
+            "expected": "-59"
+          }
+        ],
+        "methodName": "minFallingPathSum",
+        "paramTypes": [
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def minFallingPathSum(self, matrix: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 238,
@@ -1647,7 +4226,42 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(1)",
         "code": "class Solution:\n    def productExceptSelf(self, nums):\n        n=len(nums); res=[1]*n\n        for i in range(1,n): res[i]=res[i-1]*nums[i-1]\n        r=1\n        for i in range(n-1,-1,-1): res[i]*=r; r*=nums[i]\n        return res",
-        "idea": "Two passes: left products in result array, then multiply by running right product in reverse."
+        "idea": "Two passes: left products in result array, then multiply by running right product in reverse.",
+        "description": "Given integer array nums, return an array where answer[i] is the product of all elements except nums[i]. Must run in O(n) without division.",
+        "examples": [
+          {
+            "input": "nums = [1,2,3,4]",
+            "output": "[24,12,8,6]"
+          },
+          {
+            "input": "nums = [-1,1,0,-3,3]",
+            "output": "[0,0,9,0,0]"
+          }
+        ],
+        "constraints": [
+          "2 <= nums.length <= 10^5",
+          "O(n) required, no division"
+        ],
+        "hints": [
+          "Two passes: first build prefix products, then suffix products. answer[i] = prefix[i] * suffix[i]."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,3,4]",
+            "expected": "[24,12,8,6]"
+          },
+          {
+            "id": 2,
+            "input": "[-1,1,0,-3,3]",
+            "expected": "[0,0,9,0,0]"
+          }
+        ],
+        "methodName": "productExceptSelf",
+        "paramTypes": [
+          "intarray"
+        ],
+        "pythonStarter": "class Solution:\n    def productExceptSelf(self, nums: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "diagonal_and_product_except_self_matrix_array.pdf"
@@ -1678,7 +4292,52 @@
         "timeComplexity": "O(V + E)",
         "spaceComplexity": "O(V)",
         "code": "class Solution:\n    def findJudge(self, n, trust):\n        score=[0]*(n+1)\n        for a,b in trust: score[a]-=1; score[b]+=1\n        return next((i for i in range(1,n+1) if score[i]==n-1),-1)",
-        "idea": "Net score: score += 1 for being trusted, -= 1 for trusting. Judge has score = n-1."
+        "idea": "Net score: score += 1 for being trusted, -= 1 for trusting. Judge has score = n-1.",
+        "description": "In a town of n people (1..n), the town judge trusts nobody and everybody else trusts the judge. Given trust pairs [a,b], return the judge's label or -1.",
+        "examples": [
+          {
+            "input": "n = 2, trust = [[1,2]]",
+            "output": "2"
+          },
+          {
+            "input": "n = 3, trust = [[1,3],[2,3]]",
+            "output": "3"
+          },
+          {
+            "input": "n = 3, trust = [[1,3],[2,3],[3,1]]",
+            "output": "-1"
+          }
+        ],
+        "constraints": [
+          "1 <= n <= 1000",
+          "0 <= trust.length <= 10^4"
+        ],
+        "hints": [
+          "Track in-degree and out-degree. Judge has in-degree = n-1 and out-degree = 0."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "2\n[[1,2]]",
+            "expected": "2"
+          },
+          {
+            "id": 2,
+            "input": "3\n[[1,3],[2,3]]",
+            "expected": "3"
+          },
+          {
+            "id": 3,
+            "input": "3\n[[1,3],[2,3],[3,1]]",
+            "expected": "-1"
+          }
+        ],
+        "methodName": "findJudge",
+        "paramTypes": [
+          "int",
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def findJudge(self, n: int, trust: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 200,
@@ -1696,7 +4355,42 @@
         "timeComplexity": "O(m·n)",
         "spaceComplexity": "O(m·n)",
         "code": "class Solution:\n    def numIslands(self, grid):\n        m,n,count=len(grid),len(grid[0]),0\n        def dfs(i,j):\n            if i<0 or i>=m or j<0 or j>=n or grid[i][j]!='1': return\n            grid[i][j]='0'\n            for di,dj in [(0,1),(1,0),(0,-1),(-1,0)]: dfs(i+di,j+dj)\n        for i in range(m):\n            for j in range(n):\n                if grid[i][j]=='1': dfs(i,j); count+=1\n        return count",
-        "idea": "DFS from each '1'. Mark as '0' to avoid revisiting. Each DFS call = one island."
+        "idea": "DFS from each '1'. Mark as '0' to avoid revisiting. Each DFS call = one island.",
+        "description": "Given an m×n binary grid of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and connected horizontally/vertically.",
+        "examples": [
+          {
+            "input": "grid with one connected landmass",
+            "output": "1"
+          },
+          {
+            "input": "grid with three separate landmasses",
+            "output": "3"
+          }
+        ],
+        "constraints": [
+          "1 <= m, n <= 300",
+          "grid[i][j] is '0' or '1'"
+        ],
+        "hints": [
+          "DFS/BFS from each unvisited '1'. Mark visited cells as '0' (or seen). Count how many times you start a new DFS."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]",
+            "expected": "1"
+          },
+          {
+            "id": 2,
+            "input": "[[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"1\",\"1\"]]",
+            "expected": "3"
+          }
+        ],
+        "methodName": "numIslands",
+        "paramTypes": [
+          "charmatrix"
+        ],
+        "pythonStarter": "class Solution:\n    def numIslands(self, grid: list) -> int:\n        pass\n"
       },
       {
         "lcNumber": 1192,
@@ -1713,7 +4407,43 @@
         "timeComplexity": "O(V + E)",
         "spaceComplexity": "O(V + E)",
         "code": "from collections import defaultdict\nclass Solution:\n    def criticalConnections(self, n, connections):\n        adj=defaultdict(list)\n        for a,b in connections: adj[a].append(b); adj[b].append(a)\n        bridges,arr,low=[], [-1]*n, [-1]*n\n        t=[0]\n        def dfs(v,par):\n            arr[v]=low[v]=t[0]; t[0]+=1\n            for nb in adj[v]:\n                if nb==par: continue\n                if arr[nb]==-1:\n                    dfs(nb,v); low[v]=min(low[v],low[nb])\n                    if low[nb]>arr[v]: bridges.append([v,nb])\n                else: low[v]=min(low[v],arr[nb])\n        dfs(0,-1); return bridges",
-        "idea": "Tarjan's bridge algorithm. Track arrival and lowest reachable times. If lowest[child] > arrival[node], edge is a bridge."
+        "idea": "Tarjan's bridge algorithm. Track arrival and lowest reachable times. If lowest[child] > arrival[node], edge is a bridge.",
+        "description": "Given n servers and connections between them, a critical connection is one whose removal disconnects some servers. Return all critical connections.",
+        "examples": [
+          {
+            "input": "n=4, connections=[[0,1],[1,2],[2,0],[1,3]]",
+            "output": "[[1,3]]"
+          },
+          {
+            "input": "n=2, connections=[[0,1]]",
+            "output": "[[0,1]]"
+          }
+        ],
+        "constraints": [
+          "2 <= n <= 10^5",
+          "n-1 <= connections.length <= 10^5"
+        ],
+        "hints": [
+          "Tarjan's bridge-finding algorithm. Track discovery time and low value. Edge (u,v) is a bridge if low[v] > disc[u]."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "4\n[[0,1],[1,2],[2,0],[1,3]]",
+            "expected": "[[1,3]]"
+          },
+          {
+            "id": 2,
+            "input": "2\n[[0,1]]",
+            "expected": "[[0,1]]"
+          }
+        ],
+        "methodName": "criticalConnections",
+        "paramTypes": [
+          "int",
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def criticalConnections(self, n: int, connections: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "critical_connections_autocomplete_town_judge.pdf"
@@ -1743,7 +4473,51 @@
         "timeComplexity": "O(n)",
         "spaceComplexity": "O(h)",
         "code": "class Solution:\n    def isBalanced(self, root):\n        def h(node):\n            if not node: return 0\n            l,r=h(node.left),h(node.right)\n            if l==-1 or r==-1 or abs(l-r)>1: return -1\n            return 1+max(l,r)\n        return h(root)!=-1",
-        "idea": "Bottom-up height. Return -1 to signal imbalance early. Final check: height != -1."
+        "idea": "Bottom-up height. Return -1 to signal imbalance early. Final check: height != -1.",
+        "description": "Given a binary tree, determine if it is height-balanced (the depth of the two subtrees of every node differs by at most 1).",
+        "examples": [
+          {
+            "input": "root = [3,9,20,null,null,15,7]",
+            "output": "true"
+          },
+          {
+            "input": "root = [1,2,2,3,3,null,null,4,4]",
+            "output": "false"
+          },
+          {
+            "input": "root = []",
+            "output": "true"
+          }
+        ],
+        "constraints": [
+          "0 <= nodes <= 5000",
+          "-10^4 <= Node.val <= 10^4"
+        ],
+        "hints": [
+          "DFS returning height. If any subtree is unbalanced, propagate -1 upward to short-circuit."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[3,9,20,null,null,15,7]",
+            "expected": "true"
+          },
+          {
+            "id": 2,
+            "input": "[1,2,2,3,3,null,null,4,4]",
+            "expected": "false"
+          },
+          {
+            "id": 3,
+            "input": "[]",
+            "expected": "true"
+          }
+        ],
+        "methodName": "isBalanced",
+        "paramTypes": [
+          "tree"
+        ],
+        "pythonStarter": "# TreeNode is already defined for you\nclass Solution:\n    def isBalanced(self, root) -> bool:\n        pass\n"
       }
     ],
     "notesUrl": "BFS_and_DFS.pdf"
@@ -1773,7 +4547,53 @@
         "timeComplexity": "O(n·amount)",
         "spaceComplexity": "O(amount)",
         "code": "class Solution:\n    def coinChange(self, coins, amount):\n        dp=[amount+1]*(amount+1); dp[0]=0\n        for i in range(1,amount+1):\n            for c in coins:\n                if c<=i: dp[i]=min(dp[i],dp[i-c]+1)\n        return dp[amount] if dp[amount]<=amount else -1",
-        "idea": "1D DP. dp[i] = min coins for amount i. For each coin: dp[i] = min(dp[i], dp[i-coin]+1). Init to amount+1."
+        "idea": "1D DP. dp[i] = min coins for amount i. For each coin: dp[i] = min(dp[i], dp[i-coin]+1). Init to amount+1.",
+        "description": "Given an integer array coins of denominations and an integer amount, return the fewest coins needed to make that amount. Return -1 if impossible.",
+        "examples": [
+          {
+            "input": "coins = [1,2,5], amount = 11",
+            "output": "3"
+          },
+          {
+            "input": "coins = [2], amount = 3",
+            "output": "-1"
+          },
+          {
+            "input": "coins = [1], amount = 0",
+            "output": "0"
+          }
+        ],
+        "constraints": [
+          "1 <= coins.length <= 12",
+          "1 <= coins[i] <= 2^31-1",
+          "0 <= amount <= 10^4"
+        ],
+        "hints": [
+          "Bottom-up DP: dp[i] = min coins to make amount i. dp[i] = min(dp[i], dp[i-coin]+1) for each coin."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "[1,2,5]\n11",
+            "expected": "3"
+          },
+          {
+            "id": 2,
+            "input": "[2]\n3",
+            "expected": "-1"
+          },
+          {
+            "id": 3,
+            "input": "[1]\n0",
+            "expected": "0"
+          }
+        ],
+        "methodName": "coinChange",
+        "paramTypes": [
+          "intarray",
+          "int"
+        ],
+        "pythonStarter": "class Solution:\n    def coinChange(self, coins: list, amount: int) -> int:\n        pass\n"
       }
     ],
     "notesUrl": "coin_change_paint_house.pdf"
@@ -1804,7 +4624,43 @@
         "timeComplexity": "O(V + E)",
         "spaceComplexity": "O(V + E)",
         "code": "from collections import defaultdict\nclass Solution:\n    def criticalConnections(self, n, connections):\n        adj=defaultdict(list)\n        for a,b in connections: adj[a].append(b); adj[b].append(a)\n        bridges,arr,low=[],[-1]*n,[-1]*n; t=[0]\n        def dfs(v,par):\n            arr[v]=low[v]=t[0]; t[0]+=1\n            for nb in adj[v]:\n                if nb==par: continue\n                if arr[nb]==-1:\n                    dfs(nb,v); low[v]=min(low[v],low[nb])\n                    if low[nb]>arr[v]: bridges.append([v,nb])\n                else: low[v]=min(low[v],arr[nb])\n        dfs(0,-1); return bridges",
-        "idea": "Deep dive: Tarjan's bridge algorithm. low[child] > arrival[parent] means no back edge from child's subtree to parent or above — the edge is a bridge."
+        "idea": "Deep dive: Tarjan's bridge algorithm. low[child] > arrival[parent] means no back edge from child's subtree to parent or above — the edge is a bridge.",
+        "description": "Given n servers and connections between them, a critical connection is one whose removal disconnects some servers. Return all critical connections.",
+        "examples": [
+          {
+            "input": "n=4, connections=[[0,1],[1,2],[2,0],[1,3]]",
+            "output": "[[1,3]]"
+          },
+          {
+            "input": "n=2, connections=[[0,1]]",
+            "output": "[[0,1]]"
+          }
+        ],
+        "constraints": [
+          "2 <= n <= 10^5",
+          "n-1 <= connections.length <= 10^5"
+        ],
+        "hints": [
+          "Tarjan's bridge-finding algorithm. Track discovery time and low value. Edge (u,v) is a bridge if low[v] > disc[u]."
+        ],
+        "testCases": [
+          {
+            "id": 1,
+            "input": "4\n[[0,1],[1,2],[2,0],[1,3]]",
+            "expected": "[[1,3]]"
+          },
+          {
+            "id": 2,
+            "input": "2\n[[0,1]]",
+            "expected": "[[0,1]]"
+          }
+        ],
+        "methodName": "criticalConnections",
+        "paramTypes": [
+          "int",
+          "int2darray"
+        ],
+        "pythonStarter": "class Solution:\n    def criticalConnections(self, n: int, connections: list) -> list:\n        pass\n"
       }
     ],
     "notesUrl": "Floodfill_01Matrix_Trajan_algo.pdf"

@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage.js";
 import ProblemList from "./components/library/ProblemList.js";
 import ProblemPage from "./pages/ProblemPage.js";
 import TopicsPage from "./pages/TopicsPage.js";
+import FeaturesPage from "./pages/FeaturesPage.js";
 import "./App.css";
 import { HashRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/topics" element={<TopicsPage />} />
             <Route path="/library" element={<ProblemList />} />
             <Route path="/lesson/:id" element={<ProblemPage />} />
+            <Route path="/features" element={<FeaturesPage />} />
             <Route path="*" element={<Navigate replace to="/" />} />
           </Routes>
         </div>

@@ -10,9 +10,10 @@ const Navbar = () => {
 
         <nav className="hidden items-center gap-8 md:flex">
           {[
-            { to: "/topics", label: "Topics" },
-            { to: "/library", label: "Problems" },
-            { to: "/library", label: "Library" },
+            { to: "/topics",   label: "Topics" },
+            { to: "/library",  label: "Problems" },
+            { to: "/library",  label: "Library" },
+            { to: "/features", label: "Features" },
           ].map((link) => (
             <Link
               key={link.label}

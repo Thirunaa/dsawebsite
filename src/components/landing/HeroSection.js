@@ -78,7 +78,7 @@ const HeroSection = () => {
               </div>
             </div>
             <pre className="overflow-x-auto p-5 text-sm leading-7 font-mono text-sm">
-{`\u001b`}<span style={{ color: "#79b8ff" }}>function </span><span style={{ color: "#4ade80" }}>binarySearch</span><span style={{ color: "#e6edf3" }}>(arr, target) {"{"}</span>{"\n"}
+<span style={{ color: "#79b8ff" }}>function </span><span style={{ color: "#4ade80" }}>binarySearch</span><span style={{ color: "#e6edf3" }}>(arr, target) {"{"}</span>{"\n"}
 <span style={{ color: "#79b8ff" }}>  let </span><span style={{ color: "#e6edf3" }}>left = </span><span style={{ color: "#f97316" }}>0</span><span style={{ color: "#e6edf3" }}>, right = arr.length - </span><span style={{ color: "#f97316" }}>1</span><span style={{ color: "#e6edf3" }}>;</span>{"\n"}
 <span style={{ color: "#79b8ff" }}>  while </span><span style={{ color: "#e6edf3" }}>(left {"<="} right) {"{"}</span>{"\n"}
 <span style={{ color: "#79b8ff" }}>    const </span><span style={{ color: "#e6edf3" }}>mid = Math.floor((left + right) / </span><span style={{ color: "#f97316" }}>2</span><span style={{ color: "#e6edf3" }}>);</span>{"\n"}
