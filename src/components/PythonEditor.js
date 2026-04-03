@@ -644,7 +644,7 @@ export default function PythonEditor({ problem, onError, onAskAI, onAskAIOutput 
     const { output: out, error } = await captureRun(code);
     setOutput(error || out);
     setRunning(false);
-  }, [code, captureRun, onError]);
+  }, [code, captureRun]);
 
   const runTests = useCallback(async () => {
     if (testCases.length === 0) {
@@ -680,7 +680,7 @@ export default function PythonEditor({ problem, onError, onAskAI, onAskAIOutput 
       setTestResults([...results]);
     }
     setRunning(false);
-  }, [code, problem, testCases, ensurePyodide, onError]);
+  }, [code, problem, testCases, ensurePyodide]);
 
   const updateTestCase = (id, newInput, newExpected) => {
     setTestCases(prev => prev.map(tc => tc.id === id ? { ...tc, input: newInput, expected: newExpected } : tc));

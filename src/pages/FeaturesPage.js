@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowLeft, Play, Bot, FlaskConical, TreePine, BookOpen,
-  Search, Eye, Zap, Star, ChevronRight, CheckCircle,
-  Code2, Pencil, Plus, Brain, Layers, Terminal
+  Play, Bot, TreePine, BookOpen,
+  Search, Zap, Star, ChevronRight, CheckCircle,
+  Pencil, Plus, Layers, Terminal
 } from "lucide-react";
 
 const PUBLIC = process.env.PUBLIC_URL || "";
