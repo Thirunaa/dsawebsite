@@ -4,9 +4,8 @@ const SiteFooter = () => {
   return (
     <footer className="border-t border-border py-8">
       <div className="container flex flex-col items-center justify-between gap-4 text-sm text-muted-foreground md:flex-row">
-        <Link to="/" className="flex items-center gap-1.5 font-mono font-bold text-foreground hover:text-primary transition-colors">
-          <span className="text-primary">&gt;_</span>
-          <span>Hashmap</span>
+        <Link to="/" className="hover:opacity-85 transition-opacity">
+          <img src={`${process.env.PUBLIC_URL}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-auto rounded" />
         </Link>
         <div className="flex items-center gap-5">
           <Link to="/library" className="hover:text-foreground transition-colors">Library</Link>

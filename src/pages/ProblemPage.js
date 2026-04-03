@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ExternalLink, ChevronDown, ChevronUp, Play } from "lucide-react";
+import { ArrowLeft, ExternalLink, ChevronDown, ChevronUp, Play, FileText } from "lucide-react";
 import problemData from "../data.json";
+
+const PUBLIC = process.env.PUBLIC_URL || "";
 
 const diffColor = { Easy: "#4ade80", Medium: "#fbbf24", Hard: "#f87171" };
 
@@ -94,11 +96,11 @@ const ProblemCard = ({ problem, index }) => {
             )}
           </div>
 
-          {/* Notes */}
-          {problem.notes && (
+          {/* Idea */}
+          {problem.idea && (
             <div className="rounded-md border border-border p-3" style={{ background: "#161b22" }}>
-              <p className="font-mono text-xs text-primary uppercase tracking-widest mb-1.5">Notes</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">{problem.notes}</p>
+              <p className="font-mono text-xs text-primary uppercase tracking-widest mb-1.5">Idea</p>
+              <p className="text-sm text-muted-foreground leading-relaxed">{problem.idea}</p>
             </div>
           )}
 
@@ -137,9 +139,8 @@ const ProblemPage = () => {
             <ArrowLeft className="h-4 w-4" />
             Library
           </Link>
-          <Link to="/" className="flex items-center gap-1 font-mono text-sm font-bold">
-            <span className="text-primary">&gt;_</span>
-            <span className="text-foreground">Hashmap</span>
+          <Link to="/" className="hover:opacity-85 transition-opacity">
+            <img src={`${PUBLIC}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-auto rounded" />
           </Link>
         </div>
       </header>
@@ -177,6 +178,20 @@ const ProblemPage = () => {
               />
             </div>
           </div>
+        )}
+
+        {/* Notes PDF */}
+        {lesson.notesUrl && (
+          <a
+            href={`${PUBLIC}/data/${lesson.notesUrl}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-muted-foreground transition-all hover:border-primary/50 hover:text-foreground"
+            style={{ background: "#0d1117" }}
+          >
+            <FileText className="h-4 w-4 text-primary" />
+            Open Lesson Notes (PDF)
+          </a>
         )}
 
         {/* Problems */}

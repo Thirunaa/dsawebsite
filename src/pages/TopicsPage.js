@@ -68,9 +68,8 @@ const TopicsPage = () => {
             <ArrowLeft className="h-4 w-4" />
             Home
           </Link>
-          <Link to="/" className="flex items-center gap-1 font-mono text-sm font-bold">
-            <span className="text-primary">&gt;_</span>
-            <span className="text-foreground">Hashmap</span>
+          <Link to="/" className="hover:opacity-85 transition-opacity">
+            <img src={`${process.env.PUBLIC_URL}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-auto rounded" />
           </Link>
         </div>
       </header>

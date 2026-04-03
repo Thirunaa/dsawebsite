@@ -1,213 +1,190 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ExternalLink, FileText, PlayCircle } from "lucide-react";
+import { Play, ExternalLink } from "lucide-react";
 import problemData from "../../data.json";
 import filterData from "../../filterData.json";
 import SearchProblems from "./SearchProblems";
 import FilterProblems from "./FilterProblems";
-import { getYouTubeThumbnailSet, resolveResourceLink } from "../../utils/content";
-import { cn } from "../../lib/utils";
-import { buttonVariants } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
-import { Separator } from "../ui/separator";
 
-const getProblemTopics = (problemId) => {
-  const numericId = Number(problemId);
-  return Object.keys(filterData).filter((topic) => filterData[topic].includes(numericId));
-};
+const diffColor = { Easy: "#4ade80", Medium: "#fbbf24", Hard: "#f87171" };
 
-const LessonThumbnail = ({ title, videoLink }) => {
-  const sources = getYouTubeThumbnailSet(videoLink);
-  const [currentSource, setCurrentSource] = useState(0);
-
-  if (!sources.length) {
-    return (
-      <div className="flex aspect-[16/10] h-full min-h-[180px] items-end border-b bg-secondary p-4 md:border-b-0 md:border-r">
-        <p className="text-sm font-medium text-foreground">{title}</p>
-      </div>
-    );
-  }
+const LessonCard = ({ lesson }) => {
+  const [imgErr, setImgErr] = useState(false);
 
   return (
-    <div className="h-full border-b bg-muted md:border-b-0 md:border-r">
-      <img
-        className="h-full w-full object-cover"
-        src={sources[currentSource]}
-        alt={`${title} lesson thumbnail`}
-        loading="lazy"
-        onError={() => {
-          if (currentSource < sources.length - 1) {
-            setCurrentSource((value) => value + 1);
-          }
-        }}
-      />
+    <div className="group overflow-hidden rounded-xl border border-border transition-all hover:border-primary/30 hover:shadow-lg" style={{ background: "#0d1117" }}>
+      <div className="grid md:grid-cols-[260px,1fr]">
+        {/* Thumbnail */}
+        <div className="relative overflow-hidden border-b border-border md:border-b-0 md:border-r md:border-border" style={{ background: "#161b22" }}>
+          {!imgErr ? (
+            <img
+              src={lesson.thumbnail}
+              alt={lesson.title}
+              className="h-full w-full object-cover aspect-video md:aspect-auto"
+              loading="lazy"
+              onError={() => setImgErr(true)}
+            />
+          ) : (
+            <div className="flex h-full min-h-[140px] items-center justify-center">
+              <span className="font-mono text-4xl text-muted-foreground/20">&gt;_</span>
+            </div>
+          )}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity" style={{ background: "rgba(0,0,0,0.5)" }}>
+            <div className="rounded-full border border-green-400/50 p-3" style={{ background: "rgba(74,222,128,0.15)" }}>
+              <Play className="h-5 w-5 fill-green-400 text-green-400" />
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex flex-col gap-4 p-5">
+          <div>
+            <div className="mb-2 flex flex-wrap gap-1.5">
+              {lesson.topics.map((t) => (
+                <span key={t} className="rounded-md border border-border px-2 py-0.5 font-mono text-xs text-muted-foreground">
+                  {t}
+                </span>
+              ))}
+            </div>
+            <Link to={`/lesson/${lesson.id}`}>
+              <h2 className="text-base font-semibold text-foreground transition-colors hover:text-primary leading-snug">
+                {lesson.title}
+              </h2>
+            </Link>
+          </div>
+
+          {/* Problems list */}
+          <div className="space-y-1.5">
+            {lesson.problems.map((p) => (
+              <div key={p.lcNumber} className="flex items-center gap-2 text-sm">
+                <span className="font-mono text-xs text-muted-foreground/60 w-8 shrink-0">#{p.lcNumber}</span>
+                <span className="text-muted-foreground flex-1 truncate">{p.title}</span>
+                <span
+                  className="rounded px-1.5 py-0.5 font-mono text-xs font-medium shrink-0"
+                  style={{ color: diffColor[p.difficulty] || "#4ade80", background: `${diffColor[p.difficulty] || "#4ade80"}15` }}
+                >
+                  {p.difficulty}
+                </span>
+                <span className="rounded border border-border px-1.5 py-0.5 font-mono text-xs text-muted-foreground shrink-0">
+                  {p.language}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Actions */}
+          <div className="mt-auto flex flex-wrap gap-2 border-t border-border pt-4">
+            {lesson.videoUrl && (
+              <a
+                href={lesson.videoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition-all hover:border-primary/50 hover:text-foreground"
+              >
+                <Play className="h-3 w-3 fill-current" />
+                Watch
+              </a>
+            )}
+            <Link
+              to={`/lesson/${lesson.id}`}
+              className="inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-semibold transition-all hover:opacity-90 ml-auto"
+              style={{ background: "#4ade80", color: "#0a0e17" }}
+            >
+              <ExternalLink className="h-3 w-3" />
+              Open Lesson
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 const ProblemList = () => {
-  const regex = /(<([^>]+)>)/gi;
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerms, setFilterTerms] = useState([]);
-  const [resourceFilter, setResourceFilter] = useState("all");
-
-  const searchValue = (value) => {
-    setSearchTerm(value);
-  };
-
-  const filterProblems = (value) => {
-    setFilterTerms(value);
-  };
 
   const filteredIds = filterTerms.length
-    ? new Set(filterTerms.flatMap((term) => filterData[term] || []))
+    ? new Set(filterTerms.flatMap((t) => filterData[t] || []))
     : null;
 
-  const visibleProblems = problemData.filter((problem) => {
-    const matchesSearch =
+  const visible = problemData.filter((lesson) => {
+    const matchSearch =
       !searchTerm ||
-      problem.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      problem.summary.toLowerCase().includes(searchTerm.toLowerCase());
-
-    const matchesFilter = !filteredIds || filteredIds.has(Number(problem.id));
-    const matchesResourceFilter =
-      resourceFilter === "all" ||
-      (resourceFilter === "video" && Boolean(problem.videoLink)) ||
-      (resourceFilter === "notes" && Boolean(problem.notes));
-
-    return matchesSearch && matchesFilter && matchesResourceFilter;
+      lesson.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      lesson.topics.some((t) => t.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      lesson.problems.some((p) => p.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchFilter = !filteredIds || filteredIds.has(Number(lesson.id));
+    return matchSearch && matchFilter;
   });
 
-  const lessonCount = problemData.length;
-  const videoCount = problemData.filter((problem) => problem.videoLink).length;
-  const notesCount = problemData.filter((problem) => problem.notes).length;
-  const activeTopicText = filterTerms.length ? `Filtered by ${filterTerms.join(", ")}` : "All topics";
+  const totalProblems = problemData.reduce((s, l) => s + l.problems.length, 0);
 
   return (
     <main className="min-h-screen">
-      <header className="border-b bg-card">
+      {/* Header */}
+      <header className="border-b border-border" style={{ background: "#0d1117" }}>
         <div className="container flex flex-col gap-3 py-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight">Data Structures and Algorithms</h1>
+            <Link to="/" className="mb-1 inline-flex items-center gap-1 font-mono text-sm font-bold text-primary hover:opacity-80 transition-opacity">
+              <span>&gt;_</span><span className="text-foreground">Hashmap</span>
+            </Link>
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">Problem Library</h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {lessonCount} lessons, {videoCount} video walkthroughs, {notesCount} note packs
+              {problemData.length} lessons · {totalProblems} problems with solutions
             </p>
           </div>
-          <p className="text-sm text-muted-foreground">{activeTopicText}</p>
+          <p className="font-mono text-xs text-muted-foreground">
+            {filterTerms.length ? `Filtered: ${filterTerms.join(", ")}` : "All topics"}
+          </p>
         </div>
       </header>
 
       <div className="container py-6">
-        <div className="grid gap-6 lg:grid-cols-[240px,minmax(0,1fr)]">
-          <aside className="space-y-4">
-            <FilterProblems selected={filterTerms} filterterms={filterProblems} />
+        <div className="grid gap-6 lg:grid-cols-[220px,1fr]">
+          {/* Sidebar */}
+          <aside>
+            <FilterProblems selected={filterTerms} filterterms={setFilterTerms} />
           </aside>
 
+          {/* Main */}
           <section className="space-y-4">
             <SearchProblems
-              searchValue={searchValue}
+              searchValue={setSearchTerm}
               searchTerm={searchTerm}
-              resourceFilter={resourceFilter}
-              setResourceFilter={setResourceFilter}
-              visibleCount={visibleProblems.length}
-              totalCount={lessonCount}
+              visibleCount={visible.length}
+              totalCount={problemData.length}
             />
 
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center justify-between">
               <p className="text-sm text-muted-foreground">
-                Browse the library by topic, then open a lesson for links, notes, and the best YouTube preview
-                available.
+                Showing <span className="text-foreground font-medium">{visible.length}</span> of {problemData.length} lessons
               </p>
-              {(filterTerms.length > 0 || searchTerm || resourceFilter !== "all") && (
+              {(filterTerms.length > 0 || searchTerm) && (
                 <button
-                  className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "w-fit")}
-                  onClick={() => {
-                    setFilterTerms([]);
-                    setSearchTerm("");
-                    setResourceFilter("all");
-                  }}
+                  onClick={() => { setFilterTerms([]); setSearchTerm(""); }}
+                  className="rounded-md border border-border px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
                 >
                   Clear filters
                 </button>
               )}
             </div>
 
-            <div className="space-y-4">
-              {visibleProblems.map((problem) => {
-                const topics = getProblemTopics(problem.id);
-                const summary = problem.summary
-                  ? `${problem.summary.replace(regex, "").substring(0, 180).trim()}...`
-                  : "Structured explanation coming soon.";
+            <div className="space-y-3">
+              {visible.map((lesson) => (
+                <LessonCard key={lesson.id} lesson={lesson} />
+              ))}
 
-                return (
-                  <Card key={problem.id} className="overflow-hidden">
-                    <div className="grid md:grid-cols-[280px,minmax(0,1fr)]">
-                      <LessonThumbnail title={problem.title} videoLink={problem.videoLink} />
-                      <CardContent className="flex flex-col gap-4 p-5">
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                            <span>{topics[0] || "General"}</span>
-                            <span>{problem.videoLink ? "Video available" : "Reading only"}</span>
-                            <span>{problem.notes ? "Notes included" : "No notes attached"}</span>
-                          </div>
-                          <Link to={`/problem/${problem.id}`}>
-                            <h2 className="text-lg font-semibold leading-6 hover:text-primary">{problem.title}</h2>
-                          </Link>
-                          <p className="text-sm leading-6 text-muted-foreground">{summary}</p>
-                        </div>
-
-                        <Separator />
-
-                        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
-                            {topics.slice(0, 4).map((topic) => (
-                              <span key={topic}>{topic}</span>
-                            ))}
-                          </div>
-                          <div className="flex flex-wrap gap-2">
-                            {problem.videoLink && (
-                              <a
-                                className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-                                href={problem.videoLink}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                <PlayCircle className="mr-2 h-4 w-4" />
-                                Watch
-                              </a>
-                            )}
-                            {problem.notes && (
-                              <a
-                                className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-                                href={resolveResourceLink(problem.notes)}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                <FileText className="mr-2 h-4 w-4" />
-                                Notes
-                              </a>
-                            )}
-                            <Link className={cn(buttonVariants({ size: "sm" }))} to={`/problem/${problem.id}`}>
-                              <ExternalLink className="mr-2 h-4 w-4" />
-                              Open lesson
-                            </Link>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </div>
-                  </Card>
-                );
-              })}
-
-              {!visibleProblems.length && (
-                <Card>
-                  <CardContent className="p-6">
-                    <h2 className="text-base font-semibold">No lessons match the current filters.</h2>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      Try a broader search or clear the selected topic and resource filters.
-                    </p>
-                  </CardContent>
-                </Card>
+              {visible.length === 0 && (
+                <div className="rounded-xl border border-border p-10 text-center" style={{ background: "#0d1117" }}>
+                  <p className="font-mono text-sm text-muted-foreground">No lessons match your search.</p>
+                  <button
+                    onClick={() => { setFilterTerms([]); setSearchTerm(""); }}
+                    className="mt-3 text-sm text-primary hover:underline"
+                  >
+                    Clear filters
+                  </button>
+                </div>
               )}
             </div>
           </section>

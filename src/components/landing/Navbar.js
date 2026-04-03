@@ -4,11 +4,8 @@ const Navbar = () => {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <span className="font-mono text-lg font-bold text-primary group-hover:opacity-80 transition-opacity">
-            &gt;_
-          </span>
-          <span className="font-mono text-lg font-bold text-foreground tracking-tight">Hashmap</span>
+        <Link to="/" className="flex items-center group hover:opacity-85 transition-opacity">
+          <img src={`${process.env.PUBLIC_URL}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-9 w-auto rounded" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

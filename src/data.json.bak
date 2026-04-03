@@ -1,0 +1,822 @@
+[
+  {
+    "id": "0",
+    "link": "https://leetcode.com/problems/implement-queue-using-stacks/",
+    "notes": "HashsetImplementation.pdf",
+    "videoLink": "https://youtu.be/MNVB5Gytr3A",
+    "mySolution": "",
+    "summary": "Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).Implement the MyQueue class:void push(int x) Pushes element x to the back of the queue.int pop() Removes the element from the front of the queue and returns it.int peek() Returns the element at the front of the queue.boolean empty() Returns true if the queue is empty, false otherwise.Notes:You must use only standard operations of a stack, which means only push to top, peek/pop from top, size, and is empty operations are valid.Depending on your language, the stack may not be supported natively. You may simulate a stack using a list or deque (double-ended queue) as long as you use only a stack's standard operations.",
+    "title": "Create Queue using Stacks"
+  },
+  {
+    "id": "1",
+    "link": "https://leetcode.com/problems/design-hashset/",
+    "notes": "HashsetImplementation.pdf",
+    "videoLink": "https://youtu.be/MNVB5Gytr3A",
+    "mySolution": "",
+    "summary": "Design a HashSet without using any built-in hash table libraries. Implement MyHashSet class: void add(key) Inserts the value key into the HashSet. bool contains(key) Returns whether the value key exists in the HashSet or not. void remove(key) Removes the value key in the HashSet. If key does not exist in the HashSet, do nothing.",
+    "title": "Implement Hashset"
+  },
+  {
+    "id": "2",
+    "link": "https://leetcode.com/problems/min-stack/",
+    "notes": "HashmapImplementation_MinStack.pdf",
+    "videoLink": "https://youtu.be/mLTvEkrbCvM",
+    "mySolution": "",
+    "summary": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.Implement the MinStack class:MinStack() initializes the stack object.void push(int val) pushes the element val onto the stack.void pop() removes the element on the top of the stack.int top() gets the top element of the stack.int getMin() retrieves the minimum element in the stack.You must implement a solution with O(1) time complexity for each function.",
+    "title": "Implement MinStack"
+  },
+  {
+    "id": "3",
+    "link": "https://leetcode.com/problems/design-hashmap/",
+    "notes": "HashmapImplementation_MinStack.pdf",
+    "videoLink": "https://youtu.be/mLTvEkrbCvM",
+    "mySolution": "",
+    "summary": "Design a HashMap without using any built-in hash table libraries.Implement the MyHashMap class:MyHashMap() initializes the object with an empty map.void put(int key, int value) inserts a (key, value) pair into the HashMap. If the key already exists in the map, update the corresponding value.int get(int key) returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key.void remove(key) removes the key and its corresponding value if the map contains the mapping for the key.",
+    "title": "Implement HashMap"
+  },
+  {
+    "id": "4",
+    "link": "https://www.geeksforgeeks.org/min-heap-in-java/",
+    "notes": "",
+    "videoLink": "https://youtu.be/Tc-A-OgrrBs",
+    "mySolution": "",
+    "summary": "A Min-Heap is a complete binary tree in which the value in each internal node is smaller than or equal to the values in the children of that node. Mapping the elements of a heap into an array is trivial: if a node is stored an index k, then its left child is stored at index 2k + 1 and its right child at index 2k + 2.",
+    "title": "Implement MinHeap"
+  },
+  {
+    "id": "5",
+    "link": "https://leetcode.com/problems/search-a-2d-matrix/",
+    "notes": "",
+    "videoLink": "https://youtu.be/03dg-8kk8Io",
+    "mySolution": "BinarySearch_SearchInA2DMatrix.pdf",
+    "summary": "You are given an m x n integer matrix matrix with the following two properties:Each row is sorted in non-decreasing order.The first integer of each row is greater than the last integer of the previous row.Given an integer target, return true if target is in matrix or false otherwise.You must write a solution in O(log(m * n)) time complexity.",
+    "title": "Search in a 2D Matrix"
+  },
+  {
+    "id": "6",
+    "link": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+    "notes": "",
+    "videoLink": "https://youtu.be/03dg-8kk8Io",
+    "mySolution": "",
+    "summary": "There is an integer array nums sorted in ascending order (with distinct values).Prior to being passed to your function, nums is possibly rotated at an unknown pivot index k (1 <= k < nums.length) such that the resulting array is [nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]] (0-indexed). For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6,7,0,1,2].Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.You must write an algorithm with O(log n) runtime complexity.",
+    "title": "Search in a Rotated Sorted Array"
+  },
+  {
+    "id": "7",
+    "link": "https://leetcode.com/problems/find-peak-element/",
+    "notes": "Peak_element_and_MinRotated_sorted.pdf",
+    "videoLink": "https://youtu.be/75EME6Lk11s",
+    "mySolution": "",
+    "summary": "A peak element is an element that is strictly greater than its neighbors.Given a 0-indexed integer array nums, find a peak element, and return its index. If the array contains multiple peaks, return the index to any of the peaks.You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.You must write an algorithm that runs in O(log n) time.",
+    "title": "Find Peak Element"
+  },
+  {
+    "id": "8",
+    "link": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+    "notes": "Peak_element_and_MinRotated_sorted.pdf",
+    "videoLink": "https://youtu.be/75EME6Lk11s",
+    "mySolution": "",
+    "summary": "Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:[4,5,6,7,0,1,2] if it was rotated 4 times.[0,1,2,4,5,6,7] if it was rotated 7 times.Notice that rotating an array [a[0], a[1], a[2], ..., a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], ..., a[n-2]].Given the sorted rotated array nums of unique elements, return the minimum element of this array.You must write an algorithm that runs in O(log n) time.",
+    "title": "Minimum in Rotated Sorted Array"
+  },
+  {
+    "id": "9",
+    "link": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+    "notes": "",
+    "videoLink": "https://youtu.be/fKnQMhZyz2w",
+    "mySolution": "",
+    "summary": "Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.If target is not found in the array, return [-1, -1].You must write an algorithm with O(log n) runtime complexity.",
+    "title": "First and last position of element in Sorted array"
+  },
+  {
+    "id": "10",
+    "link": "https://www.geeksforgeeks.org/find-the-missing-number-in-a-sorted-array/",
+    "notes": "Hashmap_min_sorted_implementation.pdf",
+    "videoLink": "https://youtu.be/fKnQMhZyz2w",
+    "mySolution": "",
+    "summary": "Given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in list. One of the integers is missing in the list. Write an efficient code to find the missing integer. ",
+    "title": "Missing number in a sorted array"
+  },
+  {
+    "id": "11",
+    "link": "https://leetcode.com/problems/subarray-sum-equals-k/",
+    "notes": "DP_robbery_and_subarray_equals_K.pdf",
+    "videoLink": "https://youtu.be/5zwE0U1x0-s",
+    "mySolution": "",
+    "summary": "Given an array of integers nums and an integer k, return the total number of subarrays whose sum equals to k. A subarray is a contiguous non-empty sequence of elements within an array.",
+    "title": "Subarray Sum Equals K"
+  },
+  {
+    "id": "12",
+    "link": "https://leetcode.com/problems/group-anagrams/",
+    "notes": "",
+    "videoLink": "https://youtu.be/5zwE0U1x0-s",
+    "mySolution": "",
+    "summary": "Given an array of strings strs, group the anagrams together. You can return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
+    "title": "Group Anagrams"
+  },
+  {
+    "id": "13",
+    "link": "https://leetcode.com/problems/isomorphic-strings/",
+    "notes": "hashmap_anagram_isomorphic.pdf",
+    "videoLink": "https://youtu.be/5zwE0U1x0-s",
+    "mySolution": "",
+    "summary": "Given two strings s and t, determine if they are isomorphic.Two strings s and t are isomorphic if the characters in s can be replaced to get t.All occurrences of a character must be replaced with another character while preserving the order of characters. No two characters may map to the same character, but a character may map to itself.",
+    "title": "Isomorphic Strings"
+  },
+  {
+    "id": "14",
+    "link": "https://leetcode.com/problems/contiguous-array/",
+    "notes": "longest_palindrome_contiguous_subarray.pdf",
+    "videoLink": "https://youtu.be/k33JI_N6EJ8",
+    "mySolution": "",
+    "summary": "Given a binary array nums, return the maximum length of a contiguous subarray with an equal number of 0 and 1.",
+    "title": "Contiguos Subarray"
+  },
+  {
+    "id": "15",
+    "link": "https://leetcode.com/problems/longest-palindrome/",
+    "notes": "longest_palindrome_contiguous_subarray.pdf",
+    "videoLink": "https://youtu.be/k33JI_N6EJ8",
+    "mySolution": "",
+    "summary": "Given a string s which consists of lowercase or uppercase letters, return the length of the longest palindrome that can be built with those letters.Letters are case sensitive, for example, `Aa` is not considered a palindrome here.",
+    "title": "Longest Palindrome in a string"
+  },
+  {
+    "id": "16",
+    "link": "https://leetcode.com/problems/house-robber/",
+    "notes": "DP_robbery_and_subarray_equals_K.pdf",
+    "videoLink": "https://youtu.be/wra-NFEQU9U",
+    "mySolution": "",
+    "summary": "You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.",
+    "title": "House Robber"
+  },
+  {
+    "id": "17",
+    "link": "https://leetcode.com/problems/delete-and-earn/",
+    "notes": "knapsack_delete_and_earn.pdf",
+    "videoLink": "https://youtu.be/R8HNB-tTz3g",
+    "mySolution": "",
+    "summary": "You are given an integer array nums. You want to maximize the number of points you get by performing the following operation any number of times:Pick any nums[i] and delete it to earn nums[i] points. Afterwards, you must delete every element equal to nums[i] - 1 and every element equal to nums[i] + 1.Return the maximum number of points you can earn by applying the above operation some number of times.",
+    "title": "Delete and Earn"
+  },
+  {
+    "id": "18",
+    "link": "https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/",
+    "notes": "knapsack_delete_and_earn.pdf",
+    "videoLink": "https://youtu.be/R8HNB-tTz3g",
+    "mySolution": "",
+    "summary": "We are given N items where each item has some weight and profit associated with it. We are also given a bag with capacity W, [i.e., the bag can hold at most W weight in it]. The target is to put the items into the bag such that the sum of profits associated with them is the maximum possible. Note: The constraint here is we can either put an item completely into the bag or cannot put it at all [It is not possible to put a part of an item into the bag].",
+    "title": "Knapsack Problem"
+  },
+  {
+    "id": "19",
+    "link": "https://leetcode.com/problems/coin-change/",
+    "notes": "coin_change_paint_house.pdf",
+    "videoLink": "https://youtu.be/FiUT2Sb-6Kc",
+    "mySolution": "",
+    "summary": "You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.You may assume that you have an infinite number of each kind of coin.",
+    "title": "Coin Change"
+  },
+  {
+    "id": "20",
+    "link": "https://leetcode.com/problems/paint-house/",
+    "notes": "coin_change_paint_house.pdf",
+    "videoLink": "https://youtu.be/vzHTupzRWhQ",
+    "mySolution": "",
+    "summary": "There is a row of n houses, where each house can be painted one of three colors: red, blue, or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color. The cost of painting each house with a certain color is represented by an n x 3 cost matrix costs. For example, costs[0][0] is the cost of painting house 0 with the color red; costs[1][2] is the cost of painting house 1 with color green, and so on... Return the minimum cost to paint all houses.",
+    "title": "Paint House"
+  },
+  {
+    "id": "21",
+    "link": "https://leetcode.com/problems/minimum-falling-path-sum/",
+    "notes": "",
+    "videoLink": "https://youtu.be/C_cNfXMyhOw",
+    "mySolution": "",
+    "summary": "Given an n x n array of integers matrix, return the minimum sum of any falling path through matrix. A falling path starts at any element in the first row and chooses the element in the next row that is either directly below or diagonally left/right. Specifically, the next element from position (row, col) will be (row + 1, col - 1), (row + 1, col), or (row + 1, col + 1).",
+    "title": "Minimum falling path Sum"
+  },
+  {
+    "id": "22",
+    "link": "https://leetcode.com/problems/product-of-array-except-self/",
+    "notes": "diagonal_and_product_except_self_matrix_array.pdf",
+    "videoLink": "https://youtu.be/C_cNfXMyhOw",
+    "mySolution": "",
+    "summary": "Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.You must write an algorithm that runs in O(n) time and without using the division operation.",
+    "title": "Product of Array except Self"
+  },
+  {
+    "id": "23",
+    "link": "https://leetcode.com/problems/diagonal-traverse/",
+    "notes": "diagonal_and_product_except_self_matrix_array.pdf",
+    "videoLink": "https://youtu.be/S2ktQKN_LV0",
+    "mySolution": "",
+    "summary": "Given an m x n matrix mat, return an array of all the elements of the array in a diagonal order.",
+    "title": "Diagonal traversal"
+  },
+  {
+    "id": "24",
+    "link": "https://leetcode.com/problems/spiral-matrix/",
+    "notes": "Remove_duplicates_and_Spiral_matrix.pdf",
+    "videoLink": "https://youtu.be/S2ktQKN_LV0",
+    "mySolution": "",
+    "summary": "Given an m x n matrix, return all elements of the matrix in spiral order.",
+    "title": "Spiral matrix"
+  },
+  {
+    "id": "25",
+    "link": "https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/description/",
+    "notes": "Find_Disappeared_element_in_array_game_of_life.pdf",
+    "videoLink": "https://youtu.be/MxHNkH1gqRg",
+    "mySolution": "",
+    "summary": "Given an array nums of n integers where nums[i] is in the range [1, n], return an array of all the integers in the range [1, n] that do not appear in nums.",
+    "title": "Find all numbers disappeared in an array"
+  },
+  {
+    "id": "26",
+    "link": "https://leetcode.com/problems/game-of-life/",
+    "notes": "Find_Disappeared_element_in_array_game_of_life.pdf",
+    "videoLink": "https://youtu.be/MxHNkH1gqRg",
+    "mySolution": "",
+    "summary": "According to Wikipedia's article: `The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.`The board is made up of an m x n grid of cells, where each cell has an initial state: live (represented by a 1) or dead (represented by a 0). Each cell interacts with its eight neighbors (horizontal, vertical, diagonal) using the following four rules (taken from the above Wikipedia article):Any live cell with fewer than two live neighbors dies as if caused by under-population.Any live cell with two or three live neighbors lives on to the next generation.Any live cell with more than three live neighbors dies, as if by over-population.Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.The next state is created by applying the above rules simultaneously to every cell in the current state, where births and deaths occur simultaneously. Given the current state of the m x n grid board, return the next state.",
+    "title": "Game of Life"
+  },
+  {
+    "id": "27",
+    "link": "https://leetcode.com/problems/container-with-most-water/",
+    "notes": "2sum_3sum_water_container.pdf",
+    "videoLink": "https://youtu.be/f7F0WP55GEg",
+    "mySolution": "",
+    "summary": "You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).Find two lines that together with the x-axis form a container, such that the container contains the most water.Return the maximum amount of water a container can store.Notice that you may not slant the container.",
+    "title": "Container With Most Water"
+  },
+  {
+    "id": "28",
+    "link": "https://leetcode.com/problems/merge-sorted-array/description/",
+    "notes": "Sort_colors_and_merge_sorted_array.pdf",
+    "videoLink": "https://youtu.be/ot4JyaKD6cM",
+    "mySolution": "",
+    "summary": "You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.Merge nums1 and nums2 into a single array sorted in non-decreasing order.The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.",
+    "title": "Merge Sorted Array"
+  },
+  {
+    "id": "29",
+    "link": "https://leetcode.com/problems/sort-colors/",
+    "notes": "Sort_colors_and_merge_sorted_array.pdf",
+    "videoLink": "https://youtu.be/GHNs7Bi5e6w",
+    "mySolution": "",
+    "summary": "Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects of the same color are adjacent, with the colors in the order red, white, and blue.We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.You must solve this problem without using the library's sort function.",
+    "title": "Sort Colors"
+  },
+  {
+    "id": "30",
+    "link": "https://leetcode.com/problems/two-sum/",
+    "notes": "2sum_3sum_water_container.pdf",
+    "videoLink": "https://youtu.be/GHNs7Bi5e6w",
+    "mySolution": "",
+    "summary": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
+    "title": "Two Sum"
+  },
+  {
+    "id": "31",
+    "link": "https://leetcode.com/problems/3sum/",
+    "notes": "2sum_3sum_water_container.pdf",
+    "videoLink": "https://youtu.be/GHNs7Bi5e6w",
+    "mySolution": "",
+    "summary": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.Notice that the solution set must not contain duplicate triplets.",
+    "title": "3Sum"
+  },
+  {
+    "id": "32",
+    "link": "https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/description/",
+    "notes": "Remove_duplicates_and_Spiral_matrix.pdf",
+    "videoLink": "https://youtu.be/GHNs7Bi5e6w",
+    "mySolution": "",
+    "summary": "Given an integer array nums sorted in non-decreasing order, remove some duplicates in-place such that each unique element appears at most twice. The relative order of the elements should be kept the same.Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.Return k after placing the final result in the first k slots of nums.Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.",
+    "title": "Remove Duplicates from Sorted Array II"
+  },
+  {
+    "id": "33",
+    "link": "https://leetcode.com/problems/search-a-2d-matrix-ii/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Write an efficient algorithm that searches for a value target in an m x n integer matrix matrix. This matrix has the following properties:Integers in each row are sorted in ascending from left to right.Integers in each column are sorted in ascending from top to bottom.",
+    "title": "Search a 2D Matrix II"
+  },
+  {
+    "id": "34",
+    "link": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "notes": "Binary_search_tree.pdf",
+    "videoLink": "https://youtu.be/pdNJea4jh_U",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, determine if it is a valid binary search tree (BST).A valid BST is defined as follows:The left subtree of a node contains only nodes with keys less than the node's key.The right subtree of a node contains only nodes with keys greater than the node's key.Both the left and right subtrees must also be binary search trees.",
+    "title": "Validate Binary Search Tree"
+  },
+  {
+    "id": "35",
+    "link": "https://leetcode.com/problems/validate-binary-search-tree/",
+    "notes": "",
+    "videoLink": "https://youtu.be/pdNJea4jh_U",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, determine if it is a valid binary search tree (BST).A valid BST is defined as follows:The left subtree of a node contains only nodes with keys less than the node's key.The right subtree of a node contains only nodes with keys greater than the node's key.Both the left and right subtrees must also be binary search trees.",
+    "title": "Validate Binary Search Tree - Without using list"
+  },
+  {
+    "id": "36",
+    "link": "https://leetcode.com/problems/sum-root-to-leaf-numbers/",
+    "notes": "Path_sum_2_and_sum_from_root_to_leaf.pdf",
+    "videoLink": "https://youtu.be/dIS9o8dgs_8",
+    "mySolution": "",
+    "summary": "You are given the root of a binary tree containing digits from 0 to 9 only.Each root-to-leaf path in the tree represents a number.For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123.Return the total sum of all root-to-leaf numbers. Test cases are generated so that the answer will fit in a 32-bit integer.A leaf node is a node with no children.",
+    "title": "Sum Root to Leaf Numbers"
+  },
+  {
+    "id": "37",
+    "link": "https://leetcode.com/problems/path-sum-ii/",
+    "notes": "Path_sum_2_and_sum_from_root_to_leaf.pdf",
+    "videoLink": "https://youtu.be/dIS9o8dgs_8",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where the sum of the node values in the path equals targetSum. Each path should be returned as a list of the node values, not node references.A root-to-leaf path is a path starting from the root and ending at any leaf node. A leaf is a node with no children.",
+    "title": "Path Sum II"
+  },
+  {
+    "id": "38",
+    "link": "https://leetcode.com/problems/balanced-binary-tree/",
+    "notes": "",
+    "videoLink": "https://youtu.be/DmuEzLTrb3Y",
+    "mySolution": "",
+    "summary": "Given a binary tree, determine if it is height-balanced.",
+    "title": "Balanced Binary Tree"
+  },
+  {
+    "id": "39",
+    "link": "https://leetcode.com/problems/binary-tree-maximum-path-sum",
+    "notes": "Maximum_path_sum.pdf",
+    "videoLink": "https://youtu.be/eerdTo2Zkzk",
+    "mySolution": "",
+    "summary": "A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.The path sum of a path is the sum of the node's values in the path.Given the root of a binary tree, return the maximum path sum of any non-empty path.",
+    "title": "Binary Tree Maximum Path Sum"
+  },
+  {
+    "id": "40",
+    "link": "https://leetcode.com/problems/reverse-linked-list/",
+    "notes": "",
+    "videoLink": "https://youtu.be/eerdTo2Zkzk",
+    "mySolution": "",
+    "summary": "Given the head of a singly linked list, reverse the list, and return the reversed list.",
+    "title": "Reverse Linked List"
+  },
+  {
+    "id": "41",
+    "link": "https://leetcode.com/problems/linked-list-cycle-ii/",
+    "notes": "",
+    "videoLink": "https://youtu.be/eerdTo2Zkzk",
+    "mySolution": "",
+    "summary": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.There is a cycle in a linked list if there is some node in the list that can be reached again by continuously following the next pointer. Internally, pos is used to denote the index of the node that tail's next pointer is connected to (0-indexed). It is -1 if there is no cycle. Note that pos is not passed as a parameter.Do not modify the linked list.",
+    "title": "Linked List Cycle II"
+  },
+  {
+    "id": "42",
+    "link": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+    "notes": "",
+    "videoLink": "https://youtu.be/JYwlDTZUanA",
+    "mySolution": "",
+    "summary": "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+    "title": "Remove Nth Node From End of List"
+  },
+  {
+    "id": "43",
+    "link": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
+    "notes": "",
+    "videoLink": "https://youtu.be/JYwlDTZUanA",
+    "mySolution": "",
+    "summary": "Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.For example, the following two linked lists begin to intersect at node c1:The test cases are generated such that there are no cycles anywhere in the entire linked structure.Note that the linked lists must retain their original structure after the function returns.Custom Judge:The inputs to the judge are given as follows (your program is not given these inputs):intersectVal - The value of the node where the intersection occurs. This is 0 if there is no intersected node.listA - The first linked list.listB - The second linked list.skipA - The number of nodes to skip ahead in listA (starting from the head) to get to the intersected node.skipB - The number of nodes to skip ahead in listB (starting from the head) to get to the intersected node.The judge will then create the linked structure based on these inputs and pass the two heads, headA and headB to your program. If you correctly return the intersected node, then your solution will be accepted.",
+    "title": "The intersection of Two Linked Lists"
+  },
+  {
+    "id": "44",
+    "link": "https://leetcode.com/problems/reorder-list/",
+    "notes": "",
+    "videoLink": "https://youtu.be/JYwlDTZUanA",
+    "mySolution": "https://github.com/Thirunaa/Blind75/blob/main/Reorder_List/reorderList.py",
+    "summary": "You are given the head of a singly linked-list. The list can be represented as:L0 → L1 → … → Ln - 1 → Ln Reorder the list to be on the following form:L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → … You may not modify the values in the list's nodes. Only nodes themselves may be changed.",
+    "title": "Reorder List"
+  },
+  {
+    "id": "45",
+    "link": "https://leetcode.com/problems/palindrome-linked-list/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given the head of a singly linked list, return true if it is a palindrome or false otherwise.",
+    "title": "Palindromic Linkedlist - Linked List"
+  },
+  {
+    "id": "46",
+    "link": "https://leetcode.com/problems/reorder-list/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given the head of a linked list, rotate the list to the right by k places.",
+    "title": "Rotate List - Linked List"
+  },
+  {
+    "id": "47",
+    "link": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+    "notes": "",
+    "videoLink": "https://youtu.be/l_WLI0cil4E",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).",
+    "title": "Level Order Traversal"
+  },
+  {
+    "id": "48",
+    "link": "https://leetcode.com/problems/binary-tree-right-side-view/",
+    "notes": "right_side_view_symmetric_tree.pdf",
+    "videoLink": "https://youtu.be/l_WLI0cil4E",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
+    "title": "Right Side view of Binary Tree"
+  },
+  {
+    "id": "49",
+    "link": "https://leetcode.com/problems/symmetric-tree/",
+    "notes": "",
+    "videoLink": "https://youtu.be/SrI8ROaArTQ",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).",
+    "title": "Symmetric Tree-BFS"
+  },
+  {
+    "id": "50",
+    "link": "https://leetcode.com/problems/n-ary-tree-level-order-traversal/",
+    "notes": "",
+    "videoLink": "https://youtu.be/SrI8ROaArTQ",
+    "mySolution": "",
+    "summary": "Given an n-ary tree, return the level order traversal of its nodes' values. Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).",
+    "title": "N-ary tree traversal"
+  },
+  {
+    "id": "51",
+    "link": "https://leetcode.com/problems/binary-tree-right-side-view/",
+    "notes": "right_side_view_symmetric_tree.pdf",
+    "videoLink": "https://youtu.be/l_WLI0cil4E",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.",
+    "title": "Right Side view of Binary Tree"
+  },
+  {
+    "id": "52",
+    "link": "https://leetcode.com/problems/symmetric-tree/",
+    "notes": "",
+    "videoLink": "https://youtu.be/SrI8ROaArTQ",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).",
+    "title": "Symmetric Tree-DFS"
+  },
+  {
+    "id": "53",
+    "link": "https://leetcode.com/problems/employee-importance/",
+    "notes": "employee_subordinates_and_rotten_oranges.pdf",
+    "videoLink": "https://youtu.be/ZcLOgwc6YqQ",
+    "mySolution": "",
+    "summary": "You have a data structure of employee information, including the employee's unique ID, importance value, and direct subordinates' IDs.You are given an array of employees employees where:employees[i].id is the ID of the ith employee.employees[i].importance is the importance value of the ith employee.employees[i].subordinates is a list of the IDs of the direct subordinates of the ith employee.Given an integer id that represents an employee's ID, return the total importance value of this employee and all their direct and indirect subordinates.",
+    "title": "Employee Importance-BFS"
+  },
+  {
+    "id": "54",
+    "link": "https://leetcode.com/problems/employee-importance/",
+    "notes": "employee_subordinates_and_rotten_oranges.pdf",
+    "videoLink": "https://youtu.be/ZcLOgwc6YqQ",
+    "mySolution": "",
+    "summary": "You have a data structure of employee information, including the employee's unique ID, importance value, and direct subordinates' IDs.You are given an array of employees employees where:employees[i].id is the ID of the ith employee.employees[i].importance is the importance value of the ith employee.employees[i].subordinates is a list of the IDs of the direct subordinates of the ith employee.Given an integer id that represents an employee's ID, return the total importance value of this employee and all their direct and indirect subordinates.",
+    "title": "Employee Importance-DFS"
+  },
+  {
+    "id": "55",
+    "link": "https://leetcode.com/problems/rotting-oranges/description/",
+    "notes": "employee_subordinates_and_rotten_oranges.pdf",
+    "videoLink": "https://youtu.be/iZRoqCnGCYo",
+    "mySolution": "",
+    "summary": "You are given an m x n grid where each cell can have one of three values: 0 representing an empty cell,1 representing a fresh orange, or 2 representing a rotten orange.Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.Return the minimum number of minutes that must elapse until no cell has a fresh orange. If this is impossible, return -1.",
+    "title": "Rotten Oranges"
+  },
+  {
+    "id": "56",
+    "link": "https://leetcode.com/problems/01-matrix/",
+    "notes": "Floodfill_01Matrix_Trajan_algo.pdf",
+    "videoLink": "https://youtu.be/dDaS4LLOoPg",
+    "mySolution": "",
+    "summary": "Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.The distance between two adjacent cells is 1.",
+    "title": "01 Matrix"
+  },
+  {
+    "id": "57",
+    "link": "https://leetcode.com/problems/cousins-in-binary-tree/",
+    "notes": "Cousins_in_BT_Course_schedule.pdf",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree with unique values and the values of two different nodes of the tree x and y, return true if the nodes corresponding to the values x and y in the tree are cousins, or false otherwise. Two nodes of a binary tree are cousins if they have the same depth with different parents.Note that in a binary tree, the root node is at the depth 0, and children of each depth k node are at the depth k + 1.",
+    "title": "Cousins in a Binary Tree"
+  },
+  {
+    "id": "58",
+    "link": "https://leetcode.com/problems/word-ladder/",
+    "notes": "",
+    "videoLink": "https://youtu.be/dDaS4LLOoPg",
+    "mySolution": "",
+    "summary": "A transformation sequence from word beginWord to word endWord using a dictionary wordList is a sequence of words beginWord -> s1 -> s2 -> ... -> sk such that: Every adjacent pair of words differs by a single letter. Every si for 1 <= i <= k is in wordList. Note that beginWord does not need to be in wordList. sk == endWord Given two words, beginWord and endWord, and a dictionary wordList, return the number of words in the shortest transformation sequence from beginWord to endWord, or 0 if no such sequence exists.",
+    "title": "Word Ladder"
+  },
+  {
+    "id": "59",
+    "link": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/ZcLOgwc6YqQ",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, the value of a target node target, and an integer k, return an array of the values of all nodes that have a distance k from the target node. You can return the answer in any order.",
+    "title": "All node K distance"
+  },
+  {
+    "id": "60",
+    "link": "https://leetcode.com/problems/course-schedule/",
+    "notes": "Cousins_in_BT_Course_schedule.pdf",
+    "videoLink": "https://youtu.be/ZcLOgwc6YqQ",
+    "mySolution": "",
+    "summary": "There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1. Return true if you can finish all courses. Otherwise, return false.",
+    "title": "Course Schedule"
+  },
+  {
+    "id": "61",
+    "link": "https://leetcode.com/problems/find-the-town-judge/",
+    "notes": "",
+    "videoLink": "https://youtu.be/DlP1_Xx47LA",
+    "mySolution": "",
+    "summary": "In a town, there are n people labeled from 1 to n. There is a rumor that one of these people is secretly the town judge. If the town judge exists, then: The town judge trusts nobody. Everybody (except for the town judge) trusts the town judge. There is exactly one person that satisfies properties 1 and 2. You are given an array trust where trust[i] = [ai, bi] representing that the person labeled ai trusts the person labeled bi. If a trust relationship does not exist in trust array, then such a trust relationship does not exist. Return the label of the town judge if the town judge exists and can be identified, or return -1 otherwise.",
+    "title": "Town Judge"
+  },
+  {
+    "id": "62",
+    "link": "https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/ZcLOgwc6YqQ",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, the value of a target node target, and an integer k, return an array of the values of all nodes that have a distance k from the target node. You can return the answer in any order.",
+    "title": "All node K distance"
+  },
+  {
+    "id": "63",
+    "link": "https://leetcode.com/problems/critical-connections-in-a-network/",
+    "notes": "critical_connections_autocomplete_town_judge.pdf",
+    "videoLink": "https://youtu.be/DlP1_Xx47LA",
+    "mySolution": "",
+    "summary": "There are n servers numbered from 0 to n - 1 connected by undirected server-to-server connections forming a network where connections[i] = [ai, bi] represents a connection between servers ai and bi. Any server can reach other servers directly or indirectly through the network. A critical connection is a connection that, if removed, will make some servers unable to reach some other server. Return all critical connections in the network in any order.",
+    "title": "Critical Connections"
+  },
+  {
+    "id": "64",
+    "link": "https://leetcode.com/problems/flood-fill/",
+    "notes": "Floodfill_01Matrix_Trajan_algo.pdf",
+    "videoLink": "https://youtu.be/DlP1_Xx47LA",
+    "mySolution": "",
+    "summary": "An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image. You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc]. To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with color. Return the modified image after performing the flood fill.",
+    "title": "Flood Fill"
+  },
+  {
+    "id": "65",
+    "link": "https://leetcode.com/problems/number-of-islands/",
+    "notes": "",
+    "videoLink": "https://youtu.be/DlP1_Xx47LA",
+    "mySolution": "",
+    "summary": "Given an m x n 2D binary grid grid which represents a map of '1's (land) and '0's (water), return the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.",
+    "title": "No. of Islands"
+  },
+  {
+    "id": "66",
+    "link": "https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given the root of a binary tree, calculate the vertical order traversal of the binary tree. For each node at position (row, col), its left and right children will be at positions (row + 1, col - 1) and (row + 1, col + 1) respectively. The root of the tree is at (0, 0). The vertical order traversal of a binary tree is a list of top-to-bottom orderings for each column index starting from the leftmost column and ending on the rightmost column. There may be multiple nodes in the same row and same column. In such a case, sort these nodes by their values. Return the vertical order traversal of the binary tree.",
+    "title": "Vertical order traversal of Binary Tree - BFS,DFS"
+  },
+  {
+    "id": "67",
+    "link": "https://leetcode.com/problems/bus-routes/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "You are given an array routes representing bus routes where routes[i] is a bus route that the ith bus repeats forever. For example, if routes[0] = [1, 5, 7], this means that the 0th bus travels in the sequence 1 -> 5 -> 7 -> 1 -> 5 -> 7 -> 1 -> ... forever. You will start at the bus stop source (You are not on any bus initially), and you want to go to the bus stop target. You can travel between bus stops by buses only. Return the least number of buses you must take to travel from source to target. Return -1 if it is not possible.",
+    "title": "Bus routes - BFS"
+  },
+  {
+    "id": "68",
+    "link": "https://leetcode.com/problems/subsets/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/bfm5n9BAQYM",
+    "mySolution": "",
+    "summary": "Given an integer array nums of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.",
+    "title": "Subset - Choose/ No Choose"
+  },
+  {
+    "id": "69",
+    "link": "https://leetcode.com/problems/subsets/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/bfm5n9BAQYM",
+    "mySolution": "",
+    "summary": "Given an integer array nums of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.",
+    "title": "Subset - Choose/ No Choose with Backtracking"
+  },
+  {
+    "id": "70",
+    "link": "https://leetcode.com/problems/subsets/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/bfm5n9BAQYM",
+    "mySolution": "",
+    "summary": "Given an integer array nums of unique elements, return all possible subsets (the power set). The solution set must not contain duplicate subsets. Return the solution in any order.",
+    "title": "Subset - Using for loop"
+  },
+  {
+    "id": "71",
+    "link": "https://leetcode.com/problems/combination-sum/description/",
+    "notes": "Combination_sum.pdf",
+    "videoLink": "https://youtu.be/9GoRq_seH4E",
+    "mySolution": "",
+    "summary": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order. The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different. The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.",
+    "title": "Combination Sum - Choose/ No Choose"
+  },
+  {
+    "id": "72",
+    "link": "https://leetcode.com/problems/combination-sum/description/",
+    "notes": "Maximum_path_sum_and_Combinations.pdf",
+    "videoLink": "https://youtu.be/9GoRq_seH4E",
+    "mySolution": "",
+    "summary": "Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order. The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different. The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.",
+    "title": "Combination Sum - for loop based recursion"
+  },
+  {
+    "id": "73",
+    "link": "https://leetcode.com/problems/palindrome-partitioning/description/",
+    "notes": "Combination_sum_cont_palindrome_partitioning_subsets.pdf",
+    "videoLink": "https://youtu.be/dTyGlz0MiIA",
+    "mySolution": "",
+    "summary": "Given a string s, partition s such that every substring of the partition is a palindrome. Return all possible palindrome partitioning of s.",
+    "title": "Palindrome Partitioning"
+  },
+  {
+    "id": "74",
+    "link": "https://leetcode.com/problems/n-queens/",
+    "notes": "word_search_nqueens.pdf",
+    "videoLink": "https://youtu.be/M9bREnVnXXk",
+    "mySolution": "",
+    "summary": "The n-queens puzzle is the problem of placing n queens on an n x n chessboard such that no two queens attack each other. Given an integer n, return all distinct solutions to the n-queens puzzle. You may return the answer in any order. Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space, respectively.",
+    "title": "N-Queens"
+  },
+  {
+    "id": "75",
+    "link": "https://leetcode.com/problems/word-search/",
+    "notes": "word_search_nqueens.pdf",
+    "videoLink": "https://youtu.be/dTyGlz0MiIA",
+    "mySolution": "",
+    "summary": "Given an m x n grid of characters board and a string word, return true if word exists in the grid. The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once.",
+    "title": "Word-Search"
+  },
+  {
+    "id": "76",
+    "link": "https://leetcode.com/problems/restore-ip-addresses/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "A valid IP address consists of exactly four integers separated by single dots. Each integer is between 0 and 255 (inclusive) and cannot have leading zeros. For example, `0.1.2.201` and `192.168.1.1` are valid IP addresses, but `0.011.255.245`, `192.168.1.312` and `192.168@1.1` are invalid IP addresses. Given a string s containing only digits, return all possible valid IP addresses that can be formed by inserting dots into s. You are not allowed to reorder or remove any digits in s. You may return the valid IP addresses in any order.",
+    "title": "Restore IP address"
+  },
+  {
+    "id": "77",
+    "link": "https://leetcode.com/problems/beautiful-arrangement/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Suppose you have n integers labeled 1 through n. A permutation of those n integers perm (1-indexed) is considered a beautiful arrangement if for every i (1 <= i <= n), either of the following is true: perm[i] is divisible by i. i is divisible by perm[i]. Given an integer n, return the number of the beautiful arrangements that you can construct.",
+    "title": "Beautiful Arrangments"
+  },
+  {
+    "id": "78",
+    "link": "https://leetcode.com/problems/daily-temperatures/",
+    "notes": "",
+    "videoLink": "https://youtu.be/lHn9cd7t49U",
+    "mySolution": "",
+    "summary": "Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.",
+    "title": "Daily Temperatures"
+  },
+  {
+    "id": "79",
+    "link": "https://leetcode.com/problems/next-greater-element-ii/",
+    "notes": "",
+    "videoLink": "https://youtu.be/lHn9cd7t49U",
+    "mySolution": "",
+    "summary": "Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), return the next greater number for every element in nums. The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn't exist, return -1 for this number.",
+    "title": "Next Greater Element II"
+  },
+  {
+    "id": "80",
+    "link": "https://leetcode.com/problems/meeting-rooms-ii/",
+    "notes": "Meeting_rooms_and_TopK_frequent_elements.pdf",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given an array of meeting time intervals intervals where intervals[i] = [starti, endi], return the minimum number of conference rooms required.",
+    "title": "Meeting Rooms 2"
+  },
+
+  {
+    "id": "81",
+    "link": "https://leetcode.com/problems/top-k-frequent-elements/",
+    "notes": "Meeting_rooms_and_TopK_frequent_elements.pdf",
+    "videoLink": "https://youtu.be/FoncnhD7UiU",
+    "mySolution": "",
+    "summary": "Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.",
+    "title": "Top K frequent"
+  },
+  {
+    "id": "82",
+    "link": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+    "notes": "Heaps_kth_largest_element.pdf",
+    "videoLink": "https://youtu.be/66bnQlYB9QE",
+    "mySolution": "",
+    "summary": "Given an integer array nums and an integer k, return the kth largest element in the array. Note that it is the kth largest element in the sorted order, not the kth distinct element. You must solve it in O(n) time complexity.",
+    "title": "Kth Largest Element in the array"
+  },
+  {
+    "id": "83",
+    "link": "https://leetcode.com/problems/merge-k-sorted-lists/",
+    "notes": "word_search_merge_k_sortedlist_sliding_window.pdf",
+    "videoLink": "https://youtu.be/66bnQlYB9QE",
+    "mySolution": "",
+    "summary": "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+    "title": "Merge K sorted Lists"
+  },
+  {
+    "id": "84",
+    "link": "https://leetcode.com/problems/unique-paths/",
+    "notes": "",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time. Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner. The test cases are generated so that the answer will be less than or equal to 2 * 10^9.",
+    "title": "Unique Paths"
+  },
+  {
+    "id": "85",
+    "link": "https://leetcode.com/problems/minimum-path-sum/description/",
+    "notes": "",
+    "videoLink": "https://youtu.be/FoncnhD7UiU",
+    "mySolution": "",
+    "summary": "Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path. Note: You can only move either down or right at any point in time.",
+    "title": "Minimum Path Sum"
+  },
+  {
+    "id": "86",
+    "link": "https://leetcode.com/problems/longest-common-subsequence/",
+    "notes": "",
+    "videoLink": "https://youtu.be/j9yQfsS5KQ0",
+    "mySolution": "",
+    "summary": "Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0. A subsequence of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters. For example, `ace` is a subsequence of `abcde`. A common subsequence of two strings is a subsequence that is common to both strings.",
+    "title": "Longest Common Subsequence"
+  },
+  {
+    "id": "87",
+    "link": "https://leetcode.com/problems/jump-game-ii/",
+    "notes": "",
+    "videoLink": "https://youtu.be/j9yQfsS5KQ0",
+    "mySolution": "",
+    "summary": "You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0]. Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where: 0 <= j <= nums[i] and i + j < n Return the minimum number of jumps to reach nums[n - 1]. The test cases are generated such that you can reach nums[n - 1].",
+    "title": "Jump Game II"
+  },
+  {
+    "id": "88",
+    "link": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+    "notes": "anagrams_in_string_longest_substring_without_repeating_char.pdf",
+    "videoLink": "https://youtu.be/bA4pk5IVcM4",
+    "mySolution": "",
+    "summary": "Given a string s, find the length of the longest substring without repeating characters.",
+    "title": "Longest Substring Without Repeating Characters"
+  },
+  {
+    "id": "89",
+    "link": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+    "notes": "anagrams_in_string_longest_substring_without_repeating_char.pdf",
+    "videoLink": "",
+    "mySolution": "",
+    "summary": "Given two strings s and p, return an array of all the start indices of p's anagrams in s. You may return the answer in any order. An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.",
+    "title": "Find all anagrams in a String"
+  },
+  {
+    "id": "90",
+    "link": "https://leetcode.com/problems/implement-trie-prefix-tree/description/",
+    "notes": "Tries.pdf",
+    "videoLink": "https://youtu.be/TulthoVbdBs",
+    "mySolution": "",
+    "summary": "A trie (pronounced as `try`) or prefix tree is a tree data structure used to efficiently store and retrieve keys in a dataset of strings. There are various applications of this data structure, such as autocomplete and spellchecker. Implement the Trie class: Trie() Initializes the trie object. void insert(String word) Inserts the string word into the trie. boolean search(String word) Returns true if the string word is in the trie (i.e., was inserted before), and false otherwise. boolean startsWith(String prefix) Returns true if there is a previously inserted string word that has the prefix prefix, and false otherwise.",
+    "title": "Implement Tries - Prefix Tree"
+  }
+]

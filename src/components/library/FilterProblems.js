@@ -1,44 +1,50 @@
 import React from "react";
 import filterData from "../../filterData.json";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
 
 function FilterProblems({ selected, filterterms }) {
-  const selectionChangeHandler = (value) => {
-    const nextSelection = selected.includes(value)
-      ? selected.filter((item) => item !== value)
+  const toggle = (value) => {
+    const next = selected.includes(value)
+      ? selected.filter((i) => i !== value)
       : [...selected, value];
-
-    filterterms(nextSelection);
+    filterterms(next);
   };
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle>Topics</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-2">
-        <Button
-          className="w-full justify-between"
-          variant={selected.length ? "outline" : "secondary"}
+    <div className="rounded-xl border border-border overflow-hidden">
+      <div className="border-b border-border px-4 py-3" style={{ background: "#0d1117" }}>
+        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">Filter by Topic</p>
+      </div>
+      <div className="p-2 space-y-1">
+        <button
           onClick={() => filterterms([])}
+          className={`w-full flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors ${
+            selected.length === 0
+              ? "bg-primary/15 text-primary font-medium"
+              : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+          }`}
         >
-          <span>All topics</span>
-          <span className="text-xs text-muted-foreground">{Object.keys(filterData).length}</span>
-        </Button>
-        {Object.keys(filterData).map((value) => (
-          <Button
-            key={value}
-            className="w-full justify-between"
-            variant={selected.includes(value) ? "secondary" : "outline"}
-            onClick={() => selectionChangeHandler(value)}
-          >
-            <span>{value}</span>
-            <span className="text-xs text-muted-foreground">{filterData[value].length}</span>
-          </Button>
-        ))}
-      </CardContent>
-    </Card>
+          <span>All Topics</span>
+          <span className="font-mono text-xs opacity-60">{Object.keys(filterData).length}</span>
+        </button>
+
+        {Object.entries(filterData)
+          .sort(([, a], [, b]) => b.length - a.length)
+          .map(([topic, ids]) => (
+            <button
+              key={topic}
+              onClick={() => toggle(topic)}
+              className={`w-full flex items-center justify-between rounded-md px-3 py-2 text-sm transition-colors ${
+                selected.includes(topic)
+                  ? "bg-primary/15 text-primary font-medium"
+                  : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+              }`}
+            >
+              <span>{topic}</span>
+              <span className="font-mono text-xs opacity-60">{ids.length}</span>
+            </button>
+          ))}
+      </div>
+    </div>
   );
 }
 

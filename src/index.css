@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,26 +6,26 @@
 
 @layer base {
   :root {
-    --background: 217 34% 96%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 214 33% 92%;
-    --secondary-foreground: 222 47% 11%;
-    --muted: 215 28% 94%;
-    --muted-foreground: 215 16% 40%;
-    --accent: 213 100% 96%;
-    --accent-foreground: 222 47% 11%;
+    --background: 220 13% 5%;
+    --foreground: 0 0% 95%;
+    --card: 220 13% 8%;
+    --card-foreground: 0 0% 95%;
+    --popover: 220 13% 8%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142 71% 45%;
+    --primary-foreground: 220 13% 5%;
+    --secondary: 220 13% 12%;
+    --secondary-foreground: 0 0% 80%;
+    --muted: 220 13% 12%;
+    --muted-foreground: 220 10% 48%;
+    --accent: 220 13% 14%;
+    --accent-foreground: 142 71% 45%;
     --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 24% 84%;
-    --input: 214 24% 84%;
-    --ring: 217 91% 60%;
-    --radius: 0.625rem;
+    --border: 220 13% 14%;
+    --input: 220 13% 14%;
+    --ring: 142 71% 45%;
+    --radius: 0.5rem;
   }
 
   * {
@@ -39,7 +39,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     margin: 0;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
   a {
@@ -47,8 +47,8 @@
     text-decoration: none;
   }
 
-  code {
-    font-family: "IBM Plex Mono", monospace;
+  code, pre {
+    font-family: "JetBrains Mono", monospace;
   }
 
   #root {
@@ -59,8 +59,51 @@
 @layer utilities {
   .grid-pattern {
     background-image:
-      linear-gradient(hsl(var(--border) / 0.45) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--border) / 0.45) 1px, transparent 1px);
-    background-size: 32px 32px;
+      linear-gradient(hsl(var(--border) / 0.7) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.7) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .glow-green {
+    box-shadow: 0 0 24px hsl(142 71% 45% / 0.25);
   }
 }
+
+.badge-easy {
+  color: #4ade80;
+  background: rgba(74,222,128,0.1);
+  border: 1px solid rgba(74,222,128,0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-medium {
+  color: #fbbf24;
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.badge-hard {
+  color: #f87171;
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.25);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: hsl(220 13% 5%); }
+::-webkit-scrollbar-thumb { background: hsl(220 13% 22%); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(142 71% 45% / 0.5); }
