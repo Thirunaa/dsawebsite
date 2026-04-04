@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import {
   Play, Bot, TreePine, BookOpen,
   Search, Zap, Star, ChevronRight, CheckCircle,
-  Pencil, Plus, Layers, Terminal
+  Pencil, Plus, Layers, Terminal, Sparkles, ChevronLeft
 } from "lucide-react";
+import Navbar from "../components/landing/Navbar";
+import SiteFooter from "../components/landing/SiteFooter";
 
-const PUBLIC = process.env.PUBLIC_URL || "";
 
 // ─── Reusable badge ───────────────────────────────────────────────────────
 const Badge = ({ children, color = "#4ade80" }) => (
@@ -172,6 +173,146 @@ const FakeModelSelector = () => {
   );
 };
 
+// ─── Fake Visualizer ─────────────────────────────────────────────────────
+const VIZ_STEPS = [
+  {
+    title: "Initialize hash map",
+    narration: "Create an empty hash map to store each number and its index as we iterate.",
+    array: [2, 7, 11, 15],
+    highlights: [],
+    pointer: 0,
+    map: {},
+    result: null,
+  },
+  {
+    title: "Process nums[0] = 2",
+    narration: "complement = 9 − 2 = 7. Not in map yet. Store {2: 0}.",
+    array: [2, 7, 11, 15],
+    highlights: [0],
+    pointer: 0,
+    map: { 2: 0 },
+    result: null,
+  },
+  {
+    title: "Process nums[1] = 7",
+    narration: "complement = 9 − 7 = 2. Found 2 at index 0! Return [0, 1].",
+    array: [2, 7, 11, 15],
+    highlights: [0, 1],
+    pointer: 1,
+    map: { 2: 0 },
+    result: [0, 1],
+  },
+];
+
+const FakeVisualizer = () => {
+  const [step, setStep] = useState(0);
+  const s = VIZ_STEPS[step];
+
+  return (
+    <div className="rounded-2xl border border-border overflow-hidden shadow-2xl" style={{ background: "#080c14", boxShadow: "0 0 80px rgba(74,222,128,0.06)" }}>
+      {/* Header bar */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border" style={{ background: "#0d1117" }}>
+        <div className="flex items-center gap-2">
+          <Sparkles className="h-3.5 w-3.5 text-primary" />
+          <span className="font-mono text-xs font-semibold text-primary uppercase tracking-widest">AI Visualizer</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="rounded-full border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest"
+            style={{ color: "#4ade80cc", borderColor: "#4ade8030", background: "#4ade8010" }}>Hash Map</span>
+          <span className="rounded-full border px-2.5 py-0.5 font-mono text-[10px]"
+            style={{ color: "#fbbf24cc", borderColor: "#fbbf2430", background: "#fbbf2410" }}>AI-generated</span>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-4">
+        {/* Step dots */}
+        <div className="flex items-center gap-2">
+          {VIZ_STEPS.map((_, i) => (
+            <button key={i} onClick={() => setStep(i)}
+              className="flex-1 h-1.5 rounded-full transition-all"
+              style={{ background: i === step ? "#4ade80" : i < step ? "#4ade8050" : "#1e293b" }} />
+          ))}
+          <span className="font-mono text-[10px] text-muted-foreground/50 ml-1 shrink-0">
+            {step + 1}/{VIZ_STEPS.length}
+          </span>
+        </div>
+
+        {/* Step title + narration */}
+        <div className="rounded-lg border border-border px-4 py-3 space-y-1" style={{ background: "#0d1117" }}>
+          <p className="font-mono text-xs font-semibold text-primary">{s.title}</p>
+          <p className="text-xs text-muted-foreground leading-relaxed">{s.narration}</p>
+        </div>
+
+        {/* Array viz */}
+        <div className="space-y-1.5">
+          <p className="font-mono text-[10px] text-muted-foreground/40 uppercase tracking-widest">nums</p>
+          <div className="flex gap-2">
+            {s.array.map((v, i) => (
+              <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                <div className="w-full flex items-center justify-center rounded-md border py-2.5 font-mono text-sm font-bold transition-all"
+                  style={{
+                    borderColor: s.highlights.includes(i) ? "#4ade80" : "#1e293b",
+                    background: s.highlights.includes(i) ? "#4ade8018" : "#0d1117",
+                    color: s.highlights.includes(i) ? "#4ade80" : "#94a3b8",
+                    boxShadow: i === s.pointer && !s.result ? "0 0 12px rgba(74,222,128,0.25)" : "none",
+                  }}>
+                  {v}
+                </div>
+                <span className="font-mono text-[10px] text-muted-foreground/30">[{i}]</span>
+                {i === s.pointer && !s.result && (
+                  <span className="font-mono text-[9px] text-primary">▲ i</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Hash map */}
+        <div className="space-y-1.5">
+          <p className="font-mono text-[10px] text-muted-foreground/40 uppercase tracking-widest">seen (hash map)</p>
+          <div className="rounded-md border border-border overflow-hidden font-mono text-xs" style={{ background: "#0d1117" }}>
+            {Object.keys(s.map).length === 0 ? (
+              <p className="px-3 py-2 text-muted-foreground/30 italic">empty</p>
+            ) : (
+              Object.entries(s.map).map(([k, v]) => (
+                <div key={k} className="flex items-center border-b border-border last:border-0 px-3 py-1.5">
+                  <span className="text-yellow-300 flex-1">{k}</span>
+                  <span className="text-muted-foreground/40 mx-2">→</span>
+                  <span className="text-primary">{v}</span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Result */}
+        {s.result && (
+          <div className="flex items-center gap-2 rounded-lg border border-primary/30 px-4 py-2.5"
+            style={{ background: "#4ade8010" }}>
+            <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+            <span className="font-mono text-xs text-primary font-semibold">
+              Result: [{s.result.join(", ")}]
+            </span>
+          </div>
+        )}
+
+        {/* Nav */}
+        <div className="flex items-center justify-between pt-1">
+          <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0}
+            className="flex items-center gap-1 rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-all disabled:opacity-30">
+            <ChevronLeft className="h-3.5 w-3.5" />Prev
+          </button>
+          <span className="font-mono text-[10px] text-muted-foreground/40">← → keyboard nav</span>
+          <button onClick={() => setStep(Math.min(VIZ_STEPS.length - 1, step + 1))} disabled={step === VIZ_STEPS.length - 1}
+            className="flex items-center gap-1 rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-all disabled:opacity-30">
+            Next<ChevronRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ─── Feature section ──────────────────────────────────────────────────────
 function FeatureSection({ tag, title, description, bullets, visual, reverse = false }) {
   return (
@@ -200,31 +341,7 @@ function FeatureSection({ tag, title, description, bullets, visual, reverse = fa
 export default function FeaturesPage() {
   return (
     <main className="min-h-screen" style={{ background: "#080c14" }}>
-      {/* Navbar */}
-      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
-        <div className="container flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center hover:opacity-85 transition-opacity">
-            <img src={`${PUBLIC}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-9 w-auto rounded" />
-          </Link>
-          <nav className="hidden items-center gap-8 md:flex">
-            {[
-              { to: "/topics", label: "Topics" },
-              { to: "/library", label: "Problems" },
-              { to: "/library", label: "Library" },
-              { to: "/features", label: "Features" },
-            ].map(link => (
-              <Link key={link.label} to={link.to}
-                className={`text-sm transition-colors hover:text-foreground ${link.label === "Features" ? "text-primary font-medium" : "text-muted-foreground"}`}>
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-          <Link to="/library"
-            className="rounded-md bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90">
-            Get Started
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <section className="border-b border-border" style={{ background: "linear-gradient(180deg, #0d1117 0%, #080c14 100%)" }}>
@@ -296,7 +413,40 @@ export default function FeaturesPage() {
           }
         />
 
-        {/* 2 — Test runner */}
+        {/* 2 — AI Visualizer ★ */}
+        <div className="relative">
+          {/* Glow backdrop */}
+          <div className="pointer-events-none absolute -inset-8 rounded-3xl opacity-30"
+            style={{ background: "radial-gradient(ellipse at 50% 50%, #4ade8018 0%, transparent 70%)" }} />
+          <div className="relative rounded-2xl border p-8 lg:p-12"
+            style={{ borderColor: "#4ade8025", background: "linear-gradient(135deg, #0d1f130d 0%, #080c14 60%)" }}>
+            {/* "New" pill */}
+            <div className="flex justify-center mb-8">
+              <span className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5 font-mono text-xs font-semibold"
+                style={{ color: "#4ade80", borderColor: "#4ade8040", background: "#4ade8010" }}>
+                <Sparkles className="h-3.5 w-3.5" />Signature Feature
+              </span>
+            </div>
+            <FeatureSection
+              tag="AI Visualizer"
+              title={<>Step through any algorithm,<br /><span style={{ color: "#4ade80" }}>one frame at a time</span></>}
+              description="Click Visualize on any problem and watch AI generate a full step-by-step animation — live data structures, pointer movement, hash map state — all rendered right in your browser. No videos. No slides. Pure interactive insight."
+              bullets={[
+                "<strong class='text-foreground'>AI-generated</strong> for every problem — unique to the exact algorithm, not a template",
+                "Two examples per visualization: <strong class='text-foreground'>Normal Case</strong> + <strong class='text-foreground'>Edge Case</strong>",
+                "Live data structures rendered at each step: arrays, hash maps, trees, stacks, matrices",
+                "Pointer arrows, index labels, highlights — all update frame-by-frame",
+                "<strong class='text-foreground'>Validate</strong> button streams an AI review of the generated steps for correctness",
+                "Cached in localStorage — instant re-open, one-click regenerate",
+                "<strong class='text-foreground'>Download as HTML</strong> — self-contained offline file you can keep forever",
+                "Keyboard navigation (← →) for smooth step-through",
+              ]}
+              visual={<FakeVisualizer />}
+            />
+          </div>
+        </div>
+
+        {/* 3 — Test runner */}
         <FeatureSection
           tag="Test Runner"
           title="Run against real test cases, see exactly what failed"
@@ -526,18 +676,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-6" style={{ background: "#080c14" }}>
-        <div className="container flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src={`${PUBLIC}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-7 w-auto rounded" />
-            <span className="font-mono text-xs text-muted-foreground">Hashmap</span>
-          </div>
-          <p className="font-mono text-xs text-muted-foreground/50">
-            © {new Date().getFullYear()} Hashmap · DSA Practice
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

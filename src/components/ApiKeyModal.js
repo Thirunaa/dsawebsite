@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, Key, Eye, EyeOff, Trash2, Check, Zap, Star } from "lucide-react";
+import { X, Key, Eye, EyeOff, Trash2, Check, Zap, Star, Info } from "lucide-react";
 import { useApiKeys } from "../hooks/useApiKeys";
 
 const PROVIDERS = [
@@ -8,6 +8,7 @@ const PROVIDERS = [
     name: "OpenAI (GPT)",
     placeholder: "sk-proj-...",
     color: "#10b981",
+    docsUrl: "https://platform.openai.com/api-keys",
     tiers: [
       { id: "gpt-4o-mini",  label: "GPT-4o mini",   tier: "fast", note: "Fast · Cheap" },
       { id: "gpt-5.4",      label: "GPT 5.4 High",  tier: "best", note: "Latest · Capable" },
@@ -18,9 +19,10 @@ const PROVIDERS = [
     name: "Anthropic (Claude)",
     placeholder: "sk-ant-...",
     color: "#f59e0b",
+    docsUrl: "https://console.anthropic.com/settings/keys",
     tiers: [
       { id: "claude-haiku-4-5-20251001", label: "Claude Haiku 4.5",  tier: "fast", note: "Fast · Cheap" },
-      { id: "claude-4.6-opus",            label: "Claude 4.6 Opus",   tier: "best", note: "Latest · Capable" },
+      { id: "claude-opus-4-6",             label: "Claude 4.6 Opus",   tier: "best", note: "Latest · Capable" },
     ],
   },
   {
@@ -28,6 +30,7 @@ const PROVIDERS = [
     name: "Google (Gemini)",
     placeholder: "AIza...",
     color: "#3b82f6",
+    docsUrl: "https://aistudio.google.com/app/apikey",
     tiers: [
       { id: "gemini-2.0-flash", label: "Gemini 2.0 Flash", tier: "fast", note: "Fast · Cheap" },
       { id: "gemini-3.1-pro-preview",   label: "Gemini 3.1 Pro",   tier: "best", note: "Latest · Capable" },
@@ -57,6 +60,11 @@ function ProviderRow({ provider, existingKey, selectedModel, onSave, onDelete, o
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full" style={{ background: provider.color }} />
           <span className="text-sm font-semibold text-foreground">{provider.name}</span>
+          <a href={provider.docsUrl} target="_blank" rel="noreferrer"
+            className="text-muted-foreground/50 hover:text-primary transition-colors"
+            title="How to get an API key">
+            <Info className="h-3.5 w-3.5" />
+          </a>
         </div>
         {existingKey ? (
           <div className="flex items-center gap-2">

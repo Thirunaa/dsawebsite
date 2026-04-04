@@ -8,6 +8,7 @@ import problemData from "../data.json";
 import { callAI, extractJSON } from "../hooks/useAIJSON";
 import { useStreamingAI } from "../hooks/useStreamingAI";
 import { getStoredKeys } from "../hooks/useApiKeys";
+import ApiKeyModal from "../components/ApiKeyModal";
 
 // ─── System prompt ────────────────────────────────────────────────────────
 const SYSTEM_PROMPT = `You are an expert algorithm visualization tutor. Return ONLY valid JSON, no markdown, no extra text.
@@ -701,14 +702,14 @@ export default function VisualizerPage() {
   const { lcNumber } = useParams();
 
   // Find problem across all lessons
-  const problem = (() => {
+  const { problem, lessonId } = (() => {
     for (const lesson of problemData) {
       const found = (lesson.problems || []).find(
         p => String(p.lcNumber) === String(lcNumber)
       );
-      if (found) return found;
+      if (found) return { problem: found, lessonId: lesson.id };
     }
-    return null;
+    return { problem: null, lessonId: null };
   })();
 
   const [vizData, setVizData] = useState(null);
@@ -718,6 +719,7 @@ export default function VisualizerPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [, setValidating] = useState(false);
   const [showValidate, setShowValidate] = useState(false);
+  const [showKeyModal, setShowKeyModal] = useState(false);
 
   const { response: validateResult, isStreaming, stream: streamValidate, setResponse: setValidateResponse } = useStreamingAI();
 
@@ -843,8 +845,8 @@ Provide a concise review with any corrections needed.`;
       {/* Sticky header */}
       <header className="sticky top-0 z-20 border-b border-border" style={{ background: "rgba(8,12,20,0.96)", backdropFilter: "blur(8px)" }}>
         <div className="container flex items-center gap-3 py-3 flex-wrap">
-          <Link to="/library" className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors shrink-0">
-            <ArrowLeft className="h-4 w-4" />Library
+          <Link to={lessonId ? `/lesson/${lessonId}` : "/library"} className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors shrink-0">
+            <ArrowLeft className="h-4 w-4" />Problem
           </Link>
           <div className="h-4 w-px bg-border" />
           <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -891,8 +893,20 @@ Provide a concise review with any corrections needed.`;
               </button>
             </>
           )}
+          {/* API Key button */}
+          <button
+            onClick={() => setShowKeyModal(true)}
+            className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs transition-all shrink-0"
+            style={hasKey
+              ? { borderColor: "#4ade8040", background: "#4ade8010", color: "#4ade80" }
+              : { borderColor: "#f59e0b40", background: "#f59e0b10", color: "#f59e0b" }}
+          >
+            <Key className="h-3.5 w-3.5" />
+            {hasKey ? "API Keys ✓" : "Add API Key"}
+          </button>
         </div>
       </header>
+      {showKeyModal && <ApiKeyModal onClose={() => setShowKeyModal(false)} />}
 
       <div className="container py-8 space-y-6 max-w-5xl">
 

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   ArrowLeft, ExternalLink, ChevronDown, ChevronUp,
-  Play, FileText, Key, EyeOff, Eye, Bot, X, Sparkles
+  Play, FileText, Key, EyeOff, Eye, Bot, X, Sparkles, Bug
 } from "lucide-react";
+import BugReportModal from "../components/BugReportModal";
 import problemData from "../data.json";
 import ApiKeyModal from "../components/ApiKeyModal";
 import AIPanel from "../components/AIPanel";
@@ -202,6 +203,7 @@ export default function ProblemPage() {
   const lesson = problemData.find((l) => String(l.id) === String(id));
 
   const [showKeyModal, setShowKeyModal] = useState(false);
+  const [showBugModal, setShowBugModal] = useState(false);
   const [aiPanel, setAiPanel] = useState(null); // { action, problem }
   const [errorContext, setErrorContext] = useState(null);
   const [testCaseContext, setTestCaseContext] = useState(null);
@@ -263,23 +265,38 @@ export default function ProblemPage() {
     <main className="min-h-screen" style={{ background: "#080c14" }}>
       {/* Top bar */}
       <header className="sticky top-0 z-10 border-b border-border" style={{ background: "rgba(8,12,20,0.95)", backdropFilter: "blur(8px)" }}>
-        <div className="container flex items-center justify-between py-3">
-          <Link to="/library" className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            Library
+        <div className="container flex items-center gap-3 py-3">
+          {/* Logo + wordmark */}
+          <Link to="/" className="flex items-center gap-2 hover:opacity-85 transition-opacity shrink-0">
+            <img src={`${PUBLIC}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-8 rounded-full object-cover" />
+            <span className="font-mono text-sm font-semibold tracking-wide hidden sm:inline">
+              <span className="text-foreground">Hash</span><span className="text-muted-foreground">map</span>
+            </span>
           </Link>
-          <Link to="/" className="hover:opacity-85 transition-opacity">
-            <img src={`${PUBLIC}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-auto rounded" />
+          <div className="h-4 w-px bg-border" />
+          <Link to="/library" className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors shrink-0">
+            <ArrowLeft className="h-4 w-4" />Library
           </Link>
+          <div className="flex-1" />
+          {/* Bug report */}
+          <button
+            onClick={() => setShowBugModal(true)}
+            className="inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-1.5 font-mono text-xs text-muted-foreground hover:text-red-400 hover:border-red-500/40 hover:bg-red-500/5 transition-all shrink-0"
+          >
+            <Bug className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">Report Bug</span>
+          </button>
+          {/* API keys */}
           <button
             onClick={() => setShowKeyModal(true)}
-            className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs transition-all hover:border-primary/50 hover:text-foreground ${hasKey ? "border-green-500/40 text-green-400" : "border-border text-muted-foreground"}`}
+            className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs transition-all hover:border-primary/50 hover:text-foreground shrink-0 ${hasKey ? "border-green-500/40 text-green-400" : "border-border text-muted-foreground"}`}
           >
             <Key className="h-3.5 w-3.5" />
             {hasKey ? "API Keys ✓" : "Add API Key"}
           </button>
         </div>
       </header>
+      {showBugModal && <BugReportModal onClose={() => setShowBugModal(false)} />}
 
       {/* Main layout: left content + right panel */}
       <div className="flex h-[calc(100vh-57px)]">

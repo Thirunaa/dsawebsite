@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import Navbar from "../components/landing/Navbar";
+import SiteFooter from "../components/landing/SiteFooter";
 import filterData from "../filterData.json";
 import problemData from "../data.json";
 
@@ -61,18 +63,7 @@ const TopicsPage = () => {
 
   return (
     <main className="min-h-screen" style={{ background: "#080c14" }}>
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-border" style={{ background: "rgba(8,12,20,0.95)", backdropFilter: "blur(8px)" }}>
-        <div className="container flex items-center justify-between py-3">
-          <Link to="/" className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-foreground transition-colors">
-            <ArrowLeft className="h-4 w-4" />
-            Home
-          </Link>
-          <Link to="/" className="hover:opacity-85 transition-opacity">
-            <img src={`${process.env.PUBLIC_URL}/NewHashmapLogo.jpg`} alt="Hashmap" className="h-8 w-auto rounded" />
-          </Link>
-        </div>
-      </header>
+      <Navbar />
 
       <div className="container py-8 max-w-6xl">
         {/* Page title */}
@@ -195,6 +186,7 @@ const TopicsPage = () => {
           </div>
         )}
       </div>
+      <SiteFooter />
     </main>
   );
 };

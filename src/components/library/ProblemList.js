@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Play, ExternalLink } from "lucide-react";
+import Navbar from "../landing/Navbar";
+import SiteFooter from "../landing/SiteFooter";
 import problemData from "../../data.json";
 import filterData from "../../filterData.json";
 import SearchProblems from "./SearchProblems";
@@ -121,14 +123,13 @@ const ProblemList = () => {
   const totalProblems = problemData.reduce((s, l) => s + l.problems.length, 0);
 
   return (
-    <main className="min-h-screen">
-      {/* Header */}
-      <header className="border-b border-border" style={{ background: "#0d1117" }}>
+    <main className="min-h-screen" style={{ background: "#080c14" }}>
+      <Navbar />
+      {/* Page title */}
+      <div className="border-b border-border" style={{ background: "#0d1117" }}>
         <div className="container flex flex-col gap-3 py-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <Link to="/" className="mb-1 inline-flex items-center gap-1 font-mono text-sm font-bold text-primary hover:opacity-80 transition-opacity">
-              <span>&gt;_</span><span className="text-foreground">Hashmap</span>
-            </Link>
+            <p className="mb-1 font-mono text-xs font-semibold uppercase tracking-widest text-primary">&gt;_ Hashmap</p>
             <h1 className="text-2xl font-bold tracking-tight text-foreground">Problem Library</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               {problemData.length} lessons · {totalProblems} problems with solutions
@@ -138,7 +139,7 @@ const ProblemList = () => {
             {filterTerms.length ? `Filtered: ${filterTerms.join(", ")}` : "All topics"}
           </p>
         </div>
-      </header>
+      </div>
 
       <div className="container py-6">
         <div className="grid gap-6 lg:grid-cols-[220px,1fr]">
@@ -190,6 +191,7 @@ const ProblemList = () => {
           </section>
         </div>
       </div>
+      <SiteFooter />
     </main>
   );
 };
